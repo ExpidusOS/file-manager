@@ -1,5 +1,6 @@
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io' as io;
 
@@ -8,28 +9,43 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({ super.key });
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return TokyoApp(
       title: 'Flutter Demo',
-      home: MyHomePage(directory: io.Directory.current),
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({ super.key, required this.directory });
+class HomePage extends StatefulWidget {
+  const HomePage({ super.key, this.directory });
 
-  final io.Directory directory;
+  final io.Directory? directory;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
+  io.Directory? currentDirectory;
+
+  @override
+  void initState() {
+    super.initState();
+
+    currentDirectory = widget.directory;
+    if (currentDirectory == null) {
+      if (io.Platform.isAndroid) {
+        currentDirectory = io.Directory('/storage/emulated/0');
+      } else {
+        currentDirectory = io.Directory.current;
+      }
+    }
+  }
+
   void _handleError(BuildContext context, Object e) {
     if (e is Error) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -53,23 +69,23 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('File Manager'),
       ) : null,
       appBar: AppBar(
-        title: Text(widget.directory.path),
+        title: currentDirectory != null ? Text(currentDirectory!.path) : null,
       ),
       body: Center(
-        child: FileBrowserList(
-          directory: widget.directory,
+        child: currentDirectory != null ? FileBrowserList(
+          directory: currentDirectory!,
           onTap: (entry) {
             if (entry is io.Directory) {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => MyHomePage(directory: entry as io.Directory)
+                  builder: (context) => HomePage(directory: entry as io.Directory)
                 )
               );
             } else {
               launchUrl(entry.uri).catchError((e) => _handleError(context, e));
             }
           },
-        ),
+        ) : Text('Directory path is not initialized'),
       ),
     );
   }
