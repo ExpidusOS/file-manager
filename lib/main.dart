@@ -21,9 +21,10 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({ super.key, this.directory });
+  const HomePage({ super.key, this.directory, this.gridView });
 
   final io.Directory? directory;
+  final bool? gridView;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -31,11 +32,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   io.Directory? currentDirectory;
+  bool gridView = false;
 
   @override
   void initState() {
     super.initState();
 
+    gridView = widget.gridView ?? false;
     currentDirectory = widget.directory;
     if (currentDirectory == null) {
       if (io.Platform.isAndroid) {
@@ -43,6 +46,10 @@ class _HomePageState extends State<HomePage> {
       } else {
         currentDirectory = io.Directory.current;
       }
+    }
+
+    for (var type in StorageDirectory.values) {
+      getExternalStorageDirectories(type: type).then((dirs) => print("${type} = ${dirs}")).catchError(print);
     }
   }
 
@@ -61,32 +68,55 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void _onEntryTap(BuildContext context, io.FileSystemEntity entry) {
+    if (entry is io.Directory) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => HomePage(
+            directory: entry as io.Directory,
+            gridView: gridView,
+          )
+        )
+      );
+    } else {
+      launchUrl(entry.uri).catchError((e) => _handleError(context, e));
+    }
+  }
+
+  Widget _buildBody(BuildContext context) =>
+    gridView ?
+      FileBrowserGrid(
+        directory: currentDirectory!,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4,
+        ),
+        onTap: (entry) => _onEntryTap(context, entry),
+      )
+    : FileBrowserList(
+        directory: currentDirectory!,
+        onTap: (entry) => _onEntryTap(context, entry),
+      );
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) =>
+    Scaffold(
       windowBar: WindowBar.shouldShow(context) && !kIsWeb ? WindowBar(
         leading: Image.asset('imgs/icon.png'),
         title: const Text('File Manager'),
       ) : null,
       appBar: AppBar(
         title: currentDirectory != null ? Text(currentDirectory!.path) : null,
+        actions: [
+          IconButton(
+            icon: gridView ? const Icon(Icons.list) : const Icon(Icons.grid_4x4),
+            onPressed: () => setState(() {
+              gridView = !gridView;
+            }),
+          ),
+        ],
       ),
       body: Center(
-        child: currentDirectory != null ? FileBrowserList(
-          directory: currentDirectory!,
-          onTap: (entry) {
-            if (entry is io.Directory) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => HomePage(directory: entry as io.Directory)
-                )
-              );
-            } else {
-              launchUrl(entry.uri).catchError((e) => _handleError(context, e));
-            }
-          },
-        ) : Text('Directory path is not initialized'),
+        child: currentDirectory != null ? _buildBody(context) : Text('Directory path is not initialized'),
       ),
     );
-  }
 }
