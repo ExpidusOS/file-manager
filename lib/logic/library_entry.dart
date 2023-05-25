@@ -4,15 +4,20 @@ import 'package:flutter/foundation.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:xdg_directories/xdg_directories.dart';
+import 'package:universal_disk_space/universal_disk_space.dart';
+import 'package:udisks/udisks.dart';
+import 'package:path/path.dart' as path;
 import 'dart:io' as io;
 
 class LibraryEntry {
   LibraryEntry({
+    this.group = 0,
     required this.title,
     required this.entry,
     required this.iconData,
   });
 
+  final int group;
   final String title;
   final io.Directory entry;
   final IconData iconData;
@@ -117,25 +122,74 @@ class LibraryEntry {
   static Future<List<LibraryEntry>> genList() async {
     var entries = <LibraryEntry>[];
 
-    if (defaultTargetPlatform == TargetPlatform.linux) {
-      for (var name in getUserDirectoryNames()) {
-        final entry = getUserDirectory(name);
-        if (entry == null) continue;
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.linux:
+        for (var name in getUserDirectoryNames()) {
+          final entry = getUserDirectory(name);
+          if (entry == null) continue;
 
-        entries.add(LibraryEntry.fromXdg(name: name, entry: entry));
-      }
-    } else {
-      for (var type in StorageDirectory.values) {
-        final dirs = await getExternalStorageDirectories(type: type);
-        if (dirs == null || dirs.isEmpty) continue;
+          entries.add(LibraryEntry.fromXdg(name: name, entry: entry));
+        }
+        break;
+      default:
+        for (var type in StorageDirectory.values) {
+          final dirs = await getExternalStorageDirectories(type: type);
+          if (dirs == null || dirs.isEmpty) continue;
 
-        entries.add(LibraryEntry.from(type: type, entry: dirs[0]));
-      }
+          entries.add(LibraryEntry.from(type: type, entry: dirs[0]));
+        }
+        break;
+    }
+
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.linux:
+        var client = UDisksClient();
+        await client.connect();
+
+        for (var drive in client.blockDevices) {
+          final fstab = drive.configuration.firstWhereOrNull((element) => element.type == 'fstab');
+          if (fstab == null) continue;
+          if (!fstab.details.containsKey('dir')) continue;
+          if (drive.hintIgnore) continue;
+
+          final entry = io.Directory(String.fromCharCodes(fstab.details['dir']!.asByteArray().where((i) => i > 0)));
+
+          entries.add(LibraryEntry(
+            title: drive.hintName.isEmpty ? (drive.idLabel.isEmpty ? entry.path : drive.idLabel) : drive.hintName,
+            entry: entry,
+            iconData: Icons.storage,
+            group: 1,
+          ));
+        }
+        await client.close();
+        break;
+      case TargetPlatform.macOS:
+      case TargetPlatform.windows:
+        var diskSpace = DiskSpace();
+        diskSpace.scan();
+        print(diskSpace.disks);
+        break;
+      default:
+        break;
     }
 
     if (defaultEntry != null) entries.add(defaultEntry!);
     return entries;
   }
+  
+  static List<LibraryEntry> sort(List<LibraryEntry> entries) =>
+    entries..sort((a, b) => a.title.compareTo(b.title));
+
+  static List<Widget> buildWidgets(List<LibraryEntry> entries, BuildContext context) =>
+      mapGroups(entries).map((groupId, entries) {
+        final widgets = entries.isNotEmpty && groupId > 0 ? <Widget>[
+          const Divider(),
+        ] : <Widget>[];
+        widgets.addAll(sort(entries).map((e) => e.build(context)));
+        return MapEntry(groupId, widgets);
+      }).values.flattened.toList();
+
+  static Map<int, List<LibraryEntry>> mapGroups(List<LibraryEntry> entries) => entries.groupListsBy((entry) => entry.group);
 
   static LibraryEntry? find({
     required List<LibraryEntry> entries,

@@ -36,9 +36,17 @@ class _FileManagerDrawerState extends State<FileManagerDrawer> with FileManagerL
                     .colorScheme
                     .onSurface,
               ),
-              child: libraryTitle != null ? Text(libraryTitle!) : null,
+              child: currentLibrary != null ? Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Icon(currentLibrary!.iconData),
+                  const SizedBox(width: 15),
+                  Text(currentLibrary!.title),
+                ],
+              ) : null,
             ),
-            ...(libraryEntries..sort((a, b) => a.title.compareTo(b.title))).map((entry) => entry.build(context)),
+            ...LibraryEntry.buildWidgets(libraryEntries, context),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.settings),
