@@ -2,6 +2,7 @@ import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/logic.dart';
 import 'package:file_manager/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'dart:io' as io;
 
 class LibraryView extends StatefulWidget {
@@ -64,6 +65,9 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
         windowBar: WindowBar.shouldShow(context) ? WindowBar(
           leading: Image.asset('imgs/icon.png'),
           title: Text('File Manager${libraryTitle == null ? "" : ": ${libraryTitle!}"}'),
+          onMinimize: () => appWindow.minimize(),
+          onMaximize: () => appWindow.maximize(),
+          onClose: () => appWindow.close(),
         ) : null,
         appBar: AppBar(
           title: libraryTitle == null ? (currentDirectory == null ? null : Text(currentDirectory!.path)) : Text(libraryTitle!),
