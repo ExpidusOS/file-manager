@@ -17,6 +17,8 @@ dependencies:
       path: packages/libtokyo_flutter
   path_provider: ^2.0.15
   url_launcher: ^6.1.11
+  bitsdojo_window: ^0.1.5
+  xdg_directories: ^1.0.0
 
 dev_dependencies:
   flutter_test:
