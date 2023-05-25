@@ -116,7 +116,6 @@ class LibraryEntry {
 
   static Future<List<LibraryEntry>> genList() async {
     var entries = <LibraryEntry>[];
-    if (defaultEntry != null) entries.add(defaultEntry!);
 
     if (defaultTargetPlatform == TargetPlatform.linux) {
       for (var name in getUserDirectoryNames()) {
@@ -133,6 +132,8 @@ class LibraryEntry {
         entries.add(LibraryEntry.from(type: type, entry: dirs[0]));
       }
     }
+    
+    if (defaultEntry != null) entries.add(defaultEntry!);
     return entries;
   }
 
