@@ -132,7 +132,7 @@ class LibraryEntry {
         entries.add(LibraryEntry.from(type: type, entry: dirs[0]));
       }
     }
-    
+
     if (defaultEntry != null) entries.add(defaultEntry!);
     return entries;
   }

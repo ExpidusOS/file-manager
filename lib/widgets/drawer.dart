@@ -1,5 +1,6 @@
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/logic.dart';
+import 'package:file_manager/views.dart';
 import 'dart:io' as io;
 
 class FileManagerDrawer extends StatefulWidget {
@@ -38,6 +39,16 @@ class _FileManagerDrawerState extends State<FileManagerDrawer> with FileManagerL
               child: libraryTitle != null ? Text(libraryTitle!) : null,
             ),
             ...(libraryEntries..sort((a, b) => a.title.compareTo(b.title))).map((entry) => entry.build(context)),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => SettingsView(),
+                )
+              ),
+            ),
           ],
         ),
       );
