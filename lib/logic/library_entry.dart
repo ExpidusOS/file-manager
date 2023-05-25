@@ -3,6 +3,7 @@ import 'package:file_manager/views.dart';
 import 'package:flutter/foundation.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:xdg_directories/xdg_directories.dart';
 import 'dart:io' as io;
 
 class LibraryEntry {
@@ -61,6 +62,47 @@ class LibraryEntry {
     }
   }
 
+  static LibraryEntry fromXdg({
+    required String name,
+    required io.Directory entry,
+  }) {
+    switch (name) {
+      case 'DESKTOP':
+        return LibraryEntry(title: 'Desktop', entry: entry, iconData: Icons.desktop_mac);
+      case 'TEMPLATES':
+        return LibraryEntry(title: 'Templates', entry: entry, iconData: Icons.folder);
+      case 'PUBLICSHARE':
+        return LibraryEntry(title: 'Public', entry: entry, iconData: Icons.public);
+      case 'DOWNLOAD':
+        return from(
+          type: StorageDirectory.downloads,
+          entry: entry,
+        );
+      case 'DOCUMENTS':
+        return from(
+          type: StorageDirectory.documents,
+          entry: entry,
+        );
+      case 'MUSIC':
+        return from(
+          type: StorageDirectory.music,
+          entry: entry,
+        );
+      case 'PICTURES':
+        return from(
+          type: StorageDirectory.pictures,
+          entry: entry,
+        );
+      case 'VIDEOS':
+        return from(
+          type: StorageDirectory.movies,
+          entry: entry,
+        );
+      default:
+        return LibraryEntry(title: name, entry: entry, iconData: Icons.folder);
+    }
+  }
+
   static LibraryEntry? get defaultEntry {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -76,11 +118,20 @@ class LibraryEntry {
     var entries = <LibraryEntry>[];
     if (defaultEntry != null) entries.add(defaultEntry!);
 
-    for (var type in StorageDirectory.values) {
-      final dirs = await getExternalStorageDirectories(type: type);
-      if (dirs == null || dirs.isEmpty) continue;
+    if (defaultTargetPlatform == TargetPlatform.linux) {
+      for (var name in getUserDirectoryNames()) {
+        final entry = getUserDirectory(name);
+        if (entry == null) continue;
 
-      entries.add(LibraryEntry.from(type: type, entry: dirs[0]));
+        entries.add(LibraryEntry.fromXdg(name: name, entry: entry));
+      }
+    } else {
+      for (var type in StorageDirectory.values) {
+        final dirs = await getExternalStorageDirectories(type: type);
+        if (dirs == null || dirs.isEmpty) continue;
+
+        entries.add(LibraryEntry.from(type: type, entry: dirs[0]));
+      }
     }
     return entries;
   }

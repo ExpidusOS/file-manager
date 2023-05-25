@@ -1,3 +1,4 @@
+#include <bitsdojo_window_linux/bitsdojo_window_plugin.h>
 #include "my_application.h"
 
 #include <flutter_linux/flutter_linux.h>
@@ -29,8 +30,10 @@ static void my_application_activate(GApplication* application) {
   MyApplication* self = MY_APPLICATION(application);
   GtkWindow* window =
       GTK_WINDOW(gtk_application_window_new(GTK_APPLICATION(application)));
+
+  auto bdw = bitsdojo_window_from(window);
+  bdw->setCustomFrame(true);
   
-  gtk_window_set_default_size(window, 1280, 720);
   gtk_widget_set_app_paintable(GTK_WIDGET(window), TRUE);
   gtk_widget_show(GTK_WIDGET(window));
 
