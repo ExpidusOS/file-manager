@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/logic.dart';
 import 'package:file_manager/widgets.dart';
@@ -62,12 +63,17 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
   @override
   Widget build(BuildContext context) =>
       Scaffold(
-        windowBar: WindowBar.shouldShow(context) ? WindowBar(
-          leading: Image.asset('imgs/icon.png'),
-          title: Text('File Manager${libraryTitle == null ? "" : ": ${libraryTitle!}"}'),
-          onMinimize: () => appWindow.minimize(),
-          onMaximize: () => appWindow.maximize(),
-          onClose: () => appWindow.close(),
+        windowBar: WindowBar.shouldShow(context) ? PreferredSize(
+          preferredSize: const Size.fromHeight(kToolbarHeight / 2),
+          child: MoveWindow(
+            child: WindowBar(
+              leading: Image.asset('imgs/icon.png'),
+              title: Text('File Manager${libraryTitle == null ? "" : ": ${libraryTitle!}"}'),
+              onMinimize: () => appWindow.minimize(),
+              onMaximize: () => appWindow.maximize(),
+              onClose: () => appWindow.close(),
+            ),
+          ),
         ) : null,
         appBar: AppBar(
           title: libraryTitle == null ? (currentDirectory == null ? null : Text(currentDirectory!.path)) : Text(libraryTitle!),
