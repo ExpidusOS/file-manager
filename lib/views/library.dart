@@ -3,6 +3,7 @@ import 'package:file_manager/logic.dart';
 import 'package:file_manager/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io' as io;
 
 class LibraryView extends StatefulWidget {
@@ -19,12 +20,17 @@ class LibraryView extends StatefulWidget {
 
 class _LibraryViewState extends State<LibraryView> with FileManagerLogic<LibraryView> {
   bool gridView = false;
+  bool showHidden = false;
 
   @override
   void initState() {
     super.initState();
 
     currentDirectory = widget.currentDirectory;
+
+    SharedPreferences.getInstance().then((prefs) => setState(() {
+      showHidden = prefs.getBool("hidden") ?? false;
+    })).catchError((error) => FlutterError.reportError(FlutterErrorDetails(exception: error)));
   }
 
   void _handleError(BuildContext context, Object e) {
@@ -93,6 +99,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
         body: currentDirectory == null ? null : Center(
           child: gridView ?
             FileBrowserGrid(
+              showHidden: showHidden,
               directory: currentDirectory!,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 5,
@@ -100,6 +107,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
               onTap: (entry) => _onEntryTap(context, entry),
             )
           : FileBrowserList(
+            showHidden: showHidden,
             directory: currentDirectory!,
             onTap: (entry) => _onEntryTap(context, entry),
           ),
