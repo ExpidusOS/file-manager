@@ -143,6 +143,17 @@ class LibraryEntry {
     return status.isGranted;
   }
 
+  static String _transformPathAndroid(StorageDirectory type, String p) {
+    switch (type) {
+      case StorageDirectory.dcim:
+        return path.join('/storage/emulated/0', 'DCIM');
+      case StorageDirectory.downloads:
+        return path.join('/storage/emulated/0', 'Download');
+      default:
+        return path.join('/storage/emulated/0', '${path.basename(p)[0].toUpperCase()}${path.basename(p).substring(1)}');
+    }
+  }
+
   static Future<List<LibraryEntry>> genList() async {
     var entries = <LibraryEntry>[];
 
@@ -157,6 +168,15 @@ class LibraryEntry {
     }
 
     switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+        for (var type in StorageDirectory.values) {
+          final dirs = await getExternalStorageDirectories(type: type);
+          if (dirs == null || dirs.isEmpty) continue;
+
+          final entry = io.Directory(_transformPathAndroid(type, dirs[0].path));
+          entries.add(LibraryEntry.from(type: type, entry: entry));
+        }
+        break;
       case TargetPlatform.linux:
         for (var name in getUserDirectoryNames()) {
           final entry = getUserDirectory(name);
