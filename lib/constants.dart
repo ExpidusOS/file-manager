@@ -1,8 +1,15 @@
 enum FileManagerBuildConfig {
-  sentryDsn;
+  sentryDsn(key: 'SENTRY_DSN');
 
-  String get value => String.fromEnvironment(name);
+  const FileManagerBuildConfig({ required this.key });
+
+  final String key;
+
+  String get value => String.fromEnvironment(key);
   bool get isSet => value.isNotEmpty;
+
+  @override
+  String toString() => '${key}=${value}';
 }
 
 enum FileManagerSettings {

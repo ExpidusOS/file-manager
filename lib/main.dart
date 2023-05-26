@@ -39,6 +39,8 @@ Future<void> main() async {
   const sentryDsn = FileManagerBuildConfig.sentryDsn;
   final perfs = await SharedPreferences.getInstance();
 
+  print(sentryDsn);
+
   if (sentryDsn.isSet && (perfs.getBool(FileManagerSettings.optInErrorReporting.name) ?? false)) {
     await SentryFlutter.init(
       (options) {
