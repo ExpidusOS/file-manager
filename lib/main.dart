@@ -4,12 +4,15 @@ import 'package:libtokyo_flutter/libtokyo.dart' hide ColorScheme;
 import 'package:libtokyo/libtokyo.dart' hide TokyoApp;
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'dart:io' as io;
 import 'logic.dart';
 import 'views.dart';
 
-void main() {
-  runApp(const FileManagerApp());
+void _runMain({
+  required bool isSentry,
+}) {
+  runApp(FileManagerApp(isSentry: isSentry));
 
   switch (defaultTargetPlatform) {
     case TargetPlatform.windows:
@@ -30,8 +33,28 @@ void main() {
   }
 }
 
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  const sentryDsn = FileManagerBuildConfig.sentryDsn;
+  final perfs = await SharedPreferences.getInstance();
+
+  if (sentryDsn.isSet && (perfs.getBool(FileManagerSettings.optInErrorReporting.name) ?? false)) {
+    await SentryFlutter.init(
+      (options) {
+        options.dsn = sentryDsn.value;
+      },
+      appRunner: () => _runMain(isSentry: true),
+    );
+  } else {
+    _runMain(isSentry: false);
+  }
+}
+
 class FileManagerApp extends StatefulWidget {
-  const FileManagerApp({ super.key });
+  const FileManagerApp({ super.key, required this.isSentry });
+
+  final bool isSentry;
 
   @override
   State<FileManagerApp> createState() => _FileManagerApp();
@@ -67,6 +90,9 @@ class _FileManagerApp extends State<FileManagerApp> {
       TokyoApp(
         colorScheme: colorScheme,
         title: 'Flutter Demo',
+        navigatorObservers: widget.isSentry ? [
+          SentryNavigatorObserver(),
+        ] : null,
         home: LibraryView(
           currentDirectory: LibraryEntry.defaultEntry == null ? io.Directory.current : LibraryEntry.defaultEntry!.entry,
         ),

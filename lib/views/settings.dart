@@ -17,6 +17,7 @@ class _SettingsViewState extends State<SettingsView> {
   late SharedPreferences preferences;
   bool showHiddenFiles = false;
   bool showHiddenLibraries = false;
+  bool optInErrorReporting = false;
 
   @override
   void initState() {
@@ -31,6 +32,7 @@ class _SettingsViewState extends State<SettingsView> {
   void _loadSettings() {
     showHiddenFiles = preferences.getBool(FileManagerSettings.showHiddenFiles.name) ?? false;
     showHiddenLibraries = preferences.getBool(FileManagerSettings.showHiddenLibraries.name) ?? false;
+    optInErrorReporting = preferences.getBool(FileManagerSettings.optInErrorReporting.name) ?? false;
   }
 
   void _handleError(BuildContext context, Object e) {
@@ -89,6 +91,18 @@ class _SettingsViewState extends State<SettingsView> {
                 });
               }).catchError((error) => _handleError(context, error)),
             ),
+            ...(FileManagerBuildConfig.sentryDsn.isSet ? [
+              SwitchListTile(
+                title: const Text('Opt-in to error reporting via Sentry'),
+                subtitle: const Text('Will take effect after restarting the application'),
+                value: optInErrorReporting,
+                onChanged: (value) => preferences.setBool(FileManagerSettings.optInErrorReporting.name, value).then((value) {
+                  setState(() {
+                    optInErrorReporting = value;
+                  });
+                }).catchError((error) => _handleError(context, error)),
+              ),
+            ] : []),
             ListTile(
               title: const Text('Restore default settings'),
               onTap: () => preferences.clear().then((value) => setState(() {

@@ -33,6 +33,7 @@ dependencies:
   path_provider_windows: ^2.1.6
   path_provider_platform_interface: ^2.0.6
   ffi: ^2.0.2
+  sentry_flutter: ^7.6.2
 
 dev_dependencies:
   flutter_test:
