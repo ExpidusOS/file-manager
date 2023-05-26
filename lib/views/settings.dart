@@ -27,18 +27,16 @@ class _SettingsViewState extends State<SettingsView> {
   }
 
   void _handleError(BuildContext context, Object e) {
-    if (e is Error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Failed to open file: ${e.toString()}'),
-            duration: const Duration(milliseconds: 1500),
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-          )
-      );
-    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Failed to open file: ${e.toString()}'),
+        duration: const Duration(milliseconds: 1500),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      )
+    );
   }
 
   @override
@@ -65,6 +63,7 @@ class _SettingsViewState extends State<SettingsView> {
         body: ListView(
           children: [
             SwitchListTile(
+              tileColor: Theme.of(context).cardTheme.color ?? Theme.of(context).cardColor,
               shape: Theme.of(context).cardTheme.shape,
               contentPadding: Theme.of(context).cardTheme.margin,
               title: const Text('Show hidden files and directories'),

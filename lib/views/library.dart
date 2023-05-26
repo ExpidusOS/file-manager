@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/logic.dart';
 import 'package:file_manager/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:open_file_plus/open_file_plus.dart';
 import 'dart:io' as io;
 
 class LibraryView extends StatefulWidget {
@@ -34,18 +36,16 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
   }
 
   void _handleError(BuildContext context, Object e) {
-    if (e is Error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Failed to open file: ${e.toString()}'),
-            duration: const Duration(milliseconds: 1500),
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-          )
-      );
-    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Failed to open file: ${e.toString()}'),
+        duration: const Duration(milliseconds: 1500),
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      )
+    );
   }
 
   void _onEntryTap(BuildContext context, io.FileSystemEntity entry) {
@@ -58,10 +58,21 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
         )
       );
     } else {
-      launchUrl(entry.uri).catchError((e) {
-        _handleError(context, e);
-        return true;
-      });
+      switch (defaultTargetPlatform) {
+        case TargetPlatform.android:
+        case TargetPlatform.iOS:
+          OpenFile.open(entry.path).catchError((e) {
+            _handleError(context, e);
+            return OpenResult(type: ResultType.error, message: e.toString());
+          });
+          break;
+        default:
+          launchUrl(entry.uri).catchError((e) {
+            _handleError(context, e);
+            return true;
+          });
+          break;
+      }
     }
   }
 

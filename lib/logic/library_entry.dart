@@ -3,6 +3,8 @@ import 'package:file_manager/views.dart';
 import 'package:flutter/foundation.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:saf/saf.dart';
 import 'package:xdg_directories/xdg_directories.dart';
 import 'package:universal_disk_space/universal_disk_space.dart';
 import 'package:udisks/udisks.dart';
@@ -119,8 +121,40 @@ class LibraryEntry {
     }
   }
 
+  static Future<bool> _checkPermission(Permission perm) async {
+    var status = await perm.status;
+    if (status.isPermanentlyDenied) {
+      return await openAppSettings();
+    }
+
+    if (!status.isGranted) {
+      switch (await perm.request()) {
+        case PermissionStatus.granted:
+        case PermissionStatus.limited:
+          return true;
+        case PermissionStatus.denied:
+        case PermissionStatus.restricted:
+          return false;
+        case PermissionStatus.permanentlyDenied:
+          return await openAppSettings();
+      }
+    }
+
+    return status.isGranted;
+  }
+
   static Future<List<LibraryEntry>> genList() async {
     var entries = <LibraryEntry>[];
+
+    switch (defaultTargetPlatform) {
+      case TargetPlatform.android:
+      case TargetPlatform.iOS:
+      case TargetPlatform.windows:
+        while (!await _checkPermission(Permission.manageExternalStorage));
+        break;
+      default:
+        break;
+    }
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.linux:
