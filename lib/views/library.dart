@@ -93,6 +93,8 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
           ),
         ) : null,
         appBar: AppBar(
+          leading: const DrawerWithClose(),
+          leadingWidth: Navigator.of(context).canPop() ? 100.0 : 56.0,
           title: libraryTitle == null ? (currentDirectory == null ? null : Text(currentDirectory!.path)) : Text(libraryTitle!),
           actions: [
             IconButton(

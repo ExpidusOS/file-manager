@@ -422,31 +422,10 @@
             </list>
           </value>
         </entry>
-        <entry key="typed_data">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/typed_data-1.3.2/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="udisks">
           <value>
             <list>
               <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/udisks-0.4.0/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="universal_disk_space">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/universal_disk_space-0.2.3/lib" />
-            </list>
-          </value>
-        </entry>
-        <entry key="universal_io">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/universal_io-2.2.0/lib" />
             </list>
           </value>
         </entry>
@@ -593,10 +572,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/string_scanner-1.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/term_glyph-1.2.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/test_api-0.5.1/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/typed_data-1.3.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/udisks-0.4.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/universal_disk_space-0.2.3/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/universal_io-2.2.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher-6.1.11/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.34/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_ios-6.1.4/lib" />

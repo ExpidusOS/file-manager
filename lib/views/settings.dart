@@ -62,6 +62,8 @@ class _SettingsViewState extends State<SettingsView> {
           ),
         ) : null,
         appBar: AppBar(
+          leading: const DrawerWithClose(),
+          leadingWidth: Navigator.of(context).canPop() ? 100.0 : 56.0,
           title: const Text('Settings'),
         ),
         drawer: const FileManagerDrawer(
