@@ -1,4 +1,5 @@
 import 'package:file_manager/constants.dart';
+import 'package:file_manager/logic/error.dart';
 import 'package:flutter/foundation.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/logic.dart';
@@ -33,7 +34,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
 
     SharedPreferences.getInstance().then((prefs) => setState(() {
       showHiddenFiles = prefs.getBool(FileManagerSettings.showHiddenFiles.name) ?? false;
-    })).catchError((error) => FlutterError.reportError(FlutterErrorDetails(exception: error)));
+    })).catchError((error, trace) => handleError(error, trace: trace));
   }
 
   void _handleError(BuildContext context, Object e) {

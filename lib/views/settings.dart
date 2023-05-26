@@ -1,3 +1,4 @@
+import 'package:file_manager/logic/error.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/widgets.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -26,7 +27,7 @@ class _SettingsViewState extends State<SettingsView> {
     SharedPreferences.getInstance().then((prefs) => setState(() {
       preferences = prefs;
       _loadSettings();
-    })).catchError((error) => FlutterError.reportError(FlutterErrorDetails(exception: error)));
+    })).catchError((error, trace) => handleError(error, trace: trace));
   }
 
   void _loadSettings() {
@@ -91,7 +92,7 @@ class _SettingsViewState extends State<SettingsView> {
                 });
               }).catchError((error) => _handleError(context, error)),
             ),
-            ...(FileManagerBuildConfig.sentryDsn.isSet ? [
+            ...(const String.fromEnvironment('SENTRY_DSN', defaultValue: '').isNotEmpty ? [
               SwitchListTile(
                 title: const Text('Opt-in to error reporting via Sentry'),
                 subtitle: const Text('Will take effect after restarting the application'),

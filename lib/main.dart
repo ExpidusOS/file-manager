@@ -1,4 +1,5 @@
 import 'package:file_manager/constants.dart';
+import 'package:file_manager/logic/error.dart';
 import 'package:flutter/foundation.dart';
 import 'package:libtokyo_flutter/libtokyo.dart' hide ColorScheme;
 import 'package:libtokyo/libtokyo.dart' hide TokyoApp;
@@ -36,15 +37,22 @@ void _runMain({
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  const sentryDsn = FileManagerBuildConfig.sentryDsn;
-  final perfs = await SharedPreferences.getInstance();
+  const sentryDsn = String.fromEnvironment('SENTRY_DSN', defaultValue: '');
+  final prefs = await SharedPreferences.getInstance();
 
-  print(sentryDsn);
-
-  if (sentryDsn.isSet && (perfs.getBool(FileManagerSettings.optInErrorReporting.name) ?? false)) {
+  if (sentryDsn.isNotEmpty && (prefs.getBool(FileManagerSettings.optInErrorReporting.name) ?? false)) {
     await SentryFlutter.init(
       (options) {
-        options.dsn = sentryDsn.value;
+        options.dsn = sentryDsn;
+        options.tracesSampleRate = 1.0;
+
+        if (kDebugMode) {
+          options.environment = 'debug';
+        } else if (kProfileMode) {
+          options.environment = 'profile';
+        } else if (kReleaseMode) {
+          options.environment = 'release';
+        }
       },
       appRunner: () => _runMain(isSentry: true),
     );
@@ -75,7 +83,9 @@ class _FileManagerApp extends State<FileManagerApp> {
     SharedPreferences.getInstance().then((prefs) => setState(() {
       preferences = prefs;
       _loadSettings();
-    })).catchError((error) => FlutterError.reportError(FlutterErrorDetails(exception: error)));
+    })).catchError((error, trace) {
+      handleError(error, trace: trace);
+    });
   }
 
   void _loadSettings() {
