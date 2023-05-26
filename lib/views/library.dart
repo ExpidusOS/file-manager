@@ -25,6 +25,7 @@ class LibraryView extends StatefulWidget {
 class _LibraryViewState extends State<LibraryView> with FileManagerLogic<LibraryView> {
   bool gridView = false;
   bool showHiddenFiles = false;
+  Key key = UniqueKey();
 
   @override
   void initState() {
@@ -112,19 +113,28 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
           currentDirectory: currentDirectory,
         ),
         body: currentDirectory == null ? null : Center(
-          child: gridView ?
-            FileBrowserGrid(
+          child: RefreshIndicator(
+            onRefresh: () async {
+              setState(() {
+                key = UniqueKey();
+              });
+            },
+            child: gridView ?
+              FileBrowserGrid(
+                key: key,
+                showHidden: showHiddenFiles,
+                directory: currentDirectory!,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 5,
+                ),
+                onTap: (entry) => _onEntryTap(context, entry),
+              )
+            : FileBrowserList(
+              key: key,
               showHidden: showHiddenFiles,
               directory: currentDirectory!,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 5,
-              ),
               onTap: (entry) => _onEntryTap(context, entry),
-            )
-          : FileBrowserList(
-            showHidden: showHiddenFiles,
-            directory: currentDirectory!,
-            onTap: (entry) => _onEntryTap(context, entry),
+            ),
           ),
         ),
       );

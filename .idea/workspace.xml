@@ -10,16 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0722f09-2eeb-4fdd-a8a3-9bf72efb0eea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/logic/error.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/file_manager_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/file_manager_android.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/file_manager.iml" beforeDir="false" afterPath="$PROJECT_DIR$/file_manager.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/logic/fm_logic.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/logic/fm_logic.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/views/library.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/library.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/views/settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/settings.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
