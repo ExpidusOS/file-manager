@@ -10,6 +10,11 @@ dependencies:
   collection: ^1.17.1
   flutter:
     sdk: flutter
+  libtokyo:
+    git:
+      url: https://github.com/ExpidusOS/libtokyo.git
+      ref: feat/packages
+      path: packages/libtokyo
   libtokyo_flutter:
     git:
       url: https://github.com/ExpidusOS/libtokyo.git
@@ -23,9 +28,12 @@ dependencies:
   udisks: ^0.4.0
   path: ^1.8.3
   shared_preferences: ^2.1.1
-  saf: ^1.0.3+4
   open_file_plus: ^3.4.1
   permission_handler: ^10.2.0
+  win32: ^3.1.4
+  path_provider_windows: ^2.1.6
+  path_provider_platform_interface: ^2.0.6
+  ffi: ^2.0.2
 
 dev_dependencies:
   flutter_test:

@@ -324,13 +324,6 @@
             </list>
           </value>
         </entry>
-        <entry key="saf">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/saf-1.0.3+4/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="shared_preferences">
           <value>
             <list>
@@ -587,7 +580,6 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/platform-3.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/process-4.2.4/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/saf-1.0.3+4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences-2.1.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.2/lib" />

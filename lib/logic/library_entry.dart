@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'package:collection/collection.dart';
 import 'package:file_manager/constants.dart';
 import 'package:file_manager/views.dart';
@@ -5,12 +6,15 @@ import 'package:flutter/foundation.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:saf/saf.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xdg_directories/xdg_directories.dart';
 import 'package:universal_disk_space/universal_disk_space.dart';
 import 'package:udisks/udisks.dart';
 import 'package:path/path.dart' as path;
+import 'package:path_provider_windows/path_provider_windows.dart';
+import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:win32/win32.dart';
+import 'package:ffi/ffi.dart';
 import 'dart:io' as io;
 
 class LibraryEntry {
@@ -188,6 +192,57 @@ class LibraryEntry {
 
           entries.add(LibraryEntry.fromXdg(name: name, entry: entry));
         }
+        break;
+      case TargetPlatform.windows:
+        final pathProvider = PathProviderPlatform.instance as PathProviderWindows;
+
+        entries.addAll([
+          LibraryEntry(
+            title: 'Desktop',
+            entry: io.Directory((await pathProvider.getPath(FOLDERID_Desktop))!),
+            iconData: Icons.desktop_windows
+          ),
+          LibraryEntry.from(
+            type: StorageDirectory.documents,
+            entry: io.Directory((await pathProvider.getPath(FOLDERID_Documents))!),
+          ),
+          LibraryEntry.from(
+            type: StorageDirectory.movies,
+            entry: io.Directory((await pathProvider.getPath(FOLDERID_Videos))!),
+          ),
+          LibraryEntry.from(
+            type: StorageDirectory.music,
+            entry: io.Directory((await pathProvider.getPath(FOLDERID_Music))!),
+          ),
+          LibraryEntry.from(
+            type: StorageDirectory.downloads,
+            entry: io.Directory((await pathProvider.getPath(FOLDERID_Downloads))!),
+          ),
+          LibraryEntry.fromXdg(
+            name: 'HOME',
+            entry: io.Directory((await pathProvider.getPath(FOLDERID_Profile))!),
+          ),
+        ]);
+
+        var buff = String.fromCharCodes(List.filled(1024, 0)).toNativeUtf16();
+        GetLogicalDriveStrings(1024, buff);
+        final arr = buff.cast<Uint16>().asTypedList(1024);
+
+        var elem = <int>[];
+        var drives = <String>[];
+        for (var i = 0; i < arr.length; i++) {
+          final val = arr[i];
+          if (val == 0) {
+            drives.add(String.fromCharCodes(elem));
+            elem = <int>[];
+          } else {
+            elem.add(i);
+          }
+        }
+
+        entries.addAll(drives.map((drive) =>
+          LibraryEntry(title: drive, entry: io.Directory(drive), iconData: Icons.storage)
+        ));
         break;
       default:
         for (var type in StorageDirectory.values) {
