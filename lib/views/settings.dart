@@ -2,6 +2,7 @@ import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/widgets.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:file_manager/constants.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({
@@ -14,7 +15,8 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsViewState extends State<SettingsView> {
   late SharedPreferences preferences;
-  bool showHidden = false;
+  bool showHiddenFiles = false;
+  bool showHiddenLibraries = false;
 
   @override
   void initState() {
@@ -22,8 +24,13 @@ class _SettingsViewState extends State<SettingsView> {
 
     SharedPreferences.getInstance().then((prefs) => setState(() {
       preferences = prefs;
-      showHidden = prefs.getBool("hidden") ?? false;
+      _loadSettings();
     })).catchError((error) => FlutterError.reportError(FlutterErrorDetails(exception: error)));
+  }
+
+  void _loadSettings() {
+    showHiddenFiles = preferences.getBool(FileManagerSettings.showHiddenFiles.name) ?? false;
+    showHiddenLibraries = preferences.getBool(FileManagerSettings.showHiddenLibraries.name) ?? false;
   }
 
   void _handleError(BuildContext context, Object e) {
@@ -63,18 +70,35 @@ class _SettingsViewState extends State<SettingsView> {
         body: ListView(
           children: [
             SwitchListTile(
-              tileColor: Theme.of(context).cardTheme.color ?? Theme.of(context).cardColor,
-              shape: Theme.of(context).cardTheme.shape,
-              contentPadding: Theme.of(context).cardTheme.margin,
               title: const Text('Show hidden files and directories'),
-              value: showHidden,
-              onChanged: (value) => preferences.setBool('hidden', value).then((value) {
+              value: showHiddenFiles,
+              onChanged: (value) => preferences.setBool(FileManagerSettings.showHiddenFiles.name, value).then((value) {
                 setState(() {
-                  showHidden = value;
+                  showHiddenFiles = value;
                 });
               }).catchError((error) => _handleError(context, error)),
             ),
-          ],
+            SwitchListTile(
+              title: const Text('Show hidden libraries'),
+              value: showHiddenLibraries,
+              onChanged: (value) => preferences.setBool(FileManagerSettings.showHiddenLibraries.name, value).then((value) {
+                setState(() {
+                  showHiddenLibraries = value;
+                });
+              }).catchError((error) => _handleError(context, error)),
+            ),
+            ListTile(
+              title: const Text('Restore default settings'),
+              onTap: () => preferences.clear().then((value) => setState(() {
+                _loadSettings();
+              })).catchError((error) => _handleError(context, error)),
+            ),
+          ].map((child) => child is Divider ? child : ListTileTheme(
+            tileColor: Theme.of(context).cardTheme.color ?? Theme.of(context).cardColor,
+            shape: Theme.of(context).cardTheme.shape,
+            contentPadding: Theme.of(context).cardTheme.margin,
+            child: child
+          )).toList(),
         ),
       );
 }

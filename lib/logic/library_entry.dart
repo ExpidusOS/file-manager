@@ -1,10 +1,12 @@
 import 'package:collection/collection.dart';
+import 'package:file_manager/constants.dart';
 import 'package:file_manager/views.dart';
 import 'package:flutter/foundation.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:saf/saf.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xdg_directories/xdg_directories.dart';
 import 'package:universal_disk_space/universal_disk_space.dart';
 import 'package:udisks/udisks.dart';
@@ -156,6 +158,8 @@ class LibraryEntry {
 
   static Future<List<LibraryEntry>> genList() async {
     var entries = <LibraryEntry>[];
+    final prefs = await SharedPreferences.getInstance();
+    final showHiddenLibraries = prefs.getBool(FileManagerSettings.showHiddenLibraries.name) ?? false;
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -204,7 +208,7 @@ class LibraryEntry {
           final fstab = drive.configuration.firstWhereOrNull((element) => element.type == 'fstab');
           if (fstab == null) continue;
           if (!fstab.details.containsKey('dir')) continue;
-          if (drive.hintIgnore) continue;
+          if (drive.hintIgnore && !showHiddenLibraries) continue;
 
           final entry = io.Directory(String.fromCharCodes(fstab.details['dir']!.asByteArray().where((i) => i > 0)));
 
