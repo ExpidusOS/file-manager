@@ -22,7 +22,7 @@ modules:
       - mkdir -p /app/bin && ln -s /app/expidus_file_manager/file_manager /app/bin/file_manager
       - install -D data/com.expidusos.file_manager.desktop /app/share/applications/com.expidusos.file_manager.desktop
       - install -D data/com.expidusos.file_manager.metainfo.xml /app/share/metainfo/com.expidusos.file_manager.metainfo.xml
-      - install -D imgs/icon.png /app/share/icons/hicolor/256x256/apps/com.expidusos.file_manager.png
+      - install -D assets/imgs/icon.png /app/share/icons/hicolor/256x256/apps/com.expidusos.file_manager.png
     sources:
       - type: dir
         path: ..
