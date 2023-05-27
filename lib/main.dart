@@ -70,6 +70,7 @@ class FileManagerApp extends StatefulWidget {
   State<FileManagerApp> createState() => _FileManagerApp();
 
   static Future<void> reload(BuildContext context) => context.findAncestorStateOfType<_FileManagerApp>()!.reload();
+  static bool isSentryOnContext(BuildContext context) => context.findAncestorWidgetOfExactType<FileManagerApp>()!.isSentry;
 }
 
 class _FileManagerApp extends State<FileManagerApp> {

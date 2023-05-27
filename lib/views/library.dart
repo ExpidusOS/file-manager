@@ -43,6 +43,10 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
   void _loadSettings({ required bool isGridViewSet }) {
     showHiddenFiles = preferences.getBool(FileManagerSettings.showHiddenFiles.name) ?? false;
 
+    if (!isGridViewSet) {
+      gridView = preferences.getBool(FileManagerSettings.showGridView.name) ?? false;
+    }
+
     if (currentDirectory != null) {
       final gridViewPaths = preferences.getStringList(FileManagerSettings.gridViewsPaths.name) ?? <String>[];
       if (!isGridViewSet) {

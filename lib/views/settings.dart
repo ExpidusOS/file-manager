@@ -1,4 +1,6 @@
 import 'package:file_manager/logic/error.dart';
+import 'package:file_manager/main.dart';
+import 'package:file_manager/views/feedback_choice.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/widgets.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -18,6 +20,7 @@ class _SettingsViewState extends State<SettingsView> {
   late SharedPreferences preferences;
   bool showHiddenFiles = false;
   bool showHiddenLibraries = false;
+  bool showGridView = false;
   bool optInErrorReporting = false;
 
   @override
@@ -33,6 +36,7 @@ class _SettingsViewState extends State<SettingsView> {
   void _loadSettings() {
     showHiddenFiles = preferences.getBool(FileManagerSettings.showHiddenFiles.name) ?? false;
     showHiddenLibraries = preferences.getBool(FileManagerSettings.showHiddenLibraries.name) ?? false;
+    showGridView = preferences.getBool(FileManagerSettings.showGridView.name) ?? false;
     optInErrorReporting = preferences.getBool(FileManagerSettings.optInErrorReporting.name) ?? false;
   }
 
@@ -92,6 +96,15 @@ class _SettingsViewState extends State<SettingsView> {
                 });
               }).catchError((error) => _handleError(context, error)),
             ),
+            SwitchListTile(
+              title: const Text('Show grid view in all directories'),
+              value: showGridView,
+              onChanged: (value) => preferences.setBool(FileManagerSettings.showGridView.name, value).then((value) {
+                setState(() {
+                  showGridView = value;
+                });
+              }).catchError((error) => _handleError(context, error)),
+            ),
             ...(const String.fromEnvironment('SENTRY_DSN', defaultValue: '').isNotEmpty ? [
               SwitchListTile(
                 title: const Text('Opt-in to error reporting via Sentry'),
@@ -102,6 +115,20 @@ class _SettingsViewState extends State<SettingsView> {
                     optInErrorReporting = value;
                   });
                 }).catchError((error) => _handleError(context, error)),
+              ),
+            ] : []),
+            const Divider(),
+            ...(const String.fromEnvironment('SENTRY_DSN', defaultValue: '').isNotEmpty && FileManagerApp.isSentryOnContext(context) ? [
+              ListTile(
+                title: const Text('Send feedback'),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const FeedbackChoice(),
+                    settings: const RouteSettings(
+                      name: 'FeedbackChoice',
+                    ),
+                  )
+                ),
               ),
             ] : []),
             ListTile(
