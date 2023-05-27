@@ -120,7 +120,7 @@ class LibraryEntry {
       case TargetPlatform.android:
         return LibraryEntry(title: 'Storage', entry: io.Directory('/storage/emulated/0'), iconData: Icons.storage);
       case TargetPlatform.linux:
-        return LibraryEntry(title: 'Home', entry: io.Directory(io.Platform.environment['HOME'] ?? io.Directory.current.path), iconData: Icons.home);
+        return LibraryEntry.fromXdg(name: 'HOME', entry: io.Directory(io.Platform.environment['HOME']!));
       default:
         return null;
     }
