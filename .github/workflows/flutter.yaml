@@ -14,6 +14,11 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v3
+      - name: Add missing dependencies
+        run: |
+          dnf update -y
+          dnf install -y jq
+          dnf clean all
       - uses: subosito/flutter-action@v2
         with:
           cache: true
