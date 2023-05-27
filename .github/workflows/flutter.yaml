@@ -44,7 +44,7 @@ jobs:
         name: Install host dependencies
         run: |
           sudo apt-get update -y
-          sudo apt-get install -y ninja-build libgtk-3-dev
+          sudo apt-get install -y ninja-build libgtk-3-dev flatpak-builder
       - run: flutter doctor
       - name: Download dependencies
         run: flutter pub get
@@ -53,6 +53,9 @@ jobs:
         run: |
           flutter config --enable-${{ matrix.target }}-desktop
           flutter build ${{ matrix.target }} --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+      - if: ${{ matrix.target == 'linux' }}
+        name: Bundle Flatpak
+        run: flatpak-builder build/flutter data/com.expidusos.file_manager.yml
       - if: ${{ matrix.target == 'android' }}
         name: Build for Android
         run: |

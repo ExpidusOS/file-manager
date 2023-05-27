@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=File Manager
+Comment=ExpidusOS File Manager
+Categories=Utility;
+Icon=com.expidusos.file_manager
+Terminal=false

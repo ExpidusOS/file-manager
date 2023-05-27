@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.expidusos.file_manager</id>
+  
+  <name>File Manager</name>
+  <summary>ExpidusOS File Manager</summary>
+  <developer_name>Midstall Software</developer_name>
+  <url type="homepage">https://expidusos.com</url>
+  <url type="bugtracker">https://github.com/ExpidusOS/file-manager/issues</url>
+  <url type="contribute">https://github.com/ExpidusOS/file-manager</url>
+  
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-only</project_license>
+
+  <content_rating type="oars-1.1">
+    <content_attribute id="social-info">moderate</content_attribute>
+  </content_rating>
+  
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+  
+  <description>
+    <p>
+      The file manager for the Expidus operating system designed using Flutter.
+    </p>
+  </description>
+  
+  <launchable type="desktop-id">com.expidusos.file_manager.desktop</launchable>
+</component>
