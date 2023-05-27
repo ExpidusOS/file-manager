@@ -85,6 +85,8 @@ class LibraryEntry {
         return LibraryEntry(title: 'Templates', entry: entry, iconData: Icons.folder);
       case 'PUBLICSHARE':
         return LibraryEntry(title: 'Public', entry: entry, iconData: Icons.public);
+      case 'HOME':
+        return LibraryEntry(title: 'Home', entry: entry, iconData: Icons.home);
       case 'DOWNLOAD':
         return from(
           type: StorageDirectory.downloads,

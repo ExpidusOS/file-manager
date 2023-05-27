@@ -23,6 +23,7 @@ class LibraryView extends StatefulWidget {
 }
 
 class _LibraryViewState extends State<LibraryView> with FileManagerLogic<LibraryView> {
+  late SharedPreferences preferences;
   bool gridView = false;
   bool showHiddenFiles = false;
   Key key = UniqueKey();
@@ -34,8 +35,20 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
     currentDirectory = widget.currentDirectory;
 
     SharedPreferences.getInstance().then((prefs) => setState(() {
-      showHiddenFiles = prefs.getBool(FileManagerSettings.showHiddenFiles.name) ?? false;
+      preferences = prefs;
+      _loadSettings(isGridViewSet: false);
     })).catchError((error, trace) => handleError(error, trace: trace));
+  }
+
+  void _loadSettings({ required bool isGridViewSet }) {
+    showHiddenFiles = preferences.getBool(FileManagerSettings.showHiddenFiles.name) ?? false;
+
+    if (currentDirectory != null) {
+      final gridViewPaths = preferences.getStringList(FileManagerSettings.gridViewsPaths.name) ?? <String>[];
+      if (!isGridViewSet) {
+        gridView = gridViewPaths.contains(currentDirectory!.path);
+      }
+    }
   }
 
   void _handleError(BuildContext context, Object e) {
@@ -105,6 +118,20 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
               onPressed: () =>
                   setState(() {
                     gridView = !gridView;
+
+                    if (currentDirectory != null) {
+                      final gridViewPaths = preferences.getStringList(FileManagerSettings.gridViewsPaths.name) ?? <String>[];
+                      if (gridViewPaths.contains(currentDirectory!.path) && !gridView) {
+                        gridViewPaths.remove(currentDirectory!.path);
+                      } else if (!gridViewPaths.contains(currentDirectory!.path) && gridView) {
+                        gridViewPaths.add(currentDirectory!.path);
+                      }
+
+                      preferences.setStringList(FileManagerSettings.gridViewsPaths.name, gridViewPaths).onError((error, stackTrace) {
+                        _handleError(context, error!);
+                        return true;
+                      });
+                    }
                   }),
             ),
           ],
@@ -115,8 +142,10 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
         body: currentDirectory == null ? null : Center(
           child: RefreshIndicator(
             onRefresh: () async {
+              await preferences.reload();
               setState(() {
                 key = UniqueKey();
+                _loadSettings(isGridViewSet: false);
               });
             },
             child: gridView ?
