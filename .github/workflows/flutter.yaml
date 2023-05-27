@@ -17,7 +17,7 @@ jobs:
       - name: Add dependencies
         run: |
           dnf update -y
-          dnf install -y jq cmake ninja-build gtk3-devel
+          dnf install -y jq cmake ninja-build gtk3-devel clang
           dnf clean all
       - uses: subosito/flutter-action@v2
         with:
