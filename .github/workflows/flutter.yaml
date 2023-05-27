@@ -26,9 +26,9 @@ jobs:
           architecture: ${{ matrix.arch }}
       - name: Build Flutter
         run: |
+          git config --global --add safe.directory /opt/hostedtoolcache/flutter/${{ matrix.channel }}-3.10.2-${{ matrix.arch }}
           flutter config --enable-linux-desktop
           flutter build linux --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-          git config --global --add safe.directory /opt/hostedtoolcache/flutter/${{ matrix.channel }}-3.10.2-${{ matrix.arch }}
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
         name: Bundle Flatpak
         with:
