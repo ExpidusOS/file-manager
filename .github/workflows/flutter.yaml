@@ -1,5 +1,5 @@
 name: Flutter
-on: push
+on: [push, pull_request]
 
 jobs:
   linux:
@@ -35,7 +35,8 @@ jobs:
           bundle: com.expidusos.file_manager.flatpak
           manifest-path: data/com.expidusos.file_manager.yml
           cache-key: flatpak-builder-${{ github.sha }}
-      - name: Upload Flatpak Bundle
+      - if: ${{ !github.event.issue.pull_request }}
+        name: Upload Flatpak Bundle
         uses: actions/upload-artifact@v3
         with:
           name: com.expidusos.file_manager.flatpak
@@ -86,13 +87,13 @@ jobs:
         name: Build for Android
         run: |
           flutter build apk --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-      - if: ${{ matrix.target == 'windows' }}
+      - if: ${{ matrix.target == 'windows' && !github.event.issue.pull_request }}
         name: Upload Windows
         uses: actions/upload-artifact@v3
         with:
           name: com.expidusos.file_manager-windows.zip
           path: build/windows/runner/Release
-      - if: ${{ matrix.target == 'android' }}
+      - if: ${{ matrix.target == 'android' && !github.event.issue.pull_request }}
         name: Upload Android APK
         uses: actions/upload-artifact@v3
         with:
