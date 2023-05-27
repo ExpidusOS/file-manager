@@ -57,4 +57,3 @@ jobs:
         name: Build for Android
         run: |
           flutter build apk --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-          flutter build appbundle --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
