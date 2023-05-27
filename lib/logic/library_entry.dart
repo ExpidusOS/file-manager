@@ -121,6 +121,8 @@ class LibraryEntry {
         return LibraryEntry(title: 'Storage', entry: io.Directory('/storage/emulated/0'), iconData: Icons.storage);
       case TargetPlatform.linux:
         return LibraryEntry.fromXdg(name: 'HOME', entry: io.Directory(io.Platform.environment['HOME']!));
+      case TargetPlatform.windows:
+        return LibraryEntry.fromXdg(name: 'HOME', entry: io.Directory(io.Platform.environment['USERPROFILE']!));
       default:
         return null;
     }
