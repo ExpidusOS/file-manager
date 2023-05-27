@@ -13,7 +13,7 @@ class FeedbackChoice extends StatelessWidget {
           preferredSize: const Size.fromHeight(kToolbarHeight / 2),
           child: MoveWindow(
             child: WindowBar(
-              leading: Image.asset('imgs/icon.png'),
+              leading: Image.asset('assets/imgs/icon.png'),
               title: const Text('File Manager'),
               onMinimize: () => appWindow.minimize(),
               onMaximize: () => appWindow.maximize(),

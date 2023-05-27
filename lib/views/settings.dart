@@ -1,5 +1,6 @@
 import 'package:file_manager/logic/error.dart';
 import 'package:file_manager/main.dart';
+import 'package:file_manager/views/about.dart';
 import 'package:file_manager/views/feedback_choice.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/widgets.dart';
@@ -60,7 +61,7 @@ class _SettingsViewState extends State<SettingsView> {
           preferredSize: const Size.fromHeight(kToolbarHeight / 2),
           child: MoveWindow(
             child: WindowBar(
-              leading: Image.asset('imgs/icon.png'),
+              leading: Image.asset('assets/imgs/icon.png'),
               title: const Text('File Manager'),
               onMinimize: () => appWindow.minimize(),
               onMaximize: () => appWindow.maximize(),
@@ -137,6 +138,15 @@ class _SettingsViewState extends State<SettingsView> {
                 _loadSettings();
               })).catchError((error) => _handleError(context, error)),
             ),
+            const Divider(),
+            ListTile(
+              title: const Text('About'),
+              onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const About(),
+                )
+              ),
+            )
           ].map((child) => child is Divider ? child : ListTileTheme(
             tileColor: Theme.of(context).cardTheme.color ?? Theme.of(context).cardColor,
             shape: Theme.of(context).cardTheme.shape,

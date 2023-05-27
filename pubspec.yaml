@@ -2,6 +2,7 @@ name: file_manager
 description: The file manager for the Expidus operating system.
 publish_to: 'none'
 version: 0.1.0+1
+homepage: https://expidusos.com
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -35,6 +36,7 @@ dependencies:
   ffi: ^2.0.2
   sentry_flutter: ^7.6.2
   uuid_type: ^2.0.0
+  pubspec: ^2.3.0
 
 dev_dependencies:
   flutter_test:
@@ -44,4 +46,6 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - imgs/
+    - assets/imgs/
+    - pubspec.yaml
+    - .dart_tool/package_config.json
