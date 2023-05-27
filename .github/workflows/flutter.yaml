@@ -14,10 +14,10 @@ jobs:
       options: --privileged
     steps:
       - uses: actions/checkout@v3
-      - name: Add missing dependencies
+      - name: Add dependencies
         run: |
           dnf update -y
-          dnf install -y jq
+          dnf install -y jq cmake ninja-build gtk3-devel
           dnf clean all
       - uses: subosito/flutter-action@v2
         with:
