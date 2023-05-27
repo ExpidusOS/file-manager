@@ -257,7 +257,7 @@ class LibraryEntry {
             drives.add(String.fromCharCodes(elem));
             elem = <int>[];
           } else {
-            elem.add(i);
+            elem.add(val);
           }
         }
 
