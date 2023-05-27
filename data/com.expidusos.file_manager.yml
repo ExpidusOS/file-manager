@@ -11,6 +11,7 @@ finish-args:
   - --device=dri
   - --socket=pulseaudio
   - --share=network
+  - --socket=system-bus
   - --socket=session-bus
   - --filesystem=home
 modules:
