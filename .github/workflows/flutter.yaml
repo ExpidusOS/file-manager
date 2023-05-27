@@ -8,6 +8,7 @@ jobs:
         arch: [x64]
         channel: [stable]
     continue-on-error: true
+    runs-on: ubuntu-latest
     container:
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
       options: --privileged
