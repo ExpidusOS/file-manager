@@ -6,4 +6,5 @@ Comment=ExpidusOS File Manager
 Categories=Utility;
 Icon=com.expidusos.file_manager
 Terminal=false
-Exec=file_manager
+Exec=file_manager %U
+MimeType=inode/directory;

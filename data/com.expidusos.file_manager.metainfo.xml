@@ -15,12 +15,20 @@
   <content_rating type="oars-1.1">
     <content_attribute id="social-info">moderate</content_attribute>
   </content_rating>
+
+  <categories>
+    <category>System</category>
+  </categories>
   
   <supports>
     <control>pointing</control>
     <control>keyboard</control>
     <control>touch</control>
   </supports>
+
+  <requires>
+    <display_length>600</display_length>
+  </requires>
   
   <description>
     <p>
