@@ -16,8 +16,9 @@ import 'package:win32/win32.dart';
 import 'package:ffi/ffi.dart';
 import 'dart:io' as io;
 
-class LibraryEntry {
-  LibraryEntry({
+class LibraryEntry extends StatelessWidget {
+  const LibraryEntry({
+    super.key,
     this.group = 0,
     required this.title,
     required this.entry,
@@ -31,6 +32,7 @@ class LibraryEntry {
 
   String titleFor(io.Directory dir) => dir.path.replaceFirst(entry.path, title);
 
+  @override
   Widget build(BuildContext context) =>
       ListTile(
         leading: Icon(iconData),
@@ -300,7 +302,7 @@ class LibraryEntry {
         final widgets = entries.isNotEmpty && groupId > 0 ? <Widget>[
           const Divider(),
         ] : <Widget>[];
-        widgets.addAll(sort(entries).map((e) => e.build(context)));
+        widgets.addAll(sort(entries));
         return MapEntry(groupId, widgets);
       }).values.flattened.toList();
 

@@ -37,6 +37,8 @@ dependencies:
   sentry_flutter: ^7.6.2
   uuid_type: ^2.0.0
   pubspec: ^2.3.0
+  filesize: ^2.0.1
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

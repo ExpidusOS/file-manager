@@ -1,6 +1,6 @@
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'error.dart';
-import 'library_entry.dart';
+import '../widgets/library_entry.dart';
 import 'dart:io' as io;
 
 mixin FileManagerLogic<T extends StatefulWidget> on State<T> {

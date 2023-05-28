@@ -35,7 +35,10 @@ class About extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(MediaQuery.of(context).size.height / 3.0),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width / 5.0,
+                    vertical: MediaQuery.of(context).size.height / 3.0,
+                  ),
                   child: Center(
                     child: Column(
                       children: [
@@ -48,7 +51,7 @@ class About extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         InkWell(
-                          onTap: () => launchUrlString(FileManagerApp.getPubSpec(context).homepage!)
+                          onTap: () => launchUrlString(FileManagerApp.getPubSpec(context).homepage!, mode: LaunchMode.externalApplication)
                               .catchError((error, trace) => handleError(error, trace: trace)),
                           child: Text(
                             FileManagerApp.getPubSpec(context).homepage!,
@@ -68,13 +71,13 @@ class About extends StatelessWidget {
                   ),
                 ),
                 Column(
-                  children: FileManagerApp.getPubSpec(context).allDependencies
+                  children: (FileManagerApp.getPubSpec(context).allDependencies
                       .map((name, dep) {
                         Widget? subtitle = null;
                         if (dep is GitReference) {
                           subtitle = InkWell(
                             onTap: () =>
-                                launchUrlString(dep.url)
+                                launchUrlString(dep.url, mode: LaunchMode.externalApplication)
                                     .catchError((error, trace) =>
                                     handleError(error, trace: trace)),
                             child: Text(
@@ -92,7 +95,7 @@ class About extends StatelessWidget {
                         } else if (dep is HostedReference) {
                           subtitle = InkWell(
                             onTap: () =>
-                                launchUrlString('https://pub.dev/packages/${name}')
+                                launchUrlString('https://pub.dev/packages/${name}', mode: LaunchMode.externalApplication)
                                     .catchError((error, trace) =>
                                     handleError(error, trace: trace)),
                             child: Text(
@@ -118,7 +121,7 @@ class About extends StatelessWidget {
                           title: Text(name),
                           subtitle: subtitle,
                         ));
-                      }).values.toList(),
+                      }).entries.toList()..sort((a, b) => a.key.compareTo(b.key))).map((e) => e.value).toList(),
                 )
               ],
             ),

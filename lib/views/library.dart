@@ -1,9 +1,10 @@
 import 'package:file_manager/constants.dart';
-import 'package:file_manager/logic/error.dart';
+import 'package:file_manager/main.dart';
 import 'package:flutter/foundation.dart';
-import 'package:libtokyo_flutter/libtokyo.dart';
+import 'package:libtokyo_flutter/libtokyo.dart' hide Feedback;
 import 'package:file_manager/logic.dart';
 import 'package:file_manager/widgets.dart';
+import 'package:file_manager/views.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -143,6 +144,39 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                       });
                     }
                   }),
+            ),
+            PopupMenuButton<String>(
+              onSelected: (value) {
+                switch (value) {
+                  case 'feedback':
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Feedback(
+                          id: gridView ? FileManagerFeedbackID.viewLibraryGrid : FileManagerFeedbackID.viewLibraryList,
+                        ),
+                        settings: const RouteSettings(name: 'Feedback'),
+                      )
+                    );
+                    break;
+                }
+              },
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: 'mkfile',
+                  child: Text('Create File'),
+                ),
+                const PopupMenuItem(
+                  value: 'mkdir',
+                  child: Text('Create Directory'),
+                ),
+                ...(FileManagerApp.isSentryOnContext(context) ? <PopupMenuEntry<String>>[
+                  const PopupMenuDivider(),
+                  const PopupMenuItem(
+                    value: 'feedback',
+                    child: Text('Send feedback'),
+                  ),
+                ] : <PopupMenuEntry<String>>[]),
+              ],
             ),
           ],
         ),
