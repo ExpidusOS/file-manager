@@ -1,6 +1,7 @@
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/logic.dart';
 import 'package:file_manager/views.dart';
+import 'package:file_manager/widgets.dart';
 import 'dart:io' as io;
 
 class FileManagerDrawer extends StatefulWidget {

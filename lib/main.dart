@@ -1,5 +1,3 @@
-import 'package:file_manager/constants.dart';
-import 'package:file_manager/logic/error.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:libtokyo_flutter/libtokyo.dart' hide ColorScheme;
@@ -9,7 +7,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:pubspec/pubspec.dart';
 import 'dart:io' as io;
+
+import 'constants.dart';
 import 'logic.dart';
+import 'widgets.dart';
 import 'views.dart';
 
 Future<void> _runMain({

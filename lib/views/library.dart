@@ -29,6 +29,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
   bool gridView = false;
   bool showHiddenFiles = false;
   Key key = UniqueKey();
+  List<ClipboardEntry> clipboard = <ClipboardEntry>[];
 
   @override
   void initState() {
@@ -308,7 +309,16 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
               key: key,
               showHidden: showHiddenFiles,
               directory: currentDirectory!,
-              onTap: (entry) => _onEntryTap(context, entry),
+              createEntryWidget: (entry) => CustomFileBrowserListEntry(
+                entry: entry,
+                onTap: () => _onEntryTap(context, entry),
+                longPress: (value) {
+                  setState(() {
+                    key = UniqueKey();
+                    _loadSettings(isGridViewSet: false);
+                  });
+                },
+              ),
             ),
           ),
         ),
