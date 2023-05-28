@@ -36,7 +36,6 @@ class About extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width / 5.0,
                     vertical: MediaQuery.of(context).size.height / 3.0,
                   ),
                   child: Center(

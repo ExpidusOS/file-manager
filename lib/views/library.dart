@@ -100,7 +100,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
     WillPopScope(
       onWillPop: () async {
         if (Navigator.of(context).canPop() || parentLibrary == null) return true;
-        
+
         currentDirectory = currentDirectory!.parent;
         key = UniqueKey();
         _loadSettings(isGridViewSet: false);
