@@ -125,9 +125,7 @@ class _SettingsViewState extends State<SettingsView> {
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const FeedbackChoice(),
-                    settings: const RouteSettings(
-                      name: 'FeedbackChoice',
-                    ),
+                    settings: const RouteSettings(name: 'FeedbackChoice'),
                   )
                 ),
               ),
@@ -144,6 +142,7 @@ class _SettingsViewState extends State<SettingsView> {
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const About(),
+                  settings: const RouteSettings(name: 'About'),
                 )
               ),
             )

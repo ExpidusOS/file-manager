@@ -14,11 +14,15 @@ import 'views.dart';
 
 Future<void> _runMain({
   required bool isSentry,
+  required PubSpec pubspec,
+  required List<String> args,
 }) async {
-  runApp(FileManagerApp(
+  final app = FileManagerApp(
     isSentry: isSentry,
-    pubspec: PubSpec.fromYamlString(await rootBundle.loadString('pubspec.yaml'))
-  ));
+    pubspec: pubspec,
+    directory: args.isNotEmpty ? io.Directory(args.first) : null,
+  );
+  runApp(isSentry ? DefaultAssetBundle(bundle: SentryAssetBundle(), child: app) : app);
 
   switch (defaultTargetPlatform) {
     case TargetPlatform.windows:
@@ -39,8 +43,9 @@ Future<void> _runMain({
   }
 }
 
-Future<void> main() async {
+Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  final pubspec = PubSpec.fromYamlString(await rootBundle.loadString('pubspec.yaml'));
 
   const sentryDsn = String.fromEnvironment('SENTRY_DSN', defaultValue: '');
   final prefs = await SharedPreferences.getInstance();
@@ -50,6 +55,7 @@ Future<void> main() async {
       (options) {
         options.dsn = sentryDsn;
         options.tracesSampleRate = 1.0;
+        options.release = 'com.expidusos.file_manager@${pubspec.version!}';
 
         if (kDebugMode) {
           options.environment = 'debug';
@@ -59,18 +65,32 @@ Future<void> main() async {
           options.environment = 'release';
         }
       },
-      appRunner: () => _runMain(isSentry: true).catchError((error, trace) => handleError(error, trace: trace)),
+      appRunner: () => _runMain(
+        isSentry: true,
+        pubspec: pubspec,
+        args: args,
+      ).catchError((error, trace) => handleError(error, trace: trace)),
     );
   } else {
-    await _runMain(isSentry: false);
+    await _runMain(
+      isSentry: false,
+      pubspec: pubspec,
+      args: args,
+    );
   }
 }
 
 class FileManagerApp extends StatefulWidget {
-  const FileManagerApp({ super.key, required this.isSentry, required this.pubspec });
+  const FileManagerApp({
+    super.key,
+    required this.isSentry,
+    required this.pubspec,
+    this.directory,
+  });
 
   final bool isSentry;
   final PubSpec pubspec;
+  final io.Directory? directory;
 
   @override
   State<FileManagerApp> createState() => _FileManagerApp();
@@ -109,12 +129,14 @@ class _FileManagerApp extends State<FileManagerApp> {
   Widget build(BuildContext context) =>
       TokyoApp(
         colorScheme: colorScheme,
-        title: 'Flutter Demo',
+        title: 'File Manager',
         navigatorObservers: widget.isSentry ? [
-          SentryNavigatorObserver(),
+          SentryNavigatorObserver(
+            setRouteNameAsTransaction: true,
+          ),
         ] : null,
         home: LibraryView(
-          currentDirectory: LibraryEntry.defaultEntry == null ? io.Directory.current : LibraryEntry.defaultEntry!.entry,
+          currentDirectory: widget.directory ?? (LibraryEntry.defaultEntry == null ? io.Directory.current : LibraryEntry.defaultEntry!.entry),
         ),
       );
 }

@@ -40,6 +40,12 @@ class LibraryEntry {
             builder: (context) => LibraryView(
               currentDirectory: entry,
             ),
+            settings: RouteSettings(
+              name: 'LibraryView',
+              arguments: {
+                'path': entry.path,
+              },
+            ),
           )
         ),
       );

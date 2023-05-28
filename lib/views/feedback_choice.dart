@@ -30,9 +30,7 @@ class FeedbackChoice extends StatelessWidget {
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => Feedback(id: id),
-                settings: RouteSettings(
-                  name: 'Feedback',
-                ),
+                settings: const RouteSettings(name: 'Feedback'),
               )
             ),
           )).map((child) => child is Divider ? child : ListTileTheme(

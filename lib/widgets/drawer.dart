@@ -53,7 +53,8 @@ class _FileManagerDrawerState extends State<FileManagerDrawer> with FileManagerL
               title: const Text('Settings'),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => SettingsView(),
+                  builder: (context) => const SettingsView(),
+                  settings: const RouteSettings(name: 'Settings'),
                 )
               ),
             ),

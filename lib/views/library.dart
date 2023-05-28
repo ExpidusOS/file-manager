@@ -75,6 +75,12 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
           builder: (context) => LibraryView(
             currentDirectory: entry,
           ),
+          settings: RouteSettings(
+            name: 'LibraryView',
+            arguments: {
+              'path': entry.path,
+            },
+          ),
         )
       );
     } else {
