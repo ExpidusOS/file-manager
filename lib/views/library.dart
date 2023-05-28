@@ -112,11 +112,15 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
         ) : null,
         appBar: AppBar(
           leading: DrawerWithClose(
-            canGoBack: parentLibrary != null,
+            canGoBack: parentLibrary != null || Navigator.of(context).canPop(),
             onBack: () => setState(() {
-              currentDirectory = currentDirectory!.parent;
-              key = UniqueKey();
-              _loadSettings(isGridViewSet: false);
+              if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();
+              } else {
+                currentDirectory = currentDirectory!.parent;
+                key = UniqueKey();
+                _loadSettings(isGridViewSet: false);
+              }
             }),
           ),
           leadingWidth: (parentLibrary != null || Navigator.of(context).canPop()) ? 100.0 : 56.0,
