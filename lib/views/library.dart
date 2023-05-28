@@ -97,7 +97,16 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
 
   @override
   Widget build(BuildContext context) =>
-      Scaffold(
+    WillPopScope(
+      onWillPop: () async {
+        if (Navigator.of(context).canPop() || parentLibrary == null) return true;
+        
+        currentDirectory = currentDirectory!.parent;
+        key = UniqueKey();
+        _loadSettings(isGridViewSet: false);
+        return false;
+      },
+      child: Scaffold(
         windowBar: WindowBar.shouldShow(context) ? PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight / 2),
           child: MoveWindow(
@@ -106,7 +115,8 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
               title: Text('File Manager${libraryTitle == null ? "" : ": ${libraryTitle!}"}'),
               onMinimize: () => appWindow.minimize(),
               onMaximize: () => appWindow.maximize(),
-              onClose: () => appWindow.close(),
+              onClose: () =>
+              appWindow.close(),
             ),
           ),
         ) : null,
@@ -213,5 +223,6 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
             ),
           ),
         ),
-      );
+      )
+    );
 }
