@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:open_file_plus/open_file_plus.dart';
+import 'package:path/path.dart' as path;
 import 'dart:io' as io;
 
 class LibraryView extends StatefulWidget {
@@ -161,6 +162,94 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
             PopupMenuButton<String>(
               onSelected: (value) {
                 switch (value) {
+                  case 'mkfile':
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) =>
+                          SingleTextInputFormDialog(
+                            title: const Text('Create File'),
+                            decoration: const InputDecoration(
+                              labelText: 'Name',
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter the name';
+                              }
+                              return null;
+                            },
+                            buildActions: (context, formKey, value) => [
+                              TextButton(
+                                child: const Text('Cancel'),
+                                onPressed: () => Navigator.of(context).pop('Cancel'),
+                              ),
+                              TextButton(
+                                child: const Text('Create'),
+                                onPressed: () {
+                                  if (formKey.currentState!.validate()) {
+                                    assert(value != null && value.isNotEmpty);
+                                    io.File(path.join(currentDirectory!.path, value!)).create().then((file) {
+                                      Navigator.of(context).pop('Create');
+                                      setState(() {
+                                        key = UniqueKey();
+                                        _loadSettings(isGridViewSet: false);
+                                      });
+                                    }).catchError((error, trace) {
+                                      handleError(error, trace: trace);
+                                      _handleError(context, error);
+                                    });
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                    );
+                    break;
+                  case 'mkdir':
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) =>
+                        SingleTextInputFormDialog(
+                          title: const Text('Create Directory'),
+                          decoration: const InputDecoration(
+                            labelText: 'Name',
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter the name';
+                            }
+                            return null;
+                          },
+                          buildActions: (context, formKey, value) => [
+                            TextButton(
+                              child: const Text('Cancel'),
+                              onPressed: () => Navigator.of(context).pop('Cancel'),
+                            ),
+                            TextButton(
+                              child: const Text('Create'),
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  assert(value != null && value.isNotEmpty);
+
+                                  io.Directory(path.join(currentDirectory!.path, value!)).create().then((dir) {
+                                    Navigator.of(context).pop('Create');
+                                    setState(() {
+                                      currentDirectory = dir;
+                                      key = UniqueKey();
+                                      _loadSettings(isGridViewSet: false);
+                                    });
+                                  }).catchError((error, trace) {
+                                    handleError(error, trace: trace);
+                                    _handleError(context, error);
+                                  });
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                    );
+                    break;
                   case 'feedback':
                     Navigator.of(context).push(
                       MaterialPageRoute(
