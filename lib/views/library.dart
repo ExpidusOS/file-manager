@@ -71,19 +71,11 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
 
   void _onEntryTap(BuildContext context, io.FileSystemEntity entry) {
     if (entry is io.Directory) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => LibraryView(
-            currentDirectory: entry,
-          ),
-          settings: RouteSettings(
-            name: 'LibraryView',
-            arguments: {
-              'path': entry.path,
-            },
-          ),
-        )
-      );
+      setState(() {
+        currentDirectory = entry;
+        key = UniqueKey();
+        _loadSettings(isGridViewSet: false);
+      });
     } else {
       switch (defaultTargetPlatform) {
         case TargetPlatform.android:
@@ -119,8 +111,15 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
           ),
         ) : null,
         appBar: AppBar(
-          leading: const DrawerWithClose(),
-          leadingWidth: Navigator.of(context).canPop() ? 100.0 : 56.0,
+          leading: DrawerWithClose(
+            canGoBack: parentLibrary != null,
+            onBack: () => setState(() {
+              currentDirectory = currentDirectory!.parent;
+              key = UniqueKey();
+              _loadSettings(isGridViewSet: false);
+            }),
+          ),
+          leadingWidth: (parentLibrary != null || Navigator.of(context).canPop()) ? 100.0 : 56.0,
           title: libraryTitle == null ? (currentDirectory == null ? null : Text(currentDirectory!.path)) : Text(libraryTitle!),
           actions: [
             IconButton(

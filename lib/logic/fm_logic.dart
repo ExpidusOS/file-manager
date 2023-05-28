@@ -9,6 +9,8 @@ mixin FileManagerLogic<T extends StatefulWidget> on State<T> {
 
   LibraryEntry? get currentLibrary =>
       currentDirectory == null ? null : LibraryEntry.find(entries: libraryEntries, directory: currentDirectory!);
+  LibraryEntry? get parentLibrary =>
+      currentDirectory == null ? null : LibraryEntry.find(entries: libraryEntries, directory: currentDirectory!.parent);
 
   String? get libraryTitle => currentLibrary == null ? null : currentLibrary!.titleFor(currentDirectory!);
 
