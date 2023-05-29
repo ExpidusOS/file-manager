@@ -10,6 +10,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path/path.dart' as path;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:io' as io;
 
 class LibraryView extends StatefulWidget {

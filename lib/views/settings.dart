@@ -7,6 +7,7 @@ import 'package:file_manager/widgets.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:file_manager/constants.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({
@@ -62,7 +63,7 @@ class _SettingsViewState extends State<SettingsView> {
           child: MoveWindow(
             child: WindowBar(
               leading: Image.asset('assets/imgs/icon.png'),
-              title: const Text('File Manager'),
+              title: Text(AppLocalizations.of(context)!.applicationTitle),
               onMinimize: () => appWindow.minimize(),
               onMaximize: () => appWindow.maximize(),
               onClose: () => appWindow.close(),

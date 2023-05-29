@@ -11,9 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="c0722f09-2eeb-4fdd-a8a3-9bf72efb0eea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/l10n/app_en.arb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/l10n/app_en.arb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/l10n/app_ja.arb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/l10n/app_ja.arb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crowdin.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/crowdin.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/i18n/main.json" beforeDir="false" afterPath="$PROJECT_DIR$/i18n/main.arb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/about.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/about.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/feedback.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/feedback.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/feedback_choice.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/feedback_choice.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/library.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/library.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/views/settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/views/settings.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:file_manager/logic.dart';
 import 'package:file_manager/main.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pubspec/pubspec.dart';
 
 class About extends StatelessWidget {
@@ -18,7 +17,7 @@ class About extends StatelessWidget {
           child: MoveWindow(
             child: WindowBar(
               leading: Image.asset('assets/imgs/icon.png'),
-              title: const Text('File Manager'),
+              title: Text(AppLocalizations.of(context)!.applicationTitle),
               onMinimize: () => appWindow.minimize(),
               onMaximize: () => appWindow.maximize(),
               onClose: () => appWindow.close(),

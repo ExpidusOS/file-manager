@@ -2,6 +2,7 @@ import 'package:file_manager/constants.dart';
 import 'package:file_manager/views/feedback.dart';
 import 'package:libtokyo_flutter/libtokyo.dart' hide Feedback;
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FeedbackChoice extends StatelessWidget {
   const FeedbackChoice({ super.key });
@@ -14,7 +15,7 @@ class FeedbackChoice extends StatelessWidget {
           child: MoveWindow(
             child: WindowBar(
               leading: Image.asset('assets/imgs/icon.png'),
-              title: const Text('File Manager'),
+              title: Text(AppLocalizations.of(context)!.applicationTitle),
               onMinimize: () => appWindow.minimize(),
               onMaximize: () => appWindow.maximize(),
               onClose: () => appWindow.close(),
