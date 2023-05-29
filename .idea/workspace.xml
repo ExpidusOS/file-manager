@@ -11,6 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="c0722f09-2eeb-4fdd-a8a3-9bf72efb0eea" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/crowdin.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/crowdin.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/i18n/en/main.json" beforeDir="false" afterPath="$PROJECT_DIR$/i18n/main.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/i18n/ja/main.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +54,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/i18n" />
       <recent name="$PROJECT_DIR$/lib/widgets" />
     </key>
   </component>
