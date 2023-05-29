@@ -1,5 +1,13 @@
 {
-    "applicationTitle": "ファイルマネージャー",
+    "applicationTitle": "ファイル マネージャー",
     "libraryHome": "ホーム",
-    "applicationTitleWithLibraryName": "ファイルマネージャー：{libraryName}"
+    "applicationTitleWithLibraryName": "ファイルマネージャー：{libraryName}",
+    "@applicationTitleWithLibraryName": {
+        "description": "Application title with the name of the current library",
+        "placeholders": {
+            "libraryName": {
+                "type": "String"
+            }
+        }
+    }
 }
