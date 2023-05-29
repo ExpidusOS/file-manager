@@ -100,11 +100,11 @@ class _FeedbackState extends State<Feedback> {
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: ElevatedButton(
                     child: const Text('Submit feedback'),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         Sentry.captureUserFeedback(
                           SentryUserFeedback(
-                            eventId: widget.id.id,
+                            eventId: await widget.id.id,
                             name: email,
                             email: email,
                             comments: comments,

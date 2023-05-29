@@ -14,11 +14,8 @@ enum FileManagerFeedbackID {
   final String key;
   final String title;
 
-  String get value => NameUuidGenerator(NameUuidGenerator.dnsNamespace).generateFromString('com.expidusos.file_manager.${key}').toString();
-  SentryId get id => SentryId.fromId(value);
-
-  @override
-  String toString() => '${title} (${name},${key},${value})=${id}';
+  Future<SentryId> get id => Sentry.captureMessage('User feedback($key): $title');
+  Future<String> toFutureString() async => '$title ($name,$key)=${await id}';
 }
 
 enum FileManagerSettings {
