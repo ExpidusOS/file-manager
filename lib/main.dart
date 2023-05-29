@@ -137,7 +137,7 @@ class _FileManagerApp extends State<FileManagerApp> {
       ],
       child: TokyoApp(
         colorScheme: colorScheme,
-        onGenerateTitle: (context) => AppLocalizations.of(context)!.title,
+        onGenerateTitle: (context) => AppLocalizations.of(context)!.applicationTitle,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         navigatorObservers: widget.isSentry ? [
