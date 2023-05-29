@@ -1,4 +1,5 @@
 {
     "applicationTitle": "File Manager",
-    "libraryHome": "Home"
+    "libraryHome": "Home",
+    "applicationTitleWithLibraryName": "File Manager: {libraryName}"
 }
