@@ -107,57 +107,103 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
 
   @override
   Widget build(BuildContext context) =>
-      Scaffold(
-        windowBar: WindowBar.shouldShow(context) ? PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight / 2),
-          child: MoveWindow(
-            child: WindowBar(
-              leading: Image.asset('assets/imgs/icon.png'),
-              title: Text('File Manager${libraryTitle == null ? "" : ": ${libraryTitle!}"}'),
-              onMinimize: () => appWindow.minimize(),
-              onMaximize: () => appWindow.maximize(),
-              onClose: () =>
-              appWindow.close(),
+    FutureBuilder(
+      future: populateLibraryEntries(context),
+      builder: (context, snapshot) =>
+        Scaffold(
+          windowBar: WindowBar.shouldShow(context) ? PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight / 2),
+            child: MoveWindow(
+              child: WindowBar(
+                leading: Image.asset('assets/imgs/icon.png'),
+                title: Text('File Manager${libraryTitle == null ? "" : ": ${libraryTitle!}"}'),
+                onMinimize: () => appWindow.minimize(),
+                onMaximize: () => appWindow.maximize(),
+                onClose: () =>
+                appWindow.close(),
+              ),
             ),
-          ),
-        ) : null,
-        appBar: AppBar(
-          leading: const DrawerWithClose(),
-          leadingWidth: Navigator.of(context).canPop() ? 100.0 : 56.0,
-          title: libraryTitle == null ? (currentDirectory == null ? null : Text(currentDirectory!.path)) : Text(libraryTitle!),
-          actions: [
-            IconButton(
-              icon: gridView ? const Icon(Icons.list) : const Icon(
-                  Icons.grid_4x4),
-              onPressed: () =>
-                  setState(() {
-                    gridView = !gridView;
+          ) : null,
+          appBar: AppBar(
+            leading: const DrawerWithClose(),
+            leadingWidth: Navigator.of(context).canPop() ? 100.0 : 56.0,
+            title: libraryTitle == null ? (currentDirectory == null ? null : Text(currentDirectory!.path)) : Text(libraryTitle!),
+            actions: [
+              IconButton(
+                icon: gridView ? const Icon(Icons.list) : const Icon(
+                    Icons.grid_4x4),
+                onPressed: () =>
+                    setState(() {
+                      gridView = !gridView;
 
-                    if (currentDirectory != null) {
-                      final gridViewPaths = preferences.getStringList(FileManagerSettings.gridViewsPaths.name) ?? <String>[];
-                      if (gridViewPaths.contains(currentDirectory!.path) && !gridView) {
-                        gridViewPaths.remove(currentDirectory!.path);
-                      } else if (!gridViewPaths.contains(currentDirectory!.path) && gridView) {
-                        gridViewPaths.add(currentDirectory!.path);
+                      if (currentDirectory != null) {
+                        final gridViewPaths = preferences.getStringList(FileManagerSettings.gridViewsPaths.name) ?? <String>[];
+                        if (gridViewPaths.contains(currentDirectory!.path) && !gridView) {
+                          gridViewPaths.remove(currentDirectory!.path);
+                        } else if (!gridViewPaths.contains(currentDirectory!.path) && gridView) {
+                          gridViewPaths.add(currentDirectory!.path);
+                        }
+
+                        preferences.setStringList(FileManagerSettings.gridViewsPaths.name, gridViewPaths).onError((error, stackTrace) {
+                          _handleError(context, error!);
+                          return true;
+                        });
                       }
-
-                      preferences.setStringList(FileManagerSettings.gridViewsPaths.name, gridViewPaths).onError((error, stackTrace) {
-                        _handleError(context, error!);
-                        return true;
-                      });
-                    }
-                  }),
-            ),
-            PopupMenuButton<String>(
-              onSelected: (value) {
-                switch (value) {
-                  case 'mkfile':
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) =>
+                    }),
+              ),
+              PopupMenuButton<String>(
+                onSelected: (value) {
+                  switch (value) {
+                    case 'mkfile':
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) =>
+                            SingleTextInputFormDialog(
+                              title: const Text('Create File'),
+                              decoration: const InputDecoration(
+                                labelText: 'Name',
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter the name';
+                                }
+                                return null;
+                              },
+                              buildActions: (context, formKey, value) => [
+                                TextButton(
+                                  child: const Text('Cancel'),
+                                  onPressed: () => Navigator.of(context).pop('Cancel'),
+                                ),
+                                TextButton(
+                                  child: const Text('Create'),
+                                  onPressed: () {
+                                    if (formKey.currentState!.validate()) {
+                                      assert(value != null && value.isNotEmpty);
+                                      io.File(path.join(currentDirectory!.path, value!)).create().then((file) {
+                                        Navigator.of(context).pop('Create');
+                                        setState(() {
+                                          key = UniqueKey();
+                                          _loadSettings(isGridViewSet: false);
+                                        });
+                                      }).catchError((error, trace) {
+                                        handleError(error, trace: trace);
+                                        _handleError(context, error);
+                                      });
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                      );
+                      break;
+                    case 'mkdir':
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) =>
                           SingleTextInputFormDialog(
-                            title: const Text('Create File'),
+                            title: const Text('Create Directory'),
                             decoration: const InputDecoration(
                               labelText: 'Name',
                             ),
@@ -177,9 +223,11 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
                                     assert(value != null && value.isNotEmpty);
-                                    io.File(path.join(currentDirectory!.path, value!)).create().then((file) {
+
+                                    io.Directory(path.join(currentDirectory!.path, value!)).create().then((dir) {
                                       Navigator.of(context).pop('Create');
                                       setState(() {
+                                        currentDirectory = dir;
                                         key = UniqueKey();
                                         _loadSettings(isGridViewSet: false);
                                       });
@@ -192,123 +240,79 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                               ),
                             ],
                           ),
-                    );
-                    break;
-                  case 'mkdir':
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) =>
-                        SingleTextInputFormDialog(
-                          title: const Text('Create Directory'),
-                          decoration: const InputDecoration(
-                            labelText: 'Name',
+                      );
+                      break;
+                    case 'feedback':
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Feedback(
+                            id: gridView ? FileManagerFeedbackID.viewLibraryGrid : FileManagerFeedbackID.viewLibraryList,
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter the name';
-                            }
-                            return null;
-                          },
-                          buildActions: (context, formKey, value) => [
-                            TextButton(
-                              child: const Text('Cancel'),
-                              onPressed: () => Navigator.of(context).pop('Cancel'),
-                            ),
-                            TextButton(
-                              child: const Text('Create'),
-                              onPressed: () {
-                                if (formKey.currentState!.validate()) {
-                                  assert(value != null && value.isNotEmpty);
-
-                                  io.Directory(path.join(currentDirectory!.path, value!)).create().then((dir) {
-                                    Navigator.of(context).pop('Create');
-                                    setState(() {
-                                      currentDirectory = dir;
-                                      key = UniqueKey();
-                                      _loadSettings(isGridViewSet: false);
-                                    });
-                                  }).catchError((error, trace) {
-                                    handleError(error, trace: trace);
-                                    _handleError(context, error);
-                                  });
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                    );
-                    break;
-                  case 'feedback':
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => Feedback(
-                          id: gridView ? FileManagerFeedbackID.viewLibraryGrid : FileManagerFeedbackID.viewLibraryList,
-                        ),
-                        settings: const RouteSettings(name: 'Feedback'),
-                      )
-                    );
-                    break;
-                }
-              },
-              itemBuilder: (context) => [
-                const PopupMenuItem(
-                  value: 'mkfile',
-                  child: Text('Create File'),
-                ),
-                const PopupMenuItem(
-                  value: 'mkdir',
-                  child: Text('Create Directory'),
-                ),
-                ...(FileManagerApp.isSentryOnContext(context) ? <PopupMenuEntry<String>>[
-                  const PopupMenuDivider(),
+                          settings: const RouteSettings(name: 'Feedback'),
+                        )
+                      );
+                      break;
+                  }
+                },
+                itemBuilder: (context) => [
                   const PopupMenuItem(
-                    value: 'feedback',
-                    child: Text('Send feedback'),
+                    value: 'mkfile',
+                    child: Text('Create File'),
                   ),
-                ] : <PopupMenuEntry<String>>[]),
-              ],
-            ),
-          ],
-        ),
-        drawer: FileManagerDrawer(
-          currentDirectory: currentDirectory,
-        ),
-        body: currentDirectory == null ? null : Center(
-          child: RefreshIndicator(
-            onRefresh: () async {
-              await preferences.reload();
-              setState(() {
-                key = UniqueKey();
-                _loadSettings(isGridViewSet: false);
-              });
-            },
-            child: gridView ?
-              FileBrowserGrid(
+                  const PopupMenuItem(
+                    value: 'mkdir',
+                    child: Text('Create Directory'),
+                  ),
+                  ...(FileManagerApp.isSentryOnContext(context) ? <PopupMenuEntry<String>>[
+                    const PopupMenuDivider(),
+                    const PopupMenuItem(
+                      value: 'feedback',
+                      child: Text('Send feedback'),
+                    ),
+                  ] : <PopupMenuEntry<String>>[]),
+                ],
+              ),
+            ],
+          ),
+          drawer: FileManagerDrawer(
+            currentDirectory: currentDirectory,
+          ),
+          body: currentDirectory == null ? null : Center(
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await preferences.reload();
+                setState(() {
+                  key = UniqueKey();
+                  _loadSettings(isGridViewSet: false);
+                });
+              },
+              child: gridView ?
+                FileBrowserGrid(
+                  key: key,
+                  showHidden: showHiddenFiles,
+                  directory: currentDirectory!,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5,
+                  ),
+                  onTap: (entry) => _onEntryTap(context, entry),
+                )
+              : FileBrowserList(
                 key: key,
                 showHidden: showHiddenFiles,
                 directory: currentDirectory!,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 5,
+                createEntryWidget: (entry) => CustomFileBrowserListEntry(
+                  entry: entry,
+                  onTap: () => _onEntryTap(context, entry),
+                  longPress: (value) {
+                    setState(() {
+                      key = UniqueKey();
+                      _loadSettings(isGridViewSet: false);
+                    });
+                  },
                 ),
-                onTap: (entry) => _onEntryTap(context, entry),
-              )
-            : FileBrowserList(
-              key: key,
-              showHidden: showHiddenFiles,
-              directory: currentDirectory!,
-              createEntryWidget: (entry) => CustomFileBrowserListEntry(
-                entry: entry,
-                onTap: () => _onEntryTap(context, entry),
-                longPress: (value) {
-                  setState(() {
-                    key = UniqueKey();
-                    _loadSettings(isGridViewSet: false);
-                  });
-                },
               ),
             ),
           ),
         ),
-      );
+    );
 }

@@ -12,6 +12,7 @@ import 'package:udisks/udisks.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider_windows/path_provider_windows.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:win32/win32.dart';
 import 'package:ffi/ffi.dart';
 import 'dart:io' as io;
@@ -52,7 +53,7 @@ class LibraryEntry extends StatelessWidget {
         ),
       );
 
-  static LibraryEntry from({
+  static LibraryEntry from(BuildContext context, {
     required StorageDirectory type,
     required io.Directory entry,
   }) {
@@ -82,10 +83,11 @@ class LibraryEntry extends StatelessWidget {
     }
   }
 
-  static LibraryEntry fromXdg({
+  static LibraryEntry fromXdg(BuildContext context, {
     required String name,
     required io.Directory entry,
   }) {
+    final i18n = AppLocalizations.of(context)!;
     switch (name) {
       case 'DESKTOP':
         return LibraryEntry(title: 'Desktop', entry: entry, iconData: Icons.desktop_mac);
@@ -94,29 +96,34 @@ class LibraryEntry extends StatelessWidget {
       case 'PUBLICSHARE':
         return LibraryEntry(title: 'Public', entry: entry, iconData: Icons.public);
       case 'HOME':
-        return LibraryEntry(title: 'Home', entry: entry, iconData: Icons.home);
+        return LibraryEntry(title: i18n.libraryHome, entry: entry, iconData: Icons.home);
       case 'DOWNLOAD':
         return from(
+          context,
           type: StorageDirectory.downloads,
           entry: entry,
         );
       case 'DOCUMENTS':
         return from(
+          context,
           type: StorageDirectory.documents,
           entry: entry,
         );
       case 'MUSIC':
         return from(
+          context,
           type: StorageDirectory.music,
           entry: entry,
         );
       case 'PICTURES':
         return from(
+          context,
           type: StorageDirectory.pictures,
           entry: entry,
         );
       case 'VIDEOS':
         return from(
+          context,
           type: StorageDirectory.movies,
           entry: entry,
         );
@@ -125,14 +132,14 @@ class LibraryEntry extends StatelessWidget {
     }
   }
 
-  static LibraryEntry? get defaultEntry {
+  static LibraryEntry? getDefaultEntry(BuildContext context) {
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return LibraryEntry(title: 'Storage', entry: io.Directory('/storage/emulated/0'), iconData: Icons.storage);
       case TargetPlatform.linux:
-        return LibraryEntry.fromXdg(name: 'HOME', entry: io.Directory(io.Platform.environment['HOME']!));
+        return LibraryEntry.fromXdg(context, name: 'HOME', entry: io.Directory(io.Platform.environment['HOME']!));
       case TargetPlatform.windows:
-        return LibraryEntry.fromXdg(name: 'HOME', entry: io.Directory(io.Platform.environment['USERPROFILE']!));
+        return LibraryEntry.fromXdg(context, name: 'HOME', entry: io.Directory(io.Platform.environment['USERPROFILE']!));
       default:
         return null;
     }
@@ -171,7 +178,7 @@ class LibraryEntry extends StatelessWidget {
     }
   }
 
-  static Future<List<LibraryEntry>> genList() async {
+  static Future<List<LibraryEntry>> genList(BuildContext context) async {
     var entries = <LibraryEntry>[];
     final prefs = await SharedPreferences.getInstance();
     final showHiddenLibraries = prefs.getBool(FileManagerSettings.showHiddenLibraries.name) ?? false;
@@ -193,7 +200,7 @@ class LibraryEntry extends StatelessWidget {
           if (dirs == null || dirs.isEmpty) continue;
 
           final entry = io.Directory(_transformPathAndroid(type, dirs[0].path));
-          entries.add(LibraryEntry.from(type: type, entry: entry));
+          entries.add(LibraryEntry.from(context, type: type, entry: entry));
         }
         break;
       case TargetPlatform.linux:
@@ -201,7 +208,7 @@ class LibraryEntry extends StatelessWidget {
           final entry = getUserDirectory(name);
           if (entry == null) continue;
 
-          entries.add(LibraryEntry.fromXdg(name: name, entry: entry));
+          entries.add(LibraryEntry.fromXdg(context, name: name, entry: entry));
         }
 
         var client = UDisksClient();
@@ -234,22 +241,27 @@ class LibraryEntry extends StatelessWidget {
             iconData: Icons.desktop_windows
           ),
           LibraryEntry.from(
+            context,
             type: StorageDirectory.documents,
             entry: io.Directory((await pathProvider.getPath(FOLDERID_Documents))!),
           ),
           LibraryEntry.from(
+            context,
             type: StorageDirectory.movies,
             entry: io.Directory((await pathProvider.getPath(FOLDERID_Videos))!),
           ),
           LibraryEntry.from(
+            context,
             type: StorageDirectory.music,
             entry: io.Directory((await pathProvider.getPath(FOLDERID_Music))!),
           ),
           LibraryEntry.from(
+            context,
             type: StorageDirectory.downloads,
             entry: io.Directory((await pathProvider.getPath(FOLDERID_Downloads))!),
           ),
           LibraryEntry.fromXdg(
+            context,
             name: 'HOME',
             entry: io.Directory((await pathProvider.getPath(FOLDERID_Profile))!),
           ),
@@ -285,11 +297,12 @@ class LibraryEntry extends StatelessWidget {
           final dirs = await getExternalStorageDirectories(type: type);
           if (dirs == null || dirs.isEmpty) continue;
 
-          entries.add(LibraryEntry.from(type: type, entry: dirs[0]));
+          entries.add(LibraryEntry.from(context, type: type, entry: dirs[0]));
         }
         break;
     }
 
+    final defaultEntry = getDefaultEntry(context);
     if (defaultEntry != null) entries.add(defaultEntry!);
     return entries;
   }

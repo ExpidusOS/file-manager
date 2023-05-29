@@ -27,39 +27,52 @@ class _FileManagerDrawerState extends State<FileManagerDrawer> with FileManagerL
   @override
   Widget build(BuildContext context) =>
       Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Theme
-                    .of(context)
-                    .colorScheme
-                    .onSurface,
-              ),
-              child: currentLibrary != null ? Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Icon(currentLibrary!.iconData),
-                  const SizedBox(width: 15),
-                  Text(currentLibrary!.title),
-                ],
-              ) : null,
-            ),
-            ...LibraryEntry.buildWidgets(libraryEntries, context),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
-              onTap: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const SettingsView(),
-                  settings: const RouteSettings(name: 'Settings'),
-                )
-              ),
-            ),
-          ],
+        child: FutureBuilder(
+          future: populateLibraryEntries(context),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return BasicCard(
+                color: convertFromColor(Theme.of(context).colorScheme.errorContainer),
+                title: 'Failed to get library entries',
+                message: snapshot.error!.toString(),
+              );
+            }
+
+            return ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Theme
+                        .of(context)
+                        .colorScheme
+                        .onSurface,
+                  ),
+                  child: currentLibrary != null ? Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Icon(currentLibrary!.iconData),
+                      const SizedBox(width: 15),
+                      Text(currentLibrary!.title),
+                    ],
+                  ) : null,
+                ),
+                ...LibraryEntry.buildWidgets(libraryEntries, context),
+                const Divider(),
+                ListTile(
+                  leading: const Icon(Icons.settings),
+                  title: const Text('Settings'),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsView(),
+                      settings: const RouteSettings(name: 'Settings'),
+                    )
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       );
 }

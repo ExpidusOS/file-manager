@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' hide Clipboard;
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:libtokyo_flutter/libtokyo.dart' hide ColorScheme;
 import 'package:libtokyo/libtokyo.dart' hide TokyoApp;
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -135,14 +137,19 @@ class _FileManagerApp extends State<FileManagerApp> {
       ],
       child: TokyoApp(
         colorScheme: colorScheme,
-        title: 'File Manager',
+        onGenerateTitle: (context) => AppLocalizations.of(context)!.title,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         navigatorObservers: widget.isSentry ? [
           SentryNavigatorObserver(
             setRouteNameAsTransaction: true,
           ),
         ] : null,
-        home: LibraryView(
-          currentDirectory: widget.directory ?? (LibraryEntry.defaultEntry == null ? io.Directory.current : LibraryEntry.defaultEntry!.entry),
+        home: Builder(
+          builder: (context) =>
+            LibraryView(
+              currentDirectory: widget.directory ?? (LibraryEntry.getDefaultEntry(context) == null ? io.Directory.current : LibraryEntry.getDefaultEntry(context)!.entry),
+            ),
         ),
       ),
     );

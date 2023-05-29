@@ -18,9 +18,12 @@ mixin FileManagerLogic<T extends StatefulWidget> on State<T> {
   @override
   void initState() {
     super.initState();
+  }
 
-    LibraryEntry.genList().then((list) => setState(() {
+  Future<void> populateLibraryEntries(BuildContext context) async {
+    final list = await LibraryEntry.genList(context);
+    setState(() {
       libraryEntries = list;
-    })).catchError((error, trace) => handleError(error, trace: trace));
+    });
   }
 }
