@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' hide Clipboard;
 import 'package:libtokyo_flutter/libtokyo.dart' hide ColorScheme;
 import 'package:libtokyo/libtokyo.dart' hide TokyoApp;
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:pubspec/pubspec.dart';
+import 'package:provider/provider.dart';
 import 'dart:io' as io;
 
 import 'constants.dart';
@@ -128,7 +129,11 @@ class _FileManagerApp extends State<FileManagerApp> {
 
   @override
   Widget build(BuildContext context) =>
-      TokyoApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Clipboard()),
+      ],
+      child: TokyoApp(
         colorScheme: colorScheme,
         title: 'File Manager',
         navigatorObservers: widget.isSentry ? [
@@ -139,5 +144,6 @@ class _FileManagerApp extends State<FileManagerApp> {
         home: LibraryView(
           currentDirectory: widget.directory ?? (LibraryEntry.defaultEntry == null ? io.Directory.current : LibraryEntry.defaultEntry!.entry),
         ),
-      );
+      ),
+    );
 }

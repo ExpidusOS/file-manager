@@ -39,6 +39,7 @@ dependencies:
   pubspec: ^2.3.0
   filesize: ^2.0.1
   intl: ^0.18.1
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:

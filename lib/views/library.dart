@@ -73,11 +73,19 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
 
   void _onEntryTap(BuildContext context, io.FileSystemEntity entry) {
     if (entry is io.Directory) {
-      setState(() {
-        currentDirectory = entry;
-        key = UniqueKey();
-        _loadSettings(isGridViewSet: false);
-      });
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => LibraryView(
+            currentDirectory: entry,
+          ),
+          settings: RouteSettings(
+            name: 'LibraryView',
+            arguments: {
+              'path': entry.path,
+            },
+          ),
+        )
+      );
     } else {
       switch (defaultTargetPlatform) {
         case TargetPlatform.android:
@@ -99,16 +107,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
 
   @override
   Widget build(BuildContext context) =>
-    WillPopScope(
-      onWillPop: () async {
-        if (Navigator.of(context).canPop() || parentLibrary == null) return true;
-
-        currentDirectory = currentDirectory!.parent;
-        key = UniqueKey();
-        _loadSettings(isGridViewSet: false);
-        return false;
-      },
-      child: Scaffold(
+      Scaffold(
         windowBar: WindowBar.shouldShow(context) ? PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight / 2),
           child: MoveWindow(
@@ -123,19 +122,8 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
           ),
         ) : null,
         appBar: AppBar(
-          leading: DrawerWithClose(
-            canGoBack: parentLibrary != null || Navigator.of(context).canPop(),
-            onBack: () => setState(() {
-              if (Navigator.of(context).canPop()) {
-                Navigator.of(context).pop();
-              } else {
-                currentDirectory = currentDirectory!.parent;
-                key = UniqueKey();
-                _loadSettings(isGridViewSet: false);
-              }
-            }),
-          ),
-          leadingWidth: (parentLibrary != null || Navigator.of(context).canPop()) ? 100.0 : 56.0,
+          leading: const DrawerWithClose(),
+          leadingWidth: Navigator.of(context).canPop() ? 100.0 : 56.0,
           title: libraryTitle == null ? (currentDirectory == null ? null : Text(currentDirectory!.path)) : Text(libraryTitle!),
           actions: [
             IconButton(
@@ -322,6 +310,5 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
             ),
           ),
         ),
-      )
-    );
+      );
 }
