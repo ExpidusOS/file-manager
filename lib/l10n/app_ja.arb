@@ -9,5 +9,61 @@
                 "type": "String"
             }
         }
+    },
+    "libraryStorage": "ストレージ",
+    "@libraryStorage": {
+        "description": "Library"
+    },
+    "libraryDCIM": "DCIM",
+    "@libraryDCIM": {
+        "description": "Library"
+    },
+    "libraryAlarms": "アラーム",
+    "@libraryAlarms": {
+        "description": "Library"
+    },
+    "libraryDocuments": "ドキュメント",
+    "@libraryDocuments": {
+        "description": "Library"
+    },
+    "libraryDownloads": "ダウンロード",
+    "@libraryDownloads": {
+        "description": "Library"
+    },
+    "libraryMovies": "映画",
+    "@libraryMovies": {
+        "description": "Library"
+    },
+    "libraryMusic": "音楽",
+    "@libraryMusic": {
+        "description": "Library"
+    },
+    "libraryPictures": "ピクチャ",
+    "@libraryPictures": {
+        "description": "Library"
+    },
+    "libraryPodcasts": "ポッドキャスト",
+    "@libraryPodcasts": {
+        "description": "Library"
+    },
+    "libraryNotifications": "通知",
+    "@libraryNotifications": {
+        "description": "Library"
+    },
+    "libraryRingtones": "着信音",
+    "@libraryRingtones": {
+        "description": "Library"
+    },
+    "libraryDesktop": "デスクトップ",
+    "@libraryDesktop": {
+        "description": "Library"
+    },
+    "libraryTemplates": "テンプレート",
+    "@libraryTemplates": {
+        "description": "Library"
+    },
+    "libraryPublic": "公開",
+    "@libraryPublic": {
+        "description": "Library"
     }
 }
