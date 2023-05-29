@@ -9,5 +9,61 @@
                 "type": "String"
             }
         }
+    },
+    "libraryStorage": "Storage",
+    "@libraryStorage": {
+        "description": "Library"
+    },
+    "libraryDCIM": "DCIM",
+    "@libraryDCIM": {
+        "description": "Library"
+    },
+    "libraryAlarms": "Alarms",
+    "@libraryAlarms": {
+        "description": "Library"
+    },
+    "libraryDocuments": "Documents",
+    "@libraryDocuments": {
+        "description": "Library"
+    },
+    "libraryDownloads": "Downloads",
+    "@libraryDownloads": {
+        "description": "Library"
+    },
+    "libraryMovies": "Movies",
+    "@libraryMovies": {
+        "description": "Library"
+    },
+    "libraryMusic": "Music",
+    "@libraryMusic": {
+        "description": "Library"
+    },
+    "libraryPictures": "Pictures",
+    "@libraryPictures": {
+        "description": "Library"
+    },
+    "libraryPodcasts": "Podcasts",
+    "@libraryPodcasts": {
+        "description": "Library"
+    },
+    "libraryNotifications": "Notifications",
+    "@libraryNotifications": {
+        "description": "Library"
+    },
+    "libraryRingtones": "Ringtones",
+    "@libraryRingtones": {
+        "description": "Library"
+    },
+    "libraryDesktop": "Desktop",
+    "@libraryDesktop": {
+        "description": "Library"
+    },
+    "libraryTemplates": "Templates",
+    "@libraryTemplates": {
+        "description": "Library"
+    },
+    "libraryPublic": "Public",
+    "@libraryPublic": {
+        "description": "Library"
     }
 }
