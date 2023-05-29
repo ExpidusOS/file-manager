@@ -1,7 +1,7 @@
 {
-    "applicationTitle": "File Manager",
-    "libraryHome": "Home",
-    "applicationTitleWithLibraryName": "File Manager: {libraryName}",
+    "applicationTitle": "ファイル マネージャー",
+    "libraryHome": "ホーム",
+    "applicationTitleWithLibraryName": "ファイルマネージャー：{libraryName}",
     "@applicationTitleWithLibraryName": {
         "description": "Application title with the name of the current library",
         "placeholders": {
