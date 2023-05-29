@@ -117,7 +117,8 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
             child: MoveWindow(
               child: WindowBar(
                 leading: Image.asset('assets/imgs/icon.png'),
-                title: Text('File Manager${libraryTitle == null ? "" : ": ${libraryTitle!}"}'),
+                title: Text(libraryTitle == null ? AppLocalizations.of(context)!.applicationTitle
+                  : AppLocalizations.of(context)!.applicationTitleWithLibraryName(libraryTitle!)),
                 onMinimize: () => appWindow.minimize(),
                 onMaximize: () => appWindow.maximize(),
                 onClose: () =>
