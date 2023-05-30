@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io' as io;
 import 'package:collection/collection.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
@@ -6,11 +7,13 @@ import 'package:provider/provider.dart';
 Future<void> _clipboardCopy(io.FileSystemEntity source, io.FileSystemEntity target) async {}
 Future<void> _clipboardMove(io.FileSystemEntity source, io.FileSystemEntity target) async {}
 Future<void> _clipboardLink(io.FileSystemEntity source, io.FileSystemEntity target) async {}
+Future<void> _clipboardDelete(io.FileSystemEntity source, io.FileSystemEntity target) async {}
 
 enum ClipboardAction {
   copy(_clipboardCopy),
   move(_clipboardMove),
-  link(_clipboardLink);
+  link(_clipboardLink),
+  delete(_clipboardDelete);
 
   const ClipboardAction(this.run);
 
@@ -25,6 +28,7 @@ class ClipboardEntry {
   const ClipboardEntry.copy(this.entry) : action = ClipboardAction.copy;
   const ClipboardEntry.move(this.entry) : action = ClipboardAction.move;
   const ClipboardEntry.link(this.entry) : action = ClipboardAction.link;
+  const ClipboardEntry.delete(this.entry) : action = ClipboardAction.delete;
 
   final io.FileSystemEntity entry;
   final ClipboardAction action;
@@ -53,19 +57,52 @@ class Clipboard extends ChangeNotifier {
     notifyListeners();
   }
 
-  void clear() {
+  void clear({ bool notify = true }) {
     _items.clear();
+    if (notify) notifyListeners();
+  }
+
+  void removeItemForEntry(io.FileSystemEntity entry) {
+    _items.removeWhere((e) => e.entry.path == entry.path);
     notifyListeners();
   }
 
-  Stream<ClipboardProcState> run(io.FileSystemEntity target) async* {
-    final items = Stream.fromIterable(_items.mapIndexed((i, entry) => ClipboardProcState(current: i, count: _items.length, entry: entry)));
-    await for (final item in items) {
-      await item.entry.run(target);
-      yield item;
+  int countForAction(ClipboardAction action) {
+    var count = 0;
+    for (final item in _items) {
+      if (item.action == action) count++;
     }
+    return count;
+  }
 
-    _items.clear();
-    notifyListeners();
+  bool hasItemForEntry(io.FileSystemEntity entry) {
+    for (final item in _items) {
+      if (item.entry.path == entry.path) return true;
+    }
+    return false;
+  }
+
+  Stream<ClipboardProcState> run(io.FileSystemEntity target) {
+    late final StreamController<ClipboardProcState> controller;
+    controller = StreamController(
+      onListen: () async {
+        var i = 0;
+        for (final item in _items) {
+          final current = i++;
+          await controller.addStream((() async* {
+            yield ClipboardProcState(
+              current: current,
+              count: _items.length,
+              entry: item,
+            );
+
+            await item.run(target);
+          })());
+        }
+
+        await controller.close();
+      },
+    );
+    return controller.stream;
   }
 }

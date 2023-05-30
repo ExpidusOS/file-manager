@@ -5,6 +5,7 @@ import 'package:libtokyo_flutter/libtokyo.dart' hide Feedback;
 import 'package:file_manager/logic.dart';
 import 'package:file_manager/widgets.dart';
 import 'package:file_manager/views.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,6 +32,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
   bool showHiddenFiles = false;
   Key key = UniqueKey();
   List<ClipboardEntry> clipboard = <ClipboardEntry>[];
+  bool runningClipboard = false;
 
   @override
   void initState() {
@@ -111,7 +113,8 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
     FutureBuilder(
       future: populateLibraryEntries(context),
       builder: (context, snapshot) =>
-        Scaffold(
+        Consumer<Clipboard>(
+          builder: (context, clipboard, widget) => Scaffold(
           windowBar: WindowBar.shouldShow(context) ? PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight / 2),
             child: MoveWindow(
@@ -287,8 +290,10 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                   _loadSettings(isGridViewSet: false);
                 });
               },
-              child: gridView ?
-                FileBrowserGrid(
+              child: ListTileTheme(
+                selectedTileColor: Theme.of(context).colorScheme.onSecondaryContainer,
+                tileColor: Colors.transparent,
+                child: gridView ? FileBrowserGrid(
                   key: key,
                   showHidden: showHiddenFiles,
                   directory: currentDirectory!,
@@ -296,24 +301,103 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                     crossAxisCount: 5,
                   ),
                   onTap: (entry) => _onEntryTap(context, entry),
+                ) : FileBrowserList(
+                  key: key,
+                  showHidden: showHiddenFiles,
+                  directory: currentDirectory!,
+                  createEntryWidget: (entry) => FileBrowserListEntry(
+                    entry: entry,
+                    onTap: () => _onEntryTap(context, entry),
+                    onLongPress: () {
+                      if (clipboard.hasItemForEntry(entry)) {
+                        clipboard.removeItemForEntry(entry);
+                      } else {
+                        // TODO: figure out the action the user wants to perform
+                      }
+
+                      setState(() {
+                        key = UniqueKey();
+                      });
+                    },
+                    selected: clipboard.hasItemForEntry(entry),
+                  ),
                 )
-              : FileBrowserList(
-                key: key,
-                showHidden: showHiddenFiles,
-                directory: currentDirectory!,
-                createEntryWidget: (entry) => CustomFileBrowserListEntry(
-                  entry: entry,
-                  onTap: () => _onEntryTap(context, entry),
-                  longPress: (value) {
-                    setState(() {
-                      key = UniqueKey();
-                      _loadSettings(isGridViewSet: false);
-                    });
-                  },
-                ),
-              ),
+              )
             ),
           ),
+          bottomNavigationBar: clipboard.items.isNotEmpty || runningClipboard ?
+            BottomAppBar(
+              shape: AutomaticNotchedShape(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                )
+              ),
+              height: kToolbarHeight / 1.5,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 16.0),
+                child: Builder(
+                  builder: (context) {
+                    final i18n = AppLocalizations.of(context)!;
+
+                    if (runningClipboard) {
+                      return StreamBuilder<ClipboardProcState>(
+                        stream: clipboard.run(currentDirectory!),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Text(i18n.genericErrorMessage(snapshot.error!.toString()));
+                          }
+
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting:
+                            case ConnectionState.none:
+                            case ConnectionState.active:
+                              return const LinearProgressIndicator();
+                            case ConnectionState.done:
+                              runningClipboard = false;
+                              key = UniqueKey();
+                              clipboard.clear(notify: false);
+                              return const LinearProgressIndicator(
+                                value: 1.0,
+                              );
+                          }
+                        },
+                      );
+                    }
+
+                    var labels = <Widget>[];
+
+                    final copyCount = clipboard.countForAction(ClipboardAction.copy);
+                    final moveCount = clipboard.countForAction(ClipboardAction.move);
+                    final linkCount = clipboard.countForAction(ClipboardAction.link);
+                    final deleteCount = clipboard.countForAction(ClipboardAction.delete);
+
+                    if (copyCount > 0) labels.add(Text(i18n.clipboardCopyLabel(copyCount)));
+                    if (moveCount > 0) labels.add(Text(i18n.clipboardMoveLabel(moveCount)));
+                    if (linkCount > 0) labels.add(Text(i18n.clipboardLinkLabel(linkCount)));
+                    if (deleteCount > 0) labels.add(Text(i18n.clipboardDeleteLabel(deleteCount)));
+
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        ...labels,
+                        OutlinedButton(
+                          child: Text(i18n.clipboardExecute),
+                          onPressed: () => setState(() {
+                            runningClipboard = true;
+                          }),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () => clipboard.clear(),
+                        )
+                      ],
+                    );
+                  }
+                ),
+              ),
+            )
+          : null,
         ),
+      )
     );
 }
