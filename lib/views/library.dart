@@ -111,6 +111,58 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
       }
     }
   }
+  
+  void _onEntryLongPress(BuildContext context, io.FileSystemEntity entry) {
+    final clipboard = Provider.of<Clipboard>(context, listen: false);
+    if (clipboard.hasItemForEntry(entry)) {
+      clipboard.removeItemForEntry(entry);
+
+      setState(() {
+        key = UniqueKey();
+      });
+    } else {
+      final RenderBox tile = context.findRenderObject()! as RenderBox;
+      final overlay = Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
+
+      showMenu<ClipboardAction>(
+        context: context,
+        items: [
+          PopupMenuItem(
+            value: ClipboardAction.copy,
+            child: Text(AppLocalizations.of(context)!.libraryItemActionCopy),
+          ),
+          PopupMenuItem(
+            value: ClipboardAction.move,
+            child: Text(AppLocalizations.of(context)!.libraryItemActionMove),
+          ),
+          PopupMenuItem(
+            value: ClipboardAction.link,
+            child: Text(AppLocalizations.of(context)!.libraryItemActionLink),
+          ),
+          const PopupMenuDivider(),
+          PopupMenuItem(
+            value: ClipboardAction.delete,
+            child: Text(AppLocalizations.of(context)!.libraryItemActionDelete),
+          )
+        ],
+        position: RelativeRect.fromRect(
+          Rect.fromPoints(
+            tile.localToGlobal(Offset.zero, ancestor: overlay),
+            tile.localToGlobal(tile.size.bottomRight(Offset.zero), ancestor: overlay)
+          ),
+          Offset.zero & overlay.size,
+        )
+      ).then((action) {
+        if (action != null) {
+          clipboard.add(ClipboardEntry(action: action!, entry: entry));
+
+          setState(() {
+            key = UniqueKey();
+          });
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) =>
@@ -330,7 +382,12 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 5,
                   ),
-                  onTap: (entry) => _onEntryTap(context, entry),
+                  createEntryWidget: (entry) => FileBrowserGridEntry(
+                    entry: entry,
+                    onTap: () => _onEntryTap(context, entry),
+                    onLongPress: () => _onEntryLongPress(context, entry),
+                    selected: clipboard.hasItemForEntry(entry),
+                  ),
                 ) : FileBrowserList(
                   key: key,
                   showHidden: showHiddenFiles,
@@ -338,56 +395,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                   createEntryWidget: (entry) => FileBrowserListEntry(
                     entry: entry,
                     onTap: () => _onEntryTap(context, entry),
-                    onLongPress: () {
-                      if (clipboard.hasItemForEntry(entry)) {
-                        clipboard.removeItemForEntry(entry);
-
-                        setState(() {
-                          key = UniqueKey();
-                        });
-                      } else {
-                        final RenderBox tile = context.findRenderObject()! as RenderBox;
-                        final overlay = Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
-                        
-                        showMenu<ClipboardAction>(
-                          context: context,
-                          items: [
-                            PopupMenuItem(
-                              value: ClipboardAction.copy,
-                              child: Text(AppLocalizations.of(context)!.libraryItemActionCopy),
-                            ),
-                            PopupMenuItem(
-                              value: ClipboardAction.move,
-                              child: Text(AppLocalizations.of(context)!.libraryItemActionMove),
-                            ),
-                            PopupMenuItem(
-                              value: ClipboardAction.link,
-                              child: Text(AppLocalizations.of(context)!.libraryItemActionLink),
-                            ),
-                            const PopupMenuDivider(),
-                            PopupMenuItem(
-                              value: ClipboardAction.delete,
-                              child: Text(AppLocalizations.of(context)!.libraryItemActionDelete),
-                            )
-                          ],
-                          position: RelativeRect.fromRect(
-                            Rect.fromPoints(
-                              tile.localToGlobal(Offset.zero, ancestor: overlay),
-                              tile.localToGlobal(tile.size.bottomRight(Offset.zero), ancestor: overlay)
-                            ),
-                            Offset.zero & overlay.size,
-                          )
-                        ).then((action) {
-                          if (action != null) {
-                            clipboard.add(ClipboardEntry(action: action!, entry: entry));
-
-                            setState(() {
-                              key = UniqueKey();
-                            });
-                          }
-                        });
-                      }
-                    },
+                    onLongPress: () => _onEntryLongPress(context, entry),
                     selected: clipboard.hasItemForEntry(entry),
                   ),
                 )
