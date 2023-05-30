@@ -33,6 +33,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
   Key key = UniqueKey();
   List<ClipboardEntry> clipboard = <ClipboardEntry>[];
   bool runningClipboard = false;
+  bool isFavorite = false;
 
   @override
   void initState() {
@@ -58,6 +59,9 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
       if (!isGridViewSet) {
         gridView = gridViewPaths.contains(currentDirectory!.path);
       }
+
+      final favoritePaths = preferences.getStringList(FileManagerSettings.favoritePaths.name) ?? <String>[];
+      isFavorite = favoritePaths.contains(currentDirectory!.path);
     }
   }
 
@@ -246,6 +250,25 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                           ),
                       );
                       break;
+                    case 'favorite':
+                      setState(() {
+                        isFavorite = !isFavorite;
+
+                        if (currentDirectory != null) {
+                          final favoritePaths = preferences.getStringList(FileManagerSettings.favoritePaths.name) ?? <String>[];
+                          if (favoritePaths.contains(currentDirectory!.path) && !isFavorite) {
+                            favoritePaths.remove(currentDirectory!.path);
+                          } else if (!favoritePaths.contains(currentDirectory!.path) && isFavorite) {
+                            favoritePaths.add(currentDirectory!.path);
+                          }
+
+                          preferences.setStringList(FileManagerSettings.favoritePaths.name, favoritePaths).onError((error, stackTrace) {
+                            _handleError(context, error!);
+                            return true;
+                          });
+                        }
+                      });
+                      break;
                     case 'feedback':
                       Navigator.of(context).push(
                         MaterialPageRoute(
@@ -267,6 +290,13 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                     value: 'mkdir',
                     child: Text(AppLocalizations.of(context)!.viewLibraryActionCreateDirectory),
                   ),
+                  (isFavorite ? PopupMenuItem(
+                      value: 'favorite',
+                      child: Text(AppLocalizations.of(context)!.favoriteRemove),
+                    ) : PopupMenuItem(
+                      value: 'favorite',
+                      child: Text(AppLocalizations.of(context)!.favoriteAdd),
+                    )),
                   ...(FileManagerApp.isSentryOnContext(context) ? <PopupMenuEntry<String>>[
                     const PopupMenuDivider(),
                     PopupMenuItem(

@@ -24,7 +24,8 @@ enum FileManagerSettings {
   showHiddenFiles,
   showHiddenLibraries,
   colorScheme,
-  optInErrorReporting;
+  optInErrorReporting,
+  favoritePaths;
 
   @override
   String toString() => name;

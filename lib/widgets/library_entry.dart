@@ -305,6 +305,16 @@ class LibraryEntry extends StatelessWidget {
         break;
     }
 
+    final favoritePaths = prefs.getStringList(FileManagerSettings.favoritePaths.name) ?? <String>[];
+    for (final favoritePath in favoritePaths) {
+      entries.add(LibraryEntry(
+        entry: io.Directory(favoritePath),
+        title: favoritePath,
+        iconData: Icons.star,
+        group: 2,
+      ));
+    }
+
     final defaultEntry = getDefaultEntry(context);
     if (defaultEntry != null) entries.add(defaultEntry!);
     return entries;
