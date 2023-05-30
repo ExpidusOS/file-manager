@@ -25,7 +25,7 @@ class About extends StatelessWidget {
           ),
         ) : null,
         appBar: AppBar(
-          title: const Text('About'),
+          title: Text(AppLocalizations.of(context)!.viewAbout),
         ),
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,

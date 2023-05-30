@@ -2,6 +2,7 @@ import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/logic.dart';
 import 'package:file_manager/views.dart';
 import 'package:file_manager/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:io' as io;
 
 class FileManagerDrawer extends StatefulWidget {
@@ -62,7 +63,7 @@ class _FileManagerDrawerState extends State<FileManagerDrawer> with FileManagerL
                 const Divider(),
                 ListTile(
                   leading: const Icon(Icons.settings),
-                  title: const Text('Settings'),
+                  title: Text(AppLocalizations.of(context)!.viewSettings),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => const SettingsView(),

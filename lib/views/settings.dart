@@ -73,7 +73,7 @@ class _SettingsViewState extends State<SettingsView> {
         appBar: AppBar(
           leading: const DrawerWithClose(),
           leadingWidth: Navigator.of(context).canPop() ? 100.0 : 56.0,
-          title: const Text('Settings'),
+          title: Text(AppLocalizations.of(context)!.viewSettings),
         ),
         drawer: const FileManagerDrawer(
           currentDirectory: null,
@@ -132,14 +132,14 @@ class _SettingsViewState extends State<SettingsView> {
               ),
             ] : []),
             ListTile(
-              title: const Text('Restore default settings'),
+              title: Text(AppLocalizations.of(context)!.settingsRestoreDefaults),
               onTap: () => preferences.clear().then((value) => setState(() {
                 _loadSettings();
               })).catchError((error) => _handleError(context, error)),
             ),
             const Divider(),
             ListTile(
-              title: const Text('About'),
+              title: Text(AppLocalizations.of(context)!.viewAbout),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => const About(),

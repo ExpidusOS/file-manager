@@ -21,7 +21,7 @@ class _FeedbackState extends State<Feedback> {
   void _handleError(BuildContext context, Object e) {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Failed to send feedback: ${e.toString()}'),
+          content: Text(AppLocalizations.of(context)!.feedbackSubmitFail(e.toString())),
           duration: const Duration(milliseconds: 1500),
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
@@ -47,7 +47,7 @@ class _FeedbackState extends State<Feedback> {
           ),
         ) : null,
         appBar: AppBar(
-          title: const Text('Send Feedback'),
+          title: Text(AppLocalizations.of(context)!.feedbackSend),
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -61,17 +61,17 @@ class _FeedbackState extends State<Feedback> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 TextFormField(
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.email),
-                    hintText: 'E-Mail address',
-                    labelText: 'E-Mail',
+                  decoration: InputDecoration(
+                    icon: const Icon(Icons.email),
+                    hintText: AppLocalizations.of(context)!.feedbackFieldHintEmail,
+                    labelText: AppLocalizations.of(context)!.feedbackFieldLabelEmail,
                   ),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your E-Mail address';
+                      return AppLocalizations.of(context)!.feedbackFieldEmptyEmail;
                     }
-                    return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) ? null : 'Not a valid E-Mail address';
+                    return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) ? null : AppLocalizations.of(context)!.feedbackFieldInvalidEmail;
                   },
                   onSaved: (value) {
                     setState(() {
@@ -80,14 +80,14 @@ class _FeedbackState extends State<Feedback> {
                   },
                 ),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.note),
-                    labelText: 'Your comments',
+                  decoration: InputDecoration(
+                    icon: const Icon(Icons.note),
+                    labelText: AppLocalizations.of(context)!.feedbackFieldLabelComments,
                   ),
                   maxLines: null,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your comments';
+                      return AppLocalizations.of(context)!.feedbackFieldEmptyComments;
                     }
                     return null;
                   },
@@ -100,7 +100,7 @@ class _FeedbackState extends State<Feedback> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: ElevatedButton(
-                    child: const Text('Submit feedback'),
+                    child: Text(AppLocalizations.of(context)!.feedbackSubmit),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         Sentry.captureUserFeedback(
@@ -112,8 +112,7 @@ class _FeedbackState extends State<Feedback> {
                           )
                         ).then((value) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text(
-                                  'Successfully submitted your feedback'))
+                            SnackBar(content: Text(AppLocalizations.of(context)!.feedbackSubmitSuccess))
                           );
 
                           Navigator.of(context).popUntil((route) =>
