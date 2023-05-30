@@ -9,7 +9,7 @@
 
     <application
         android:label="@string/application_name"
-        android:name="@string/application_name"
+        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true"
         android:extractNativeLibs="true"
