@@ -66,7 +66,7 @@
     "@libraryPublic": {
         "description": "Library"
     },
-    "viewAbout": "About",
+    "viewAbout": "について",
     "@viewAbout": {
         "description": "About Page View"
     },
@@ -74,13 +74,13 @@
     "@viewSettings": {
         "description": "Settings Page View"
     },
-    "settingsRestoreDefaults": "Restore default settings",
+    "settingsRestoreDefaults": "初期設定に戻す",
     "@settingsRestoreDefaults": {
         "description": "Settings"
     },
-    "feedbackSend": "Send feedback",
-    "feedbackSubmit": "Submit feedback",
-    "feedbackSubmitSuccess": "Successfully submitted your feedback",
+    "feedbackSend": "フィードバックを送信する",
+    "feedbackSubmit": "フィードバックを送信します。",
+    "feedbackSubmitSuccess": "フィードバックを送信しました。",
     "feedbackSubmitFail": "Failed to send your feedback: {errorMessage}",
     "@feedbackSubmitFail": {
         "description": "Error message displayed in a snackbar when feedback submission failed.",
@@ -90,7 +90,7 @@
             }
         }
     },
-    "feedbackFieldHintEmail": "E-Mail address",
+    "feedbackFieldHintEmail": "Eメールアドレス",
     "feedbackFieldLabelEmail": "E メール",
     "feedbackFieldEmptyEmail": "Eメールアドレスを入力してください",
     "feedbackFieldInvalidEmail": "有効なメールアドレスではありません",
@@ -102,8 +102,8 @@
     "libraryItemActionCopy": "コピー",
     "libraryItemActionMove": "移動",
     "libraryItemActionLink": "リンク",
-    "libraryItemActionDelete": "Delete",
-    "genericErrorMessage": "Failed to perform action: {errorMessage}",
+    "libraryItemActionDelete": "削除",
+    "genericErrorMessage": "アクションを実行できませんでした: {errorMessage}",
     "@genericErrorMessage": {
         "description": "An error message with no specific meaning",
         "placeholders": {
@@ -112,7 +112,7 @@
             }
         }
     },
-    "fileOpenErrorMessage": "Failed to open file: {errorMessage}",
+    "fileOpenErrorMessage": "ファイルを開けませんでした: {errorMessage}",
     "@fileOpenErrorMessage": {
         "description": "An error message indicating a failure in opening a file",
         "placeholders": {
@@ -121,14 +121,14 @@
             }
         }
     },
-    "libraryViewsPopulateFailedTitle": "Failed to get library entries",
+    "libraryViewsPopulateFailedTitle": "ライブラリエントリの取得に失敗しました",
     "dialogCreateFileTitle": "ファイルを作成",
     "dialogCreateDirectoryTitle": "ディレクトリを作成",
     "dialogCreateEntryFieldName": "名前",
-    "dialogCreateEntryEmptyName": "Please enter the name",
-    "dialogCreateEntryActionCancel": "Cancel",
-    "dialogCreateEntryActionCreate": "Create",
-    "settingsShowHiddenFiles": "Show hidden files and directories",
+    "dialogCreateEntryEmptyName": "名前を入力して下さい",
+    "dialogCreateEntryActionCancel": "キャンセル",
+    "dialogCreateEntryActionCreate": "作成する",
+    "settingsShowHiddenFiles": "隠しファイルおよびディレクトリの表示",
     "settingsShowHiddenLibraries": "Show hidden libraries",
     "settingsShowGridView": "Show grid view in all directories",
     "settingsOptInErrorReporting": "Opt-in to error reporting via Sentry",
