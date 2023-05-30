@@ -132,5 +132,42 @@
     "settingsShowHiddenLibraries": "Show hidden libraries",
     "settingsShowGridView": "Show grid view in all directories",
     "settingsOptInErrorReporting": "Opt-in to error reporting via Sentry",
-    "settingsOptInErrorReportingSubtitle": "Will take effect after restarting the application"
+    "settingsOptInErrorReportingSubtitle": "Will take effect after restarting the application",
+    "clipboardDeleteLabel": "Deleting: {deleteCount}",
+    "@clipboardDeleteLabel": {
+        "description": "The label for the amount of entries being deleted",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardLinkLabel": "Linking: {deleteCount}",
+    "@clipboardLinkLabel": {
+        "description": "The label for the amount of entries being linked",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardMoveLabel": "Moving: {deleteCount}",
+    "@clipboardMoveLabel": {
+        "description": "The label for the amount of entries being moved",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardCopyLabel": "Copying: {deleteCount}",
+    "@clipboardCopyLabel": {
+        "description": "The label for the amount of entries being copied",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardExecute": "Perform actions here"
 }
