@@ -132,5 +132,42 @@
     "settingsShowHiddenLibraries": "隠しライブラリを表示する",
     "settingsShowGridView": "すべてのディレクトリにグリッドビューを表示",
     "settingsOptInErrorReporting": "Sentry 経由のエラー報告へのオプトイン",
-    "settingsOptInErrorReportingSubtitle": "アプリケーションを再起動した後に有効になります"
+    "settingsOptInErrorReportingSubtitle": "アプリケーションを再起動した後に有効になります",
+    "clipboardDeleteLabel": "削除: {deleteCount}",
+    "@clipboardDeleteLabel": {
+        "description": "The label for the amount of entries being deleted",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardLinkLabel": "リンク: {deleteCount}",
+    "@clipboardLinkLabel": {
+        "description": "The label for the amount of entries being linked",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardMoveLabel": "移動中: {deleteCount}",
+    "@clipboardMoveLabel": {
+        "description": "The label for the amount of entries being moved",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardCopyLabel": "コピー: {deleteCount}",
+    "@clipboardCopyLabel": {
+        "description": "The label for the amount of entries being copied",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardExecute": "ここでアクションを実行"
 }
