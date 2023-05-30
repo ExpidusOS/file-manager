@@ -57,27 +57,28 @@ class LibraryEntry extends StatelessWidget {
     required StorageDirectory type,
     required io.Directory entry,
   }) {
+    final i18n = AppLocalizations.of(context)!;
     switch (type) {
       case StorageDirectory.alarms:
-        return LibraryEntry(title: 'Alarms', entry: entry, iconData: Icons.alarm);
+        return LibraryEntry(title: i18n.libraryAlarms, entry: entry, iconData: Icons.alarm);
       case StorageDirectory.dcim:
-        return LibraryEntry(title: 'DCIM', entry: entry, iconData: Icons.photo_library);
+        return LibraryEntry(title: i18n.libraryDCIM, entry: entry, iconData: Icons.photo_library);
       case StorageDirectory.documents:
-        return LibraryEntry(title: 'Documents', entry: entry, iconData: Icons.folder);
+        return LibraryEntry(title: i18n.libraryDocuments, entry: entry, iconData: Icons.folder);
       case StorageDirectory.downloads:
-        return LibraryEntry(title: 'Downloads', entry: entry, iconData: Icons.download);
+        return LibraryEntry(title: i18n.libraryDownloads, entry: entry, iconData: Icons.download);
       case StorageDirectory.movies:
-        return LibraryEntry(title: 'Movies', entry: entry, iconData: Icons.local_movies);
+        return LibraryEntry(title: i18n.libraryMovies, entry: entry, iconData: Icons.local_movies);
       case StorageDirectory.music:
-        return LibraryEntry(title: 'Music', entry: entry, iconData: Icons.library_music);
+        return LibraryEntry(title: i18n.libraryMusic, entry: entry, iconData: Icons.library_music);
       case StorageDirectory.pictures:
-        return LibraryEntry(title: 'Pictures', entry: entry, iconData: Icons.photo_library);
+        return LibraryEntry(title: i18n.libraryPictures, entry: entry, iconData: Icons.photo_library);
       case StorageDirectory.podcasts:
-        return LibraryEntry(title: 'Podcasts', entry: entry, iconData: Icons.podcasts);
+        return LibraryEntry(title: i18n.libraryPodcasts, entry: entry, iconData: Icons.podcasts);
       case StorageDirectory.notifications:
-        return LibraryEntry(title: 'Notifications', entry: entry, iconData: Icons.notifications);
+        return LibraryEntry(title: i18n.libraryNotifications, entry: entry, iconData: Icons.notifications);
       case StorageDirectory.ringtones:
-        return LibraryEntry(title: 'Ringtones', entry: entry, iconData: Icons.library_music);
+        return LibraryEntry(title: i18n.libraryRingtones, entry: entry, iconData: Icons.library_music);
       default:
         return LibraryEntry(title: type.name, entry: entry, iconData: Icons.folder);
     }
@@ -90,11 +91,11 @@ class LibraryEntry extends StatelessWidget {
     final i18n = AppLocalizations.of(context)!;
     switch (name) {
       case 'DESKTOP':
-        return LibraryEntry(title: 'Desktop', entry: entry, iconData: Icons.desktop_mac);
+        return LibraryEntry(title: i18n.libraryDesktop, entry: entry, iconData: Icons.desktop_mac);
       case 'TEMPLATES':
-        return LibraryEntry(title: 'Templates', entry: entry, iconData: Icons.folder);
+        return LibraryEntry(title: i18n.libraryTemplates, entry: entry, iconData: Icons.folder);
       case 'PUBLICSHARE':
-        return LibraryEntry(title: 'Public', entry: entry, iconData: Icons.public);
+        return LibraryEntry(title: i18n.libraryPublic, entry: entry, iconData: Icons.public);
       case 'HOME':
         return LibraryEntry(title: i18n.libraryHome, entry: entry, iconData: Icons.home);
       case 'DOWNLOAD':
@@ -133,9 +134,10 @@ class LibraryEntry extends StatelessWidget {
   }
 
   static LibraryEntry? getDefaultEntry(BuildContext context) {
+    final i18n = AppLocalizations.of(context)!;
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return LibraryEntry(title: 'Storage', entry: io.Directory('/storage/emulated/0'), iconData: Icons.storage);
+        return LibraryEntry(title: i18n.libraryStorage, entry: io.Directory('/storage/emulated/0'), iconData: Icons.storage);
       case TargetPlatform.linux:
         return LibraryEntry.fromXdg(context, name: 'HOME', entry: io.Directory(io.Platform.environment['HOME']!));
       case TargetPlatform.windows:
@@ -234,9 +236,10 @@ class LibraryEntry extends StatelessWidget {
       case TargetPlatform.windows:
         final pathProvider = PathProviderPlatform.instance as PathProviderWindows;
 
+        final i18n = AppLocalizations.of(context)!;
         entries.addAll([
           LibraryEntry(
-            title: 'Desktop',
+            title: i18n.libraryDesktop,
             entry: io.Directory((await pathProvider.getPath(FOLDERID_Desktop))!),
             iconData: Icons.desktop_windows
           ),
