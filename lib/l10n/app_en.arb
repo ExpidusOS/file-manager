@@ -169,5 +169,7 @@
             }
         }
     },
-    "clipboardExecute": "Perform actions here"
+    "clipboardExecute": "Perform actions here",
+    "favoriteRemove": "Remove favorite",
+    "favoriteAdd": "Add as favorite"
 }
