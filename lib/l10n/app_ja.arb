@@ -81,7 +81,7 @@
     "feedbackSend": "フィードバックを送信する",
     "feedbackSubmit": "フィードバックを送信します。",
     "feedbackSubmitSuccess": "フィードバックを送信しました。",
-    "feedbackSubmitFail": "Failed to send your feedback: {errorMessage}",
+    "feedbackSubmitFail": "フィードバックの送信に失敗しました: {errorMessage}",
     "@feedbackSubmitFail": {
         "description": "Error message displayed in a snackbar when feedback submission failed.",
         "placeholders": {
@@ -129,8 +129,8 @@
     "dialogCreateEntryActionCancel": "キャンセル",
     "dialogCreateEntryActionCreate": "作成する",
     "settingsShowHiddenFiles": "隠しファイルおよびディレクトリの表示",
-    "settingsShowHiddenLibraries": "Show hidden libraries",
-    "settingsShowGridView": "Show grid view in all directories",
-    "settingsOptInErrorReporting": "Opt-in to error reporting via Sentry",
-    "settingsOptInErrorReportingSubtitle": "Will take effect after restarting the application"
+    "settingsShowHiddenLibraries": "隠しライブラリを表示する",
+    "settingsShowGridView": "すべてのディレクトリにグリッドビューを表示",
+    "settingsOptInErrorReporting": "Sentry 経由のエラー報告へのオプトイン",
+    "settingsOptInErrorReportingSubtitle": "アプリケーションを再起動した後に有効になります"
 }
