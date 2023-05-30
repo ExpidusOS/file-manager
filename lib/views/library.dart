@@ -311,13 +311,52 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                     onLongPress: () {
                       if (clipboard.hasItemForEntry(entry)) {
                         clipboard.removeItemForEntry(entry);
-                      } else {
-                        // TODO: figure out the action the user wants to perform
-                      }
 
-                      setState(() {
-                        key = UniqueKey();
-                      });
+                        setState(() {
+                          key = UniqueKey();
+                        });
+                      } else {
+                        final RenderBox tile = context.findRenderObject()! as RenderBox;
+                        final overlay = Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
+                        
+                        showMenu<ClipboardAction>(
+                          context: context,
+                          items: [
+                            PopupMenuItem(
+                              value: ClipboardAction.copy,
+                              child: Text(AppLocalizations.of(context)!.libraryItemActionCopy),
+                            ),
+                            PopupMenuItem(
+                              value: ClipboardAction.move,
+                              child: Text(AppLocalizations.of(context)!.libraryItemActionMove),
+                            ),
+                            PopupMenuItem(
+                              value: ClipboardAction.link,
+                              child: Text(AppLocalizations.of(context)!.libraryItemActionLink),
+                            ),
+                            const PopupMenuDivider(),
+                            PopupMenuItem(
+                              value: ClipboardAction.delete,
+                              child: Text(AppLocalizations.of(context)!.libraryItemActionDelete),
+                            )
+                          ],
+                          position: RelativeRect.fromRect(
+                            Rect.fromPoints(
+                              tile.localToGlobal(Offset.zero, ancestor: overlay),
+                              tile.localToGlobal(tile.size.bottomRight(Offset.zero), ancestor: overlay)
+                            ),
+                            Offset.zero & overlay.size,
+                          )
+                        ).then((action) {
+                          if (action != null) {
+                            clipboard.add(ClipboardEntry(action: action!, entry: entry));
+
+                            setState(() {
+                              key = UniqueKey();
+                            });
+                          }
+                        });
+                      }
                     },
                     selected: clipboard.hasItemForEntry(entry),
                   ),

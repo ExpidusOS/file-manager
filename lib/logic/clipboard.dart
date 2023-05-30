@@ -2,12 +2,32 @@ import 'dart:async';
 import 'dart:io' as io;
 import 'package:collection/collection.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
-import 'package:provider/provider.dart';
+import 'package:path/path.dart' as path;
 
-Future<void> _clipboardCopy(io.FileSystemEntity source, io.FileSystemEntity target) async {}
-Future<void> _clipboardMove(io.FileSystemEntity source, io.FileSystemEntity target) async {}
-Future<void> _clipboardLink(io.FileSystemEntity source, io.FileSystemEntity target) async {}
-Future<void> _clipboardDelete(io.FileSystemEntity source, io.FileSystemEntity target) async {}
+Future<void> _clipboardCopy(io.FileSystemEntity source, io.FileSystemEntity target) async {
+  if (source is io.Directory) {
+    final items = await source.list(recursive: true).toList();
+    for (final item in items) {
+      await _clipboardCopy(item, io.Directory(target.path));
+    }
+  } else if (source is io.File) {
+    await source.copy(path.join(target.path, path.basename(source.path)));
+  } else if (source is io.Link) {
+    await _clipboardLink(source, target);
+  }
+}
+
+Future<void> _clipboardMove(io.FileSystemEntity source, io.FileSystemEntity target) async {
+  await source.rename(path.join(target.path, path.basename(source.path)));
+}
+
+Future<void> _clipboardLink(io.FileSystemEntity source, io.FileSystemEntity target) async {
+  await io.Link(source.path).create(path.join(target.path, path.basename(source.path)), recursive: true);
+}
+
+Future<void> _clipboardDelete(io.FileSystemEntity source, io.FileSystemEntity target) async {
+  await source.delete();
+}
 
 enum ClipboardAction {
   copy(_clipboardCopy),
