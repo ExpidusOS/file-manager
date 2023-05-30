@@ -10,7 +10,7 @@
             }
         }
     },
-    "libraryStorage": "Storage",
+    "libraryStorage": "ストレージ",
     "@libraryStorage": {
         "description": "Library"
     },
@@ -18,51 +18,51 @@
     "@libraryDCIM": {
         "description": "Library"
     },
-    "libraryAlarms": "Alarms",
+    "libraryAlarms": "アラーム",
     "@libraryAlarms": {
         "description": "Library"
     },
-    "libraryDocuments": "Documents",
+    "libraryDocuments": "ドキュメント",
     "@libraryDocuments": {
         "description": "Library"
     },
-    "libraryDownloads": "Downloads",
+    "libraryDownloads": "ダウンロード",
     "@libraryDownloads": {
         "description": "Library"
     },
-    "libraryMovies": "Movies",
+    "libraryMovies": "ムービー",
     "@libraryMovies": {
         "description": "Library"
     },
-    "libraryMusic": "Music",
+    "libraryMusic": "ミュージック",
     "@libraryMusic": {
         "description": "Library"
     },
-    "libraryPictures": "Pictures",
+    "libraryPictures": "ピクチャ",
     "@libraryPictures": {
         "description": "Library"
     },
-    "libraryPodcasts": "Podcasts",
+    "libraryPodcasts": "ポッドキャスト",
     "@libraryPodcasts": {
         "description": "Library"
     },
-    "libraryNotifications": "Notifications",
+    "libraryNotifications": "通知",
     "@libraryNotifications": {
         "description": "Library"
     },
-    "libraryRingtones": "Ringtones",
+    "libraryRingtones": "着信音",
     "@libraryRingtones": {
         "description": "Library"
     },
-    "libraryDesktop": "Desktop",
+    "libraryDesktop": "デスクトップ",
     "@libraryDesktop": {
         "description": "Library"
     },
-    "libraryTemplates": "Templates",
+    "libraryTemplates": "テンプレート",
     "@libraryTemplates": {
         "description": "Library"
     },
-    "libraryPublic": "Public",
+    "libraryPublic": "公開",
     "@libraryPublic": {
         "description": "Library"
     }
