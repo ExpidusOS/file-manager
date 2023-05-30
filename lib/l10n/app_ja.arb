@@ -169,5 +169,7 @@
             }
         }
     },
-    "clipboardExecute": "ここでアクションを実行"
+    "clipboardExecute": "ここでアクションを実行",
+    "favoriteRemove": "お気に入りを削除",
+    "favoriteAdd": "お気に入りに追加"
 }
