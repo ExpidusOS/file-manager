@@ -2,6 +2,7 @@
 Version=1.0
 Type=Application
 Name=File Manager
+Name[ja]=ファイル マネージャー
 Comment=ExpidusOS File Manager
 Categories=Utility;
 Icon=com.expidusos.file_manager
