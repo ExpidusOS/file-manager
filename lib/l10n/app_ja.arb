@@ -133,7 +133,7 @@
     "settingsShowGridView": "すべてのディレクトリにグリッドビューを表示",
     "settingsOptInErrorReporting": "Sentry 経由のエラー報告へのオプトイン",
     "settingsOptInErrorReportingSubtitle": "アプリケーションを再起動した後に有効になります",
-    "clipboardDeleteLabel": "Deleting: {deleteCount}",
+    "clipboardDeleteLabel": "削除: {deleteCount}",
     "@clipboardDeleteLabel": {
         "description": "The label for the amount of entries being deleted",
         "placeholders": {
@@ -142,7 +142,7 @@
             }
         }
     },
-    "clipboardLinkLabel": "Linking: {deleteCount}",
+    "clipboardLinkLabel": "リンク: {deleteCount}",
     "@clipboardLinkLabel": {
         "description": "The label for the amount of entries being linked",
         "placeholders": {
@@ -151,7 +151,7 @@
             }
         }
     },
-    "clipboardMoveLabel": "Moving: {deleteCount}",
+    "clipboardMoveLabel": "移動中: {deleteCount}",
     "@clipboardMoveLabel": {
         "description": "The label for the amount of entries being moved",
         "placeholders": {
@@ -160,7 +160,7 @@
             }
         }
     },
-    "clipboardCopyLabel": "Copying: {deleteCount}",
+    "clipboardCopyLabel": "コピー: {deleteCount}",
     "@clipboardCopyLabel": {
         "description": "The label for the amount of entries being copied",
         "placeholders": {
@@ -169,5 +169,5 @@
             }
         }
     },
-    "clipboardExecute": "Perform actions here"
+    "clipboardExecute": "ここでアクションを実行"
 }
