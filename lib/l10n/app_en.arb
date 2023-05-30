@@ -93,7 +93,7 @@
     "feedbackFieldHintEmail": "E-Mail address",
     "feedbackFieldLabelEmail": "E-Mail",
     "feedbackFieldEmptyEmail": "Please enter your E-Mail address",
-    "feedbackFieldInvalidEmail": "Not a valid e-mail address",
+    "feedbackFieldInvalidEmail": "Not a valid E-mail address",
     "feedbackFieldLabelComments": "Your comments",
     "feedbackFieldEmptyComments": "Please enter your comments",
     "aboutHeadingDependencies": "Dependencies",
