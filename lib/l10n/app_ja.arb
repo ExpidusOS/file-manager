@@ -65,5 +65,72 @@
     "libraryPublic": "公開",
     "@libraryPublic": {
         "description": "Library"
-    }
+    },
+    "viewAbout": "About",
+    "@viewAbout": {
+        "description": "About Page View"
+    },
+    "viewSettings": "Settings",
+    "@viewSettings": {
+        "description": "Settings Page View"
+    },
+    "settingsRestoreDefaults": "Restore default settings",
+    "@settingsRestoreDefaults": {
+        "description": "Settings"
+    },
+    "feedbackSend": "Send feedback",
+    "feedbackSubmit": "Submit feedback",
+    "feedbackSubmitSuccess": "Successfully submitted your feedback",
+    "feedbackSubmitFail": "Failed to send your feedback: {errorMessage}",
+    "@feedbackSubmitFail": {
+        "description": "Error message displayed in a snackbar when feedback submission failed.",
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        }
+    },
+    "feedbackFieldHintEmail": "E-Mail address",
+    "feedbackFieldLabelEmail": "E-Mail",
+    "feedbackFieldEmptyEmail": "Please enter your E-Mail address",
+    "feedbackFieldInvalidEmail": "Not a valid E-Mail address",
+    "feedbackFieldLabelComments": "Your comments",
+    "feedbackFieldEmptyComments": "Please enter your comments",
+    "aboutHeadingDependencies": "Dependencies",
+    "viewLibraryActionCreateFile": "Create File",
+    "viewLibraryActionCreateDirectory": "Create Directory",
+    "libraryItemActionCopy": "Copy",
+    "libraryItemActionMove": "Move",
+    "libraryItemActionLink": "Link",
+    "libraryItemActionDelete": "Delete",
+    "genericErrorMessage": "Failed to perform action: {errorMessage}",
+    "@genericErrorMessage": {
+        "description": "An error message with no specific meaning",
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        }
+    },
+    "fileOpenErrorMessage": "Failed to open file: {errorMessage}",
+    "@fileOpenErrorMessage": {
+        "description": "An error message indicating a failure in opening a file",
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        }
+    },
+    "libraryViewsPopulateFailedTitle": "Failed to get library entries",
+    "dialogCreateFileTitle": "Create File",
+    "dialogCreateDirectoryTitle": "Create Directory",
+    "dialogCreateEntryFieldName": "Name",
+    "dialogCreateEntryEmptyName": "Please enter the name",
+    "dialogCreateEntryActionCancel": "Cancel",
+    "dialogCreateEntryActionCreate": "Create",
+    "settingsShowHiddenFiles": "Show hidden files and directories",
+    "settingsShowHiddenLibraries": "Show hidden libraries",
+    "settingsShowGridView": "Show grid view in all directories",
+    "settingsOptInErrorReporting": "Opt-in to error reporting via Sentry",
+    "settingsOptInErrorReportingSubtitle": "Will take effect after restarting the application"
 }
