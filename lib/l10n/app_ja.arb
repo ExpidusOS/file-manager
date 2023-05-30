@@ -70,7 +70,7 @@
     "@viewAbout": {
         "description": "About Page View"
     },
-    "viewSettings": "Settings",
+    "viewSettings": "設定",
     "@viewSettings": {
         "description": "Settings Page View"
     },
@@ -91,17 +91,17 @@
         }
     },
     "feedbackFieldHintEmail": "E-Mail address",
-    "feedbackFieldLabelEmail": "E-Mail",
-    "feedbackFieldEmptyEmail": "Please enter your E-Mail address",
-    "feedbackFieldInvalidEmail": "Not a valid E-Mail address",
-    "feedbackFieldLabelComments": "Your comments",
-    "feedbackFieldEmptyComments": "Please enter your comments",
-    "aboutHeadingDependencies": "Dependencies",
-    "viewLibraryActionCreateFile": "Create File",
-    "viewLibraryActionCreateDirectory": "Create Directory",
-    "libraryItemActionCopy": "Copy",
-    "libraryItemActionMove": "Move",
-    "libraryItemActionLink": "Link",
+    "feedbackFieldLabelEmail": "E メール",
+    "feedbackFieldEmptyEmail": "Eメールアドレスを入力してください",
+    "feedbackFieldInvalidEmail": "有効なメールアドレスではありません",
+    "feedbackFieldLabelComments": "あなたのコメント",
+    "feedbackFieldEmptyComments": "コメントを入力してください",
+    "aboutHeadingDependencies": "依存関係",
+    "viewLibraryActionCreateFile": "ファイルを作成",
+    "viewLibraryActionCreateDirectory": "ディレクトリを作成",
+    "libraryItemActionCopy": "コピー",
+    "libraryItemActionMove": "移動",
+    "libraryItemActionLink": "リンク",
     "libraryItemActionDelete": "Delete",
     "genericErrorMessage": "Failed to perform action: {errorMessage}",
     "@genericErrorMessage": {
@@ -122,9 +122,9 @@
         }
     },
     "libraryViewsPopulateFailedTitle": "Failed to get library entries",
-    "dialogCreateFileTitle": "Create File",
-    "dialogCreateDirectoryTitle": "Create Directory",
-    "dialogCreateEntryFieldName": "Name",
+    "dialogCreateFileTitle": "ファイルを作成",
+    "dialogCreateDirectoryTitle": "ディレクトリを作成",
+    "dialogCreateEntryFieldName": "名前",
     "dialogCreateEntryEmptyName": "Please enter the name",
     "dialogCreateEntryActionCancel": "Cancel",
     "dialogCreateEntryActionCreate": "Create",
