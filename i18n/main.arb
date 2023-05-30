@@ -65,5 +65,35 @@
     "libraryPublic": "Public",
     "@libraryPublic": {
         "description": "Library"
-    }
+    },
+    "viewAbout": "About",
+    "@viewAbout": {
+        "description": "About Page View"
+    },
+    "viewSettings": "Settings",
+    "@viewSettings": {
+        "description": "Settings Page View"
+    },
+    "settingsRestoreDefaults": "Restore default settings",
+    "@settingsRestoreDefaults": {
+        "description": "Settings"
+    },
+    "feedbackSend": "Send feedback",
+    "feedbackSubmit": "Submit feedback",
+    "feedbackSubmitSuccess": "Successfully submitted your feedback",
+    "feedbackSubmitFail": "Failed to send your feedback: {errorMessage}",
+    "@feedbackSubmitFail": {
+        "description": "Error message displayed in a snackbar when feedback submission failed.",
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        }
+    },
+    "feedbackFieldHintEmail": "E-Mail address",
+    "feedbackFieldLabelEmail": "E-Mail",
+    "feedbackFieldEmptyEmail": "Please enter your E-Mail address",
+    "feedbackFieldInvalidEmail": "Not a valid E-Mail address",
+    "feedbackFieldLabelComments": "Your comments",
+    "feedbackFieldEmptyComments": "Please enter your comments"
 }
