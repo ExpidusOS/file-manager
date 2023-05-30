@@ -45,7 +45,7 @@ class _SettingsViewState extends State<SettingsView> {
   void _handleError(BuildContext context, Object e) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Failed to open file: ${e.toString()}'),
+        content: Text(AppLocalizations.of(context)!.genericErrorMessage(e.toString())),
         duration: const Duration(milliseconds: 1500),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
@@ -81,7 +81,7 @@ class _SettingsViewState extends State<SettingsView> {
         body: ListView(
           children: [
             SwitchListTile(
-              title: const Text('Show hidden files and directories'),
+              title: Text(AppLocalizations.of(context)!.settingsShowHiddenFiles),
               value: showHiddenFiles,
               onChanged: (value) => preferences.setBool(FileManagerSettings.showHiddenFiles.name, value).then((value) {
                 setState(() {
@@ -90,7 +90,7 @@ class _SettingsViewState extends State<SettingsView> {
               }).catchError((error) => _handleError(context, error)),
             ),
             SwitchListTile(
-              title: const Text('Show hidden libraries'),
+              title: Text(AppLocalizations.of(context)!.settingsShowHiddenLibraries),
               value: showHiddenLibraries,
               onChanged: (value) => preferences.setBool(FileManagerSettings.showHiddenLibraries.name, value).then((value) {
                 setState(() {
@@ -99,7 +99,7 @@ class _SettingsViewState extends State<SettingsView> {
               }).catchError((error) => _handleError(context, error)),
             ),
             SwitchListTile(
-              title: const Text('Show grid view in all directories'),
+              title: Text(AppLocalizations.of(context)!.settingsShowGridView),
               value: showGridView,
               onChanged: (value) => preferences.setBool(FileManagerSettings.showGridView.name, value).then((value) {
                 setState(() {
@@ -109,8 +109,8 @@ class _SettingsViewState extends State<SettingsView> {
             ),
             ...(const String.fromEnvironment('SENTRY_DSN', defaultValue: '').isNotEmpty ? [
               SwitchListTile(
-                title: const Text('Opt-in to error reporting via Sentry'),
-                subtitle: const Text('Will take effect after restarting the application'),
+                title: Text(AppLocalizations.of(context)!.settingsOptInErrorReporting),
+                subtitle: Text(AppLocalizations.of(context)!.settingsOptInErrorReportingSubtitle),
                 value: optInErrorReporting,
                 onChanged: (value) => preferences.setBool(FileManagerSettings.optInErrorReporting.name, value).then((value) {
                   setState(() {
@@ -122,7 +122,7 @@ class _SettingsViewState extends State<SettingsView> {
             const Divider(),
             ...(const String.fromEnvironment('SENTRY_DSN', defaultValue: '').isNotEmpty && FileManagerApp.isSentryOnContext(context) ? [
               ListTile(
-                title: const Text('Send feedback'),
+                title: Text(AppLocalizations.of(context)!.feedbackSend),
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const FeedbackChoice(),

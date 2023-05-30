@@ -64,7 +64,7 @@ class About extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: Text(
-                    'Dependencies',
+                    AppLocalizations.of(context)!.aboutHeadingDependencies,
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                 ),

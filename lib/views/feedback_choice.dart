@@ -23,7 +23,7 @@ class FeedbackChoice extends StatelessWidget {
           ),
         ) : null,
         appBar: AppBar(
-          title: const Text('Send Feedback'),
+          title: Text(AppLocalizations.of(context)!.feedbackSend),
         ),
         body: ListView(
           children: FileManagerFeedbackID.values.map((id) => ListTile(

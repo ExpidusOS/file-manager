@@ -34,7 +34,7 @@ class _FileManagerDrawerState extends State<FileManagerDrawer> with FileManagerL
             if (snapshot.hasError) {
               return BasicCard(
                 color: convertFromColor(Theme.of(context).colorScheme.errorContainer),
-                title: 'Failed to get library entries',
+                title: AppLocalizations.of(context)!.libraryViewsPopulateFailedTitle,
                 message: snapshot.error!.toString(),
               );
             }

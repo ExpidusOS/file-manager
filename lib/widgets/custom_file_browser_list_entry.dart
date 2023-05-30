@@ -3,6 +3,7 @@ import 'package:file_manager/logic.dart';
 import 'package:path/path.dart' as path;
 import 'package:intl/intl.dart';
 import 'package:filesize/filesize.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:io' as io;
 
 class CustomFileBrowserListEntry extends FileBrowserListEntry {
@@ -40,7 +41,7 @@ class CustomFileBrowserListEntry extends FileBrowserListEntry {
     void _handleError(BuildContext context, Object e) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Failed to open file: ${e.toString()}'),
+            content: Text(AppLocalizations.of(context)!.genericErrorMessage(e.toString())),
             duration: const Duration(milliseconds: 1500),
             behavior: SnackBarBehavior.floating,
             shape: RoundedRectangleBorder(
@@ -81,22 +82,22 @@ class CustomFileBrowserListEntry extends FileBrowserListEntry {
                 context: context,
                 position: position,
                 items: [
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: 'copy',
-                    child: Text('Copy'),
+                    child: Text(AppLocalizations.of(context)!.libraryItemActionCopy),
                   ),
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: 'move',
-                    child: Text('Move'),
+                    child: Text(AppLocalizations.of(context)!.libraryItemActionMove),
                   ),
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: 'link',
-                    child: Text('Link'),
+                    child: Text(AppLocalizations.of(context)!.libraryItemActionLink),
                   ),
                   const PopupMenuDivider(),
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: 'delete',
-                    child: Text('Delete'),
+                    child: Text(AppLocalizations.of(context)!.libraryItemActionDelete),
                   ),
                 ],
               ).then((value) {

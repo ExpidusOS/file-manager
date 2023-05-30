@@ -62,7 +62,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
   void _handleError(BuildContext context, Object e) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Failed to open file: ${e.toString()}'),
+        content: Text(AppLocalizations.of(context)!.fileOpenErrorMessage(e.toString())),
         duration: const Duration(milliseconds: 1500),
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
@@ -121,8 +121,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                   : AppLocalizations.of(context)!.applicationTitleWithLibraryName(libraryTitle!)),
                 onMinimize: () => appWindow.minimize(),
                 onMaximize: () => appWindow.maximize(),
-                onClose: () =>
-                appWindow.close(),
+                onClose: () => appWindow.close(),
               ),
             ),
           ) : null,
@@ -162,23 +161,23 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                         barrierDismissible: false,
                         builder: (context) =>
                             SingleTextInputFormDialog(
-                              title: const Text('Create File'),
-                              decoration: const InputDecoration(
-                                labelText: 'Name',
+                              title: Text(AppLocalizations.of(context)!.dialogCreateFileTitle),
+                              decoration: InputDecoration(
+                                labelText: AppLocalizations.of(context)!.dialogCreateEntryFieldName,
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter the name';
+                                  return AppLocalizations.of(context)!.dialogCreateEntryEmptyName;
                                 }
                                 return null;
                               },
                               buildActions: (context, formKey, value) => [
                                 TextButton(
-                                  child: const Text('Cancel'),
+                                  child: Text(AppLocalizations.of(context)!.dialogCreateEntryActionCancel),
                                   onPressed: () => Navigator.of(context).pop('Cancel'),
                                 ),
                                 TextButton(
-                                  child: const Text('Create'),
+                                  child: Text(AppLocalizations.of(context)!.dialogCreateEntryActionCreate),
                                   onPressed: () {
                                     if (formKey.currentState!.validate()) {
                                       assert(value != null && value.isNotEmpty);
@@ -205,23 +204,23 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                         barrierDismissible: false,
                         builder: (context) =>
                           SingleTextInputFormDialog(
-                            title: const Text('Create Directory'),
-                            decoration: const InputDecoration(
-                              labelText: 'Name',
+                            title: Text(AppLocalizations.of(context)!.dialogCreateDirectoryTitle),
+                            decoration: InputDecoration(
+                              labelText: AppLocalizations.of(context)!.dialogCreateEntryFieldName,
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Please enter the name';
+                                return AppLocalizations.of(context)!.dialogCreateEntryEmptyName;
                               }
                               return null;
                             },
                             buildActions: (context, formKey, value) => [
                               TextButton(
-                                child: const Text('Cancel'),
+                                child: Text(AppLocalizations.of(context)!.dialogCreateEntryActionCancel),
                                 onPressed: () => Navigator.of(context).pop('Cancel'),
                               ),
                               TextButton(
-                                child: const Text('Create'),
+                                child: Text(AppLocalizations.of(context)!.dialogCreateEntryActionCreate),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
                                     assert(value != null && value.isNotEmpty);
@@ -257,19 +256,19 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                   }
                 },
                 itemBuilder: (context) => [
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: 'mkfile',
-                    child: Text('Create File'),
+                    child: Text(AppLocalizations.of(context)!.viewLibraryActionCreateFile),
                   ),
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: 'mkdir',
-                    child: Text('Create Directory'),
+                    child: Text(AppLocalizations.of(context)!.viewLibraryActionCreateDirectory),
                   ),
                   ...(FileManagerApp.isSentryOnContext(context) ? <PopupMenuEntry<String>>[
                     const PopupMenuDivider(),
-                    const PopupMenuItem(
+                    PopupMenuItem(
                       value: 'feedback',
-                      child: Text('Send feedback'),
+                      child: Text(AppLocalizations.of(context)!.feedbackSend),
                     ),
                   ] : <PopupMenuEntry<String>>[]),
                 ],
