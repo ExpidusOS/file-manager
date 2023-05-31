@@ -37,7 +37,7 @@ jobs:
           echo "storePassword=$ANDROID_STORE_PASSWORD" >android/key.properties
           echo "keyPassword=$ANDROID_KEY_PASSWORD" >android/key.properties
           echo "keyAlias=upload" >android/key.properties
-          echo "storeFile=keystore.jks" >android/key.properties
+          echo "storeFile=$(readlink -e android/app)/keystore.jks" >android/key.properties
       - if: ${{ !github.event.issue.pull_request }}
         name: Build for Android (release)
         run: |
