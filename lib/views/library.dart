@@ -421,6 +421,9 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                         stream: clipboard.run(currentDirectory!),
                         builder: (context, snapshot) {
                           if (snapshot.hasError) {
+                            runningClipboard = false;
+                            key = UniqueKey();
+                            clipboard.clear(notify: false);
                             return Text(i18n.genericErrorMessage(snapshot.error!.toString()));
                           }
 

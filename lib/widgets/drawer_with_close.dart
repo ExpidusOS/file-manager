@@ -9,6 +9,8 @@ class DrawerWithClose extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: (canGoBack ?? Navigator.of(context).canPop() ? <Widget>[
           IconButton(
