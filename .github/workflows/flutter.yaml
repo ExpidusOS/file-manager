@@ -27,7 +27,7 @@ jobs:
         name: Pull Keystore File
         env:
           ENCODED_STRING: ${{ secrets.ANDROID_KEYSTORE_FILE }}
-        run: echo "$ENCODED_STRING" | base64 -di >keystore.jks
+        run: echo "$ENCODED_STRING" | base64 -di >android/app/keystore.jks
       - if: ${{ !github.event.issue.pull_request }}
         name: Set up signing
         env:
