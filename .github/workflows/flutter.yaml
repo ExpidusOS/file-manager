@@ -55,6 +55,14 @@ jobs:
         with:
           name: com.expidusos.file_manager.aab
           path: build/app/outputs/bundle/profile/app-profile.aab
+      - if: ${{ !github.event.issue.pull_request }}
+        name: Deploy to Google Play
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
+          packageName: com.expidusos.file_manager
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+          track: alpha
   linux:
     strategy:
       matrix:
