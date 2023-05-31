@@ -9,7 +9,6 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher-6.1.11" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/bitsdojo_window-0.1.5" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences-2.1.1" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sentry_flutter-7.6.2" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_linux-3.0.5" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.3" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_windows-3.0.6" />
@@ -27,6 +26,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_android-6.0.35" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_macos-3.0.5" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/package_info_plus-3.1.2" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sentry_flutter-7.6.3" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

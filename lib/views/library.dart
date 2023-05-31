@@ -453,20 +453,34 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                     if (linkCount > 0) labels.add(Text(i18n.clipboardLinkLabel(linkCount)));
                     if (deleteCount > 0) labels.add(Text(i18n.clipboardDeleteLabel(deleteCount)));
 
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ...labels,
-                        OutlinedButton(
-                          child: Text(i18n.clipboardExecute),
-                          onPressed: () => setState(() {
-                            runningClipboard = true;
-                          }),
+                        Flexible(
+                          child: NavigationToolbar(
+                            middle: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: labels,
+                            ),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                OutlinedButton(
+                                  child: Text(i18n.clipboardExecute),
+                                  onPressed: () => setState(() {
+                                    runningClipboard = true;
+                                  }),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.clear),
+                                  onPressed: () => clipboard.clear(),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                        IconButton(
-                          icon: const Icon(Icons.clear),
-                          onPressed: () => clipboard.clear(),
-                        )
                       ],
                     );
                   }
