@@ -38,12 +38,10 @@ jobs:
           echo "keyPassword=$ANDROID_KEY_PASSWORD" >android/key.properties
           echo "keyAlias=upload" >android/key.properties
           echo "storeFile=$(readlink -e .)/keystore.jks" >android/key.properties
-          ls -ahl android/key.properties keystore.jks
-          readlink -e .
       - if: ${{ !github.event.issue.pull_request }}
         name: Build for Android (release)
         run: |
-          flutter build appbundle --release --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build appbundle --android-project-arg "--stacktrace --info" --release --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - if: ${{ github.event.issue.pull_request }}
         name: Build for Android (profile)
         run: |
