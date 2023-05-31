@@ -474,6 +474,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                                   }),
                                 ),
                                 IconButton(
+                                  padding: EdgeInsets.zero,
                                   icon: const Icon(Icons.clear),
                                   onPressed: () => clipboard.clear(),
                                 ),
