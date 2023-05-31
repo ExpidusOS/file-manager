@@ -39,6 +39,7 @@ jobs:
           echo "keyAlias=upload" >android/key.properties
           echo "storeFile=$(readlink -e .)/keystore.jks" >android/key.properties
           ls -ahl android/key.properties keystore.jks
+          readlink -e .
       - if: ${{ !github.event.issue.pull_request }}
         name: Build for Android (release)
         run: |
