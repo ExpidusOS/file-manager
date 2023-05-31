@@ -27,7 +27,7 @@ jobs:
         name: Pull Keystore File
         env:
           ENCODED_STRING: ${{ secrets.ANDROID_KEYSTORE_FILE }}
-        run: echo "$ENCODED_STRING" | base64 -di >android/app/keystore.jks
+        run: echo "$ENCODED_STRING" | base64 -di >keystore.jks
       - if: ${{ !github.event.issue.pull_request }}
         name: Set up signing
         env:
@@ -37,7 +37,8 @@ jobs:
           echo "storePassword=$ANDROID_STORE_PASSWORD" >android/key.properties
           echo "keyPassword=$ANDROID_KEY_PASSWORD" >android/key.properties
           echo "keyAlias=upload" >android/key.properties
-          echo "storeFile=$(readlink -e android/app)/keystore.jks" >android/key.properties
+          echo "storeFile=$(readlink -e .)/keystore.jks" >android/key.properties
+          ls -ahl android/key.properties keystore.jks
       - if: ${{ !github.event.issue.pull_request }}
         name: Build for Android (release)
         run: |
