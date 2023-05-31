@@ -2,6 +2,62 @@ name: Flutter
 on: [push, pull_request]
 
 jobs:
+  android:
+    strategy:
+      matrix:
+        arch: [x64]
+        channel: [stable]
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          channel: ${{ matrix.channel }}
+          architecture: ${{ matrix.arch }}
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - run: flutter doctor
+      - name: Download dependencies
+        run: flutter pub get
+      - if: ${{ !github.event.issue.pull_request }}
+        name: Pull Keystore File
+        env:
+          ENCODED_STRING: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+        run: echo "$ENCODED_STRING" | base64 -di >keystore.jks
+      - if: ${{ !github.event.issue.pull_request }}
+        name: Set up signing
+        env:
+          ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          echo "storePassword=$ANDROID_STORE_PASSWORD" >android/key.properties
+          echo "keyPassword=$ANDROID_KEY_PASSWORD" >android/key.properties
+          echo "keyAlias=upload" >android/key.properties
+          echo "storeFile=keystore.jks" >android/key.properties
+      - if: ${{ !github.event.issue.pull_request }}
+        name: Build for Android (release)
+        run: |
+          flutter build appbundle --release --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+      - if: ${{ github.event.issue.pull_request }}
+        name: Build for Android (profile)
+        run: |
+          flutter build appbundle --profile --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+      - if: ${{ !github.event.issue.pull_request }}
+        name: Upload Release Android Bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: com.expidusos.file_manager.aab
+          path: build/app/outputs/bundle/release/app-release.aab
+      - if: ${{ github.event.issue.pull_request }}
+        name: Upload Profile Android Bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: com.expidusos.file_manager.aab
+          path: build/app/outputs/bundle/profile/app-profile.aab
   linux:
     strategy:
       matrix:
@@ -35,18 +91,12 @@ jobs:
           bundle: com.expidusos.file_manager.flatpak
           manifest-path: data/com.expidusos.file_manager.yml
           cache-key: flatpak-builder-${{ github.sha }}
-      - if: ${{ !github.event.issue.pull_request }}
-        name: Upload Flatpak Bundle
-        uses: actions/upload-artifact@v3
-        with:
-          name: com.expidusos.file_manager.flatpak
-          path: com.expidusos.file_manager.flatpak
   build:
     strategy:
       matrix:
         arch: [x64]
         channel: [stable]
-        target: [windows, macos, android]
+        target: [windows, macos]
         os: [ubuntu-latest, windows-latest, macos-latest]
         exclude:
             - os: ubuntu-latest
@@ -57,10 +107,6 @@ jobs:
               target: macos
             - os: macos-latest
               target: windows
-            - os: windows-latest
-              target: android
-            - os: macos-latest
-              target: android
     runs-on: ${{ matrix.os }}
     continue-on-error: true
     steps:
@@ -70,32 +116,16 @@ jobs:
           cache: true
           channel: ${{ matrix.channel }}
           architecture: ${{ matrix.arch }}
-      - if: ${{ matrix.target == 'android' }}
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'zulu'
-          java-version: '11'
       - run: flutter doctor
       - name: Download dependencies
         run: flutter pub get
-      - if: ${{ matrix.target != 'android' }}
-        name: Build desktop
+      - name: Build desktop
         run: |
           flutter config --enable-${{ matrix.target }}-desktop
           flutter build ${{ matrix.target }} --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-      - if: ${{ matrix.target == 'android' }}
-        name: Build for Android
-        run: |
-          flutter build apk --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-      - if: ${{ matrix.target == 'windows' && !github.event.issue.pull_request }}
+      - if: ${{ matrix.target == 'windows' }}
         name: Upload Windows
         uses: actions/upload-artifact@v3
         with:
           name: com.expidusos.file_manager-windows.zip
           path: build/windows/runner/Release
-      - if: ${{ matrix.target == 'android' && !github.event.issue.pull_request }}
-        name: Upload Android APK
-        uses: actions/upload-artifact@v3
-        with:
-          name: com.expidusos.file_manager.apk
-          path: build/app/outputs/flutter-apk/app-release.apk
