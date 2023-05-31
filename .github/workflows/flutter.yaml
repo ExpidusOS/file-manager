@@ -24,24 +24,21 @@ jobs:
       - name: Download dependencies
         run: flutter pub get
       - if: ${{ !github.event.issue.pull_request }}
-        name: Pull Keystore File
-        env:
-          ENCODED_STRING: ${{ secrets.ANDROID_KEYSTORE_FILE }}
-        run: echo "$ENCODED_STRING" | base64 -di >keystore.jks
-      - if: ${{ !github.event.issue.pull_request }}
         name: Set up signing
         env:
           ANDROID_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          ENCODED_STRING: ${{ secrets.ANDROID_KEYSTORE_FILE }}
         run: |
+          echo "$ENCODED_STRING" | base64 -di >upload-keystore.jks
           echo "storePassword=$ANDROID_STORE_PASSWORD" >android/key.properties
           echo "keyPassword=$ANDROID_KEY_PASSWORD" >android/key.properties
           echo "keyAlias=upload" >android/key.properties
-          echo "storeFile=$(readlink -e .)/keystore.jks" >android/key.properties
+          echo "storeFile=$(readlink -e .)/upload-keystore.jks" >android/key.properties
       - if: ${{ !github.event.issue.pull_request }}
         name: Build for Android (release)
         run: |
-          flutter build appbundle --android-project-arg "--stacktrace --info" --release --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build appbundle --release --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - if: ${{ github.event.issue.pull_request }}
         name: Build for Android (profile)
         run: |
