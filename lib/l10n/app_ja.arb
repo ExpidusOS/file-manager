@@ -1,5 +1,5 @@
 {
-    "applicationTitle": "ファイル マネージャー",
+    "applicationTitle": "ファイルマネージャー",
     "libraryHome": "ホーム",
     "applicationTitleWithLibraryName": "ファイルマネージャー：{libraryName}",
     "@applicationTitleWithLibraryName": {
