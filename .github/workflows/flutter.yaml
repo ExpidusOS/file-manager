@@ -141,5 +141,5 @@ jobs:
         name: Upload Windows
         uses: actions/upload-artifact@v3
         with:
-          name: com.expidusos.file_manager-windows.zip
+          name: com.expidusos.file_manager-windows-${{ matrix.arch }}.zip
           path: build/windows/runner/Release
