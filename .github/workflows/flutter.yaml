@@ -91,12 +91,20 @@ jobs:
           git config --global --add safe.directory /opt/hostedtoolcache/flutter/${{ matrix.channel }}-3.10.2-${{ matrix.arch }}
           flutter config --enable-linux-desktop
           flutter build linux --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          cp assets/imgs/icon.png build/linux/${{ matrix.arch }}/bundle/
+          cp data/com.expidusos.file_manager.desktop build/linux/${{ matrix.arch }}/bundle/
+          cp data/com.expidusos.file_manager.metainfo.xml build/linux/${{ matrix.arch }}/bundle/
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
         name: Bundle Flatpak
         with:
           bundle: com.expidusos.file_manager.flatpak
           manifest-path: data/com.expidusos.file_manager.yml
           cache-key: flatpak-builder-${{ github.sha }}
+      - name: Upload build
+        uses: actions/upload-artifact@v3
+        with:
+          name: com.expidusos.file_manager-linux-${{ matrix.arch }}
+          path: build/linux/${{ matrix.arch }}/bundle/
   build:
     strategy:
       matrix:
