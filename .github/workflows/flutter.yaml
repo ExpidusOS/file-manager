@@ -38,11 +38,11 @@ jobs:
       - if: ${{ !github.event.issue.pull_request }}
         name: Build for Android (release)
         run: |
-          flutter build appbundle --release --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build appbundle --release --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - if: ${{ github.event.issue.pull_request }}
         name: Build for Android (profile)
         run: |
-          flutter build appbundle --profile --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build appbundle --profile --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - if: ${{ !github.event.issue.pull_request }}
         name: Upload Release Android Bundle
         uses: actions/upload-artifact@v3
@@ -90,7 +90,7 @@ jobs:
         run: |
           git config --global --add safe.directory /opt/hostedtoolcache/flutter/${{ matrix.channel }}-3.10.2-${{ matrix.arch }}
           flutter config --enable-linux-desktop
-          flutter build linux --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build linux --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
         name: Bundle Flatpak
         with:
@@ -128,7 +128,7 @@ jobs:
       - name: Build desktop
         run: |
           flutter config --enable-${{ matrix.target }}-desktop
-          flutter build ${{ matrix.target }} --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build ${{ matrix.target }} --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - if: ${{ matrix.target == 'windows' }}
         name: Upload Windows
         uses: actions/upload-artifact@v3
