@@ -42,6 +42,7 @@ dependencies:
   filesize: ^2.0.1
   intl: ^0.18.0
   provider: ^6.0.5
+  flutter_markdown: ^0.6.15
 
 dev_dependencies:
   flutter_test:
@@ -55,3 +56,4 @@ flutter:
     - assets/imgs/
     - pubspec.yaml
     - .dart_tool/package_config.json
+    - PRIVACY.md

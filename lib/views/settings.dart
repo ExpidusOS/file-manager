@@ -1,7 +1,6 @@
 import 'package:file_manager/logic/error.dart';
 import 'package:file_manager/main.dart';
-import 'package:file_manager/views/about.dart';
-import 'package:file_manager/views/feedback_choice.dart';
+import 'package:file_manager/views.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:file_manager/widgets.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -139,6 +138,15 @@ class _SettingsViewState extends State<SettingsView> {
             ),
             const Divider(),
             ListTile(
+              title: Text(AppLocalizations.of(context)!.viewPrivacy),
+              onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const Privacy(),
+                    settings: const RouteSettings(name: 'Privacy'),
+                  )
+              ),
+            ),
+            ListTile(
               title: Text(AppLocalizations.of(context)!.viewAbout),
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
@@ -146,7 +154,7 @@ class _SettingsViewState extends State<SettingsView> {
                   settings: const RouteSettings(name: 'About'),
                 )
               ),
-            )
+            ),
           ].map((child) => child is Divider ? child : ListTileTheme(
             tileColor: Theme.of(context).cardTheme.color ?? Theme.of(context).cardColor,
             shape: Theme.of(context).cardTheme.shape,
