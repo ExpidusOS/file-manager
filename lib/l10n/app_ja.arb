@@ -74,6 +74,7 @@
     "@viewSettings": {
         "description": "Settings Page View"
     },
+    "viewPrivacy": "プライバシーポリシー",
     "settingsRestoreDefaults": "初期設定に戻す",
     "@settingsRestoreDefaults": {
         "description": "Settings"
