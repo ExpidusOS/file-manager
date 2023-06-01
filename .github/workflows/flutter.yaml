@@ -16,7 +16,7 @@ jobs:
           cache: true
           channel: ${{ matrix.channel }}
           architecture: ${{ matrix.arch }}
-      - uses: actions/setup-java@v2
+      - uses: actions/setup-java@v3
         with:
           distribution: 'zulu'
           java-version: '11'
