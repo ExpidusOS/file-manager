@@ -62,7 +62,7 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
           packageName: com.expidusos.file_manager
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
-          track: alpha
+          track: beta
           releaseName: v0.1.0-${{ github.sha }}
   linux:
     strategy:
