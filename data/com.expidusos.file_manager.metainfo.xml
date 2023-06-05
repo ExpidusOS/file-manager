@@ -21,6 +21,61 @@
   <categories>
     <category>System</category>
   </categories>
+
+  <releases>
+    <release version="0.1.1" date="2023-06-05">
+      <description>
+        <p>Decreased the minimum Android API level from 33 to 19, this will support many devices now. Finalize the localizations by adding them to the about title and feedback category list.</p>
+      </description>
+
+      <url>https://github.com/ExpidusOS/file-manager/releases/tag/0.1.0</url>
+
+      <artifacts>
+        <artifact type="binary" platform="x86_64-linux-gnu">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.1.1/com.expidusos.file_manager-linux-x64.tar.gz</location>
+          <checksum type="sha256">2468e991f6ec05e8a30ba755d8cd58fc6e528dc245c918039d9f677b55c9e6c5</checksum>
+        </artifact>
+        <artifact type="binary" platform="x86_64-linux-gnu">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.1.1/com.expidusos.file_manager.flatpak</location>
+          <checksum type="sha256">bae6f9f50f4eca8c28bbdb8378b386bb0108769ab32e724f60e7c4ea627ebd42</checksum>
+        </artifact>
+        <artifact type="binary" platform="x86_64-windows-msvc">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.1.1/com.expidusos.file_manager-windows-x64.zip</location>
+          <checksum type="sha256">2d8b3547fcbb1ec84b44c0f4664f83998a392c7bef090cb3467cffde426f027b</checksum>
+        </artifact>
+        <artifact type="source">
+          <location>https://github.com/ExpidusOS/file-manager/archive/refs/tags/0.1.0.tar.gz</location>
+          <checksum type="sha256">f113c3af99d6e8e369e0673fc48236b033e0d1c4e530d90bfcd478342a7cd6e1</checksum>
+        </artifact>
+      </artifacts>
+    </release>
+    <release version="0.1.0" date="2023-06-05">
+      <description>
+        <p>This is the very first release.</p>
+      </description>
+
+      <url>https://github.com/ExpidusOS/file-manager/releases/tag/0.1.0</url>
+
+      <artifacts>
+        <artifact type="binary" platform="x86_64-linux-gnu">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.1.0/com.expidusos.file_manager-linux-x64.tar.gz</location>
+          <checksum type="sha256">de923b97cccab9501f46505421101fb1f73c1a514b30383aafdbb710e8cb3f85</checksum>
+        </artifact>
+        <artifact type="binary" platform="x86_64-linux-gnu">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.1.0/com.expidusos.file_manager.flatpak</location>
+          <checksum type="sha256">200440573240f50ff2b3dbd21f4bead6192f63dfdd54afa4e2d7cf909bfb9e5d</checksum>
+        </artifact>
+        <artifact type="binary" platform="x86_64-windows-msvc">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.1.0/com.expidusos.file_manager-windows-x64.zip</location>
+          <checksum type="sha256">5961a7c1c83780ba4ad00dbb781a28825022b46169f8701b1e2e2c2ca70ce3e4</checksum>
+        </artifact>
+        <artifact type="source">
+          <location>https://github.com/ExpidusOS/file-manager/archive/refs/tags/0.1.0.tar.gz</location>
+          <checksum type="sha256">df34d3930e7ee33a91d30d5d3d963a81b9f61a04503eb1a9c476556285dfe1f2</checksum>
+        </artifact>
+      </artifacts>
+    </release>
+  </releases>
   
   <supports>
     <control>pointing</control>
