@@ -88,12 +88,15 @@ jobs:
           track: ${{ env.TRACK }}
           releaseName: ${{ env.RELEASE_NAME }}
       - if: startsWith(github.ref, 'refs/tags/')
+        name: Rename files for release
+        run: |
+          mv ${{ env.RELEASE_FILE }} com.expidusos.file_manager.aab
+          mv ${{ env.RELEASE_FILE_APK }} com.expidusos.file_manager.apk
+      - if: startsWith(github.ref, 'refs/tags/')
         name: Release
-        uses: softprops/action-gh-release@v1
+        uses: ncipollo/release-action@v1
         with:
-          files: |
-            ${{ env.RELEASE_FILE }}
-            ${{ env.RELEASE_FILE_APK }}
+          artifacts: com.expidusos.file_manager.aab,com.expidusos.file_manager.apk
   linux:
     strategy:
       matrix:
@@ -150,11 +153,9 @@ jobs:
           path: build/linux/${{ matrix.arch }}/release/bundle/
       - if: startsWith(github.ref, 'refs/tags/')
         name: Release
-        uses: softprops/action-gh-release@v1
+        uses: ncipollo/release-action@v1
         with:
-          files: |
-            com.expidusos.file_manager.flatpak
-            com.expidusos.file_manager-linux-${{ matrix.arch }}.tar.gz
+          artifacts: com.expidusos.file_manager.flatpak,com.expidusos.file_manager-linux-${{ matrix.arch }}.tar.gz
   macos:
     strategy:
       matrix:
