@@ -172,5 +172,12 @@
     },
     "clipboardExecute": "ここでアクションを実行",
     "favoriteRemove": "お気に入りを削除",
-    "favoriteAdd": "お気に入りに追加"
+    "favoriteAdd": "お気に入りに追加",
+    "feedbackViewAbout": "Application About",
+    "feedbackViewFeedback": "Feedback submission view",
+    "feedbackViewFeedbackChoice": "Feedback choice list",
+    "feedbackViewLibraryGrid": "File browsing in a grid",
+    "feedbackViewLibraryList": "File browsing in a list",
+    "feedbackViewSettings": "Settings view",
+    "fullApplicationTitle": "ExpidusOS File Manager"
 }
