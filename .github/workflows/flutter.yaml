@@ -166,7 +166,7 @@ jobs:
           flutter build windows --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
           
           pushd build/windows/runner/Release
-          zip -O ../../../../com.expidusos.file_manager-windows-${{ matrix.arch }}.zip -r .
+          7z a ../../../../com.expidusos.file_manager-windows-${{ matrix.arch }}.zip . -r
           popd
       - name: Upload Windows
         uses: actions/upload-artifact@v3
