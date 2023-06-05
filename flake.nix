@@ -24,12 +24,12 @@
       in {
         packages.default = pkgs.flutter.buildFlutterApplication {
           pname = "expidus-file-manager";
-          version = "0.1.0-${self.shortRev or "dirty"}";
+          version = "0.1.1-${self.shortRev or "dirty"}";
 
           src = cleanSource self;
 
           depsListFile = ./deps.json;
-          vendorHash = "sha256-PHid4XAdU4sCIc6wa0I5ke7Hl9XvM5J51giyeRfOidI=";
+          vendorHash = "sha256-AVDqx2ZQmGBh7I5+bjC79GK+gWfCYL+y3u4uR0anyeQ=";
 
           postInstall = ''
             rm $out/bin/file_manager
