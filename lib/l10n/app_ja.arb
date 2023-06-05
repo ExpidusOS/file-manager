@@ -173,5 +173,11 @@
     "clipboardExecute": "ここでアクションを実行",
     "favoriteRemove": "お気に入りを削除",
     "favoriteAdd": "お気に入りに追加",
+    "feedbackViewAbout": "についてのアプリケーション",
+    "feedbackViewFeedback": "フィードバック提出ビュー",
+    "feedbackViewFeedbackChoice": "フィードバックの選択リスト",
+    "feedbackViewLibraryGrid": "グリッド内のファイルの参照",
+    "feedbackViewLibraryList": "ファイルを一覧で参照中",
+    "feedbackViewSettings": "設定ビュー",
     "fullApplicationTitle": "ExpidusOSのファイルマネージャー"
 }
