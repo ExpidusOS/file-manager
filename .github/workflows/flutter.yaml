@@ -65,8 +65,7 @@ jobs:
         run: |
           flutter build appbundle --profile --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
           flutter build apk --profile --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-      - if: ${{ !github.event.issue.pull_request }}
-        name: Upload Release Android Bundle
+      - name: Upload Android APK
         uses: actions/upload-artifact@v3
         with:
           name: com.expidusos.file_manager.apk
