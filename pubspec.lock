@@ -684,14 +684,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.7"
-  uuid_type:
-    dependency: "direct main"
-    description:
-      name: uuid_type
-      sha256: badf9bd38ed8426c6fb6e7a8b7c55bcbb9db623eb7b6c64e4e9d42d42a7cdc11
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0"
   vector_math:
     dependency: transitive
     description:
