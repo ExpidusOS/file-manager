@@ -43,7 +43,7 @@ jobs:
         run: |
           echo "RELEASE_FILE=build/app/outputs/bundle/profile/app-profile.aab" >> $GITHUB_ENV
           echo "RELEASE_FILE_APK=build/app/outputs/flutter-apk/app-profile.apk" >> $GITHUB_ENV
-          echo "RELEASE_NAME=v0.1.0-${{ github.sha }}" >> $GITHUB_ENV
+          echo "RELEASE_NAME=v0.1.1-${{ github.sha }}" >> $GITHUB_ENV
       - if: ${{ !github.event.issue.pull_request && !startsWith(github.ref, 'refs/tags/') }}
         name: Set env vars for staging
         run: |
@@ -55,7 +55,7 @@ jobs:
           
           echo "RELEASE_FILE=build/app/outputs/bundle/release/app-release.aab" >> $GITHUB_ENV
           echo "RELEASE_FILE_APK=build/app/outputs/flutter-apk/app-release.apk" >> $GITHUB_ENV
-          echo "RELEASE_NAME=v0.1.0-${{ github.sha }}" >> $GITHUB_ENV
+          echo "RELEASE_NAME=v0.1.1-${{ github.sha }}" >> $GITHUB_ENV
       - if: ${{ !github.event.issue.pull_request && startsWith(github.ref, 'refs/tags/') }}
         name: Set env vars for release
         run: |

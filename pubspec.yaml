@@ -1,7 +1,7 @@
 name: file_manager
 description: The file manager for the Expidus operating system.
 publish_to: 'none'
-version: 0.1.0+1
+version: 0.1.1+1
 homepage: https://expidusos.com
 
 environment:
