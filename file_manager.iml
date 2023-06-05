@@ -81,6 +81,9 @@
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/build" />
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/result/app/data/flutter_assets/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/result/app/data/flutter_assets/build" />
+      <excludeFolder url="file://$MODULE_DIR$/result/app/data/flutter_assets/.dart_tool" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Dart SDK" level="project" />

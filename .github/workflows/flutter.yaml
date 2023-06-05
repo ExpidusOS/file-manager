@@ -77,7 +77,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: com.expidusos.file_manager.apk
-          path: ${{ env.RELEASE_FILE }}
+          path: |
+            ${{ env.RELEASE_FILE_APK }}
       - if: ${{ !github.event.issue.pull_request }}
         name: Deploy to Google Play
         uses: r0adkll/upload-google-play@v1
