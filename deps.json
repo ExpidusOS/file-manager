@@ -24,7 +24,6 @@
       "path_provider_platform_interface",
       "ffi",
       "sentry_flutter",
-      "uuid_type",
       "pubspec",
       "filesize",
       "intl",
@@ -383,33 +382,6 @@
     ]
   },
   {
-    "name": "uuid_type",
-    "version": "2.0.0",
-    "kind": "direct",
-    "source": "hosted",
-    "dependencies": [
-      "crypto"
-    ]
-  },
-  {
-    "name": "crypto",
-    "version": "3.0.3",
-    "kind": "transitive",
-    "source": "hosted",
-    "dependencies": [
-      "typed_data"
-    ]
-  },
-  {
-    "name": "typed_data",
-    "version": "1.3.2",
-    "kind": "transitive",
-    "source": "hosted",
-    "dependencies": [
-      "collection"
-    ]
-  },
-  {
     "name": "sentry_flutter",
     "version": "7.7.0",
     "kind": "direct",
@@ -498,6 +470,15 @@
     ]
   },
   {
+    "name": "typed_data",
+    "version": "1.3.2",
+    "kind": "transitive",
+    "source": "hosted",
+    "dependencies": [
+      "collection"
+    ]
+  },
+  {
     "name": "flutter_web_plugins",
     "version": "0.0.0",
     "kind": "transitive",
@@ -531,6 +512,15 @@
     "source": "hosted",
     "dependencies": [
       "crypto"
+    ]
+  },
+  {
+    "name": "crypto",
+    "version": "3.0.3",
+    "kind": "transitive",
+    "source": "hosted",
+    "dependencies": [
+      "typed_data"
     ]
   },
   {
