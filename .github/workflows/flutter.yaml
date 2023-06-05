@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         arch: [x64]
-        channel: [stable]
+        channel: [master]
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -68,7 +68,7 @@ jobs:
     strategy:
       matrix:
         arch: [x64]
-        channel: [stable]
+        channel: [master]
     continue-on-error: true
     runs-on: ubuntu-latest
     container:
@@ -106,7 +106,7 @@ jobs:
     strategy:
       matrix:
         arch: [x64]
-        channel: [stable]
+        channel: [master]
         target: [windows, macos]
         os: [ubuntu-latest, windows-latest, macos-latest]
         exclude:
