@@ -77,7 +77,7 @@ jobs:
           packageName: com.expidusos.file_manager
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           track: production
-          releaseName: v${{ github.ref.replace(/\/refs\/tags\//, '') }}
+          releaseName: v${{ github.ref_name }}
       - if: startsWith(github.ref, 'refs/tags/')
         name: Release
         uses: softprops/action-gh-release@v1
