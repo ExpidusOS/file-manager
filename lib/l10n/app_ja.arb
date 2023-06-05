@@ -172,5 +172,6 @@
     },
     "clipboardExecute": "ここでアクションを実行",
     "favoriteRemove": "お気に入りを削除",
-    "favoriteAdd": "お気に入りに追加"
+    "favoriteAdd": "お気に入りに追加",
+    "fullApplicationTitle": "ExpidusOSのファイルマネージャー"
 }

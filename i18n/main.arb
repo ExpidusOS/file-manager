@@ -172,5 +172,12 @@
     },
     "clipboardExecute": "Perform actions here",
     "favoriteRemove": "Remove favorite",
-    "favoriteAdd": "Add as favorite"
+    "favoriteAdd": "Add as favorite",
+    "feedbackViewAbout": "Application About",
+    "feedbackViewFeedback": "Feedback submission view",
+    "feedbackViewFeedbackChoice": "Feedback choice list",
+    "feedbackViewLibraryGrid": "File browsing in a grid",
+    "feedbackViewLibraryList": "File browsing in a list",
+    "feedbackViewSettings": "Settings view",
+    "fullApplicationTitle": "ExpidusOS File Manager"
 }

@@ -105,7 +105,7 @@ class _FeedbackState extends State<Feedback> {
                       if (_formKey.currentState!.validate()) {
                         Sentry.captureUserFeedback(
                           SentryUserFeedback(
-                            eventId: await widget.id.id,
+                            eventId: await widget.id.getId(context),
                             name: email,
                             email: email,
                             comments: comments,
