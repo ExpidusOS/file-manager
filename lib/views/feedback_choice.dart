@@ -27,7 +27,7 @@ class FeedbackChoice extends StatelessWidget {
         ),
         body: ListView(
           children: FileManagerFeedbackID.values.map((id) => ListTile(
-            title: Text(id.title),
+            title: Text(id.onGenerateTitle(context)),
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => Feedback(id: id),

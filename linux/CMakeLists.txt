@@ -137,3 +137,11 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "Debug")
   install(FILES "${AOT_LIBRARY}" DESTINATION "${INSTALL_BUNDLE_LIB_DIR}"
     COMPONENT Runtime)
 endif()
+
+install(FILES "../assets/imgs/icon.png"
+  DESTINATION "${BUILD_BUNDLE_DIR}/data"
+  RENAME "com.expidusos.file_manager.png")
+install(FILES "../data/com.expidusos.file_manager.desktop"
+  DESTINATION "${BUILD_BUNDLE_DIR}/data")
+install(FILES "../data/com.expidusos.file_manager.metainfo.xml"
+  DESTINATION "${BUILD_BUNDLE_DIR}/data")

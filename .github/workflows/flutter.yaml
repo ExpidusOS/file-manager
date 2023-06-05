@@ -1,12 +1,15 @@
 name: Flutter
 on: [push, pull_request]
 
+permissions:
+  contents: write
+
 jobs:
   android:
     strategy:
       matrix:
         arch: [x64]
-        channel: [stable]
+        channel: [master]
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -35,40 +38,70 @@ jobs:
           echo "keyPassword=$ANDROID_KEY_PASSWORD" >>android/key.properties
           echo "keyAlias=upload" >>android/key.properties
           echo "storeFile=$(readlink -e .)/upload-keystore.jks" >>android/key.properties
+      - if: ${{ github.event.issue.pull_request }}
+        name: Set env vars for pull request
+        run: |
+          echo "RELEASE_FILE=build/app/outputs/bundle/profile/app-profile.aab" >> $GITHUB_ENV
+          echo "RELEASE_FILE_APK=build/app/outputs/flutter-apk/app-profile.apk" >> $GITHUB_ENV
+          echo "RELEASE_NAME=v0.1.0-${{ github.sha }}" >> $GITHUB_ENV
+      - if: ${{ !github.event.issue.pull_request && !startsWith(github.ref, 'refs/tags/') }}
+        name: Set env vars for staging
+        run: |
+          if [[ "${{ github.ref_name }}" == "master" ]]; then
+            echo "TRACK=beta" >> $GITHUB_ENV
+          else
+            echo "TRACK=${{ github.ref_name }}" >> $GITHUB_ENV
+          fi
+          
+          echo "RELEASE_FILE=build/app/outputs/bundle/release/app-release.aab" >> $GITHUB_ENV
+          echo "RELEASE_FILE_APK=build/app/outputs/flutter-apk/app-release.apk" >> $GITHUB_ENV
+          echo "RELEASE_NAME=v0.1.0-${{ github.sha }}" >> $GITHUB_ENV
+      - if: ${{ !github.event.issue.pull_request && startsWith(github.ref, 'refs/tags/') }}
+        name: Set env vars for release
+        run: |
+          echo "TRACK=production" >> $GITHUB_ENV
+          echo "RELEASE_FILE=build/app/outputs/bundle/release/app-release.aab" >> $GITHUB_ENV
+          echo "RELEASE_FILE_APK=build/app/outputs/flutter-apk/app-release.apk" >> $GITHUB_ENV
+          echo "RELEASE_NAME=v${{ github.ref_name }}" >> $GITHUB_ENV
       - if: ${{ !github.event.issue.pull_request }}
         name: Build for Android (release)
         run: |
           flutter build appbundle --release --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build apk --release --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - if: ${{ github.event.issue.pull_request }}
         name: Build for Android (profile)
         run: |
           flutter build appbundle --profile --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-      - if: ${{ !github.event.issue.pull_request }}
-        name: Upload Release Android Bundle
+          flutter build apk --profile --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+      - name: Upload Android APK
         uses: actions/upload-artifact@v3
         with:
-          name: com.expidusos.file_manager.aab
-          path: build/app/outputs/bundle/release/app-release.aab
-      - if: ${{ github.event.issue.pull_request }}
-        name: Upload Profile Android Bundle
-        uses: actions/upload-artifact@v3
-        with:
-          name: com.expidusos.file_manager.aab
-          path: build/app/outputs/bundle/profile/app-profile.aab
+          name: com.expidusos.file_manager.apk
+          path: ${{ env.RELEASE_FILE }}
       - if: ${{ !github.event.issue.pull_request }}
         name: Deploy to Google Play
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
           packageName: com.expidusos.file_manager
-          releaseFiles: build/app/outputs/bundle/release/app-release.aab
-          track: beta
-          releaseName: v0.1.0-${{ github.sha }}
+          releaseFiles: ${{ env.RELEASE_FILE }}
+          track: ${{ env.TRACK }}
+          releaseName: ${{ env.RELEASE_NAME }}
+      - if: startsWith(github.ref, 'refs/tags/')
+        name: Rename files for release
+        run: |
+          mv ${{ env.RELEASE_FILE }} com.expidusos.file_manager.aab
+          mv ${{ env.RELEASE_FILE_APK }} com.expidusos.file_manager.apk
+      - if: startsWith(github.ref, 'refs/tags/')
+        name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: com.expidusos.file_manager.aab,com.expidusos.file_manager.apk
   linux:
     strategy:
       matrix:
         arch: [x64]
-        channel: [stable]
+        channel: [master]
     continue-on-error: true
     runs-on: ubuntu-latest
     container:
@@ -86,15 +119,28 @@ jobs:
           cache: true
           channel: ${{ matrix.channel }}
           architecture: ${{ matrix.arch }}
+      - if: ${{ !github.event.issue.pull_request }}
+        name: Set up GPG key
+        uses: crazy-max/ghaction-import-gpg@v5
+        with:
+          gpg_private_key: ${{ secrets.FLATPAK_GPG_KEY }}
+          passphrase: ${{ secrets.FLATPAK_GPG_PASSPHRASE }}
       - name: Build Flutter
         run: |
           git config --global --add safe.directory /opt/hostedtoolcache/flutter/${{ matrix.channel }}-3.10.2-${{ matrix.arch }}
           flutter config --enable-linux-desktop
           flutter build linux --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-          cp assets/imgs/icon.png build/linux/${{ matrix.arch }}/release/bundle/
-          cp data/com.expidusos.file_manager.desktop build/linux/${{ matrix.arch }}/release/bundle/
-          cp data/com.expidusos.file_manager.metainfo.xml build/linux/${{ matrix.arch }}/release/bundle/
-      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
+          tar -czf com.expidusos.file_manager-linux-${{ matrix.arch }}.tar.gz -C build/linux/${{ matrix.arch }}/release/bundle/ .
+      - if: ${{ !github.event.issue.pull_request }}
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
+        name: Bundle Flatpak
+        with:
+          bundle: com.expidusos.file_manager.flatpak
+          manifest-path: data/com.expidusos.file_manager.yml
+          cache-key: flatpak-builder-${{ github.sha }}
+          gpg-sign: F1AE8F34E36642E92E7777B591654E1B742E4226
+      - if: ${{ github.event.issue.pull_request }}
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
         name: Bundle Flatpak
         with:
           bundle: com.expidusos.file_manager.flatpak
@@ -105,23 +151,17 @@ jobs:
         with:
           name: com.expidusos.file_manager-linux-${{ matrix.arch }}
           path: build/linux/${{ matrix.arch }}/release/bundle/
-  build:
+      - if: startsWith(github.ref, 'refs/tags/')
+        name: Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: com.expidusos.file_manager.flatpak,com.expidusos.file_manager-linux-${{ matrix.arch }}.tar.gz
+  macos:
     strategy:
       matrix:
         arch: [x64]
-        channel: [stable]
-        target: [windows, macos]
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        exclude:
-            - os: ubuntu-latest
-              target: windows
-            - os: ubuntu-latest
-              target: macos
-            - os: windows-latest
-              target: macos
-            - os: macos-latest
-              target: windows
-    runs-on: ${{ matrix.os }}
+        channel: [master]
+    runs-on: macos-latest
     continue-on-error: true
     steps:
       - uses: actions/checkout@v3
@@ -135,11 +175,42 @@ jobs:
         run: flutter pub get
       - name: Build desktop
         run: |
-          flutter config --enable-${{ matrix.target }}-desktop
-          flutter build ${{ matrix.target }} --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-      - if: ${{ matrix.target == 'windows' }}
-        name: Upload Windows
+          flutter config --enable-macos-desktop
+          flutter build macos --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          find build
+  windows:
+    strategy:
+      matrix:
+        arch: [x64]
+        channel: [master]
+    runs-on: windows-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          channel: ${{ matrix.channel }}
+          architecture: ${{ matrix.arch }}
+      - run: flutter doctor
+      - name: Download dependencies
+        run: flutter pub get
+      - name: Build desktop
+        run: |
+          flutter config --enable-windows-desktop
+          flutter build windows --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          
+          pushd build/windows/runner/Release
+          7z a ../../../../com.expidusos.file_manager-windows-${{ matrix.arch }}.zip . -r
+          popd
+      - name: Upload Windows
         uses: actions/upload-artifact@v3
         with:
-          name: com.expidusos.file_manager-windows.zip
+          name: com.expidusos.file_manager-windows-${{ matrix.arch }}.zip
           path: build/windows/runner/Release
+      - if: startsWith(github.ref, 'refs/tags/')
+        name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            com.expidusos.file_manager-windows-${{ matrix.arch }}.zip

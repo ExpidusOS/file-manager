@@ -41,7 +41,7 @@ class About extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'ExpidusOS File Manager',
+                          AppLocalizations.of(context)!.fullApplicationTitle,
                           style: Theme.of(context).textTheme.displayLarge,
                         ),
                         Text(

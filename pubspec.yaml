@@ -37,7 +37,6 @@ dependencies:
   path_provider_platform_interface: ^2.0.6
   ffi: ^2.0.2
   sentry_flutter: ^7.6.2
-  uuid_type: ^2.0.0
   pubspec: ^2.3.0
   filesize: ^2.0.1
   intl: ^0.18.0
