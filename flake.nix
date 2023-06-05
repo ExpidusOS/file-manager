@@ -29,7 +29,7 @@
           src = cleanSource self;
 
           depsListFile = ./deps.json;
-          vendorHash = "sha256-5qlGQororyJU2+t+EcaXqMgwfVXsNXsxbPNfl58fi1Q=";
+          vendorHash = "sha256-k0NwtqeMcgzMITl542LbsgBRws9BfuYXq/J9a0wvOxk=";
 
           postInstall = ''
             rm $out/bin/file_manager

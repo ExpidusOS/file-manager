@@ -45,7 +45,7 @@
   },
   {
     "name": "lints",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "kind": "transitive",
     "source": "hosted",
     "dependencies": []
@@ -411,7 +411,7 @@
   },
   {
     "name": "sentry_flutter",
-    "version": "7.6.3",
+    "version": "7.7.0",
     "kind": "direct",
     "source": "hosted",
     "dependencies": [
@@ -514,7 +514,7 @@
   },
   {
     "name": "sentry",
-    "version": "7.6.3",
+    "version": "7.7.0",
     "kind": "transitive",
     "source": "hosted",
     "dependencies": [
@@ -611,7 +611,7 @@
   },
   {
     "name": "permission_handler_android",
-    "version": "10.2.1",
+    "version": "10.2.2",
     "kind": "transitive",
     "source": "hosted",
     "dependencies": [
