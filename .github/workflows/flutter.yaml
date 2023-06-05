@@ -53,13 +53,13 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: com.expidusos.file_manager.aab
-          path: build/app/outputs/bundle/release/app-release.aab
+          path: build/app/outputs/bundle/release/app-release.apk
       - if: ${{ github.event.issue.pull_request }}
         name: Upload Profile Android Bundle
         uses: actions/upload-artifact@v3
         with:
           name: com.expidusos.file_manager.aab
-          path: build/app/outputs/bundle/profile/app-profile.aab
+          path: build/app/outputs/bundle/profile/app-profile.apk
       - if: ${{ !github.event.issue.pull_request }}
         name: Deploy to Google Play
         uses: r0adkll/upload-google-play@v1
