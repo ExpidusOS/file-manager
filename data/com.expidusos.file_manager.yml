@@ -6,13 +6,13 @@ separate-locales: false
 command: file_manager
 finish-args:
   - --share=ipc
-  - --socket=x11
+  - --socket=fallback-x11
   - --socket=wayland
   - --device=dri
   - --socket=pulseaudio
   - --share=network
-  - --socket=system-bus
-  - --socket=session-bus
+  - --own-name=com.expidusos.file_manager
+  - --system-talk-name=org.freedesktop.UDisks2
   - --filesystem=home
 modules:
   - name: FileManager
