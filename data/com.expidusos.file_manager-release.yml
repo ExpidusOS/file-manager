@@ -31,5 +31,5 @@ modules:
         sha256: @SHA256@
         dest: bundle
       - type: file
-        url: https://raw.githubusercontent.com/ExpidusOS/file-manager/147b1b55d65dba80e1fbffb4f2034adccd65040a/data/com.expidusos.file_manager.metainfo.xml
-        sha256: 2aa9f209b9a9beeb82081a5b1d1d51024be2883fd6b3a4e66df20b2b3c406227
+        url: https://raw.githubusercontent.com/ExpidusOS/file-manager/@METAINFO_COMMIT@/data/com.expidusos.file_manager.metainfo.xml
+        sha256: @METAINFO_SHA256@
