@@ -29,6 +29,25 @@
       </description>
 
       <url>https://github.com/ExpidusOS/file-manager/releases/tag/0.1.2</url>
+
+      <artifacts>
+        <artifact type="binary" platform="x86_64-linux-gnu">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.1.2/com.expidusos.file_manager-linux-x64.tar.gz</location>
+          <checksum type="sha256">be24791ad547e2f4e7c426e2ad522bb5478e312dbfbef67109514cbf2257b3c1</checksum>
+        </artifact>
+        <artifact type="binary" platform="x86_64-linux-gnu">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.1.2/com.expidusos.file_manager.flatpak</location>
+          <checksum type="sha256">d335b0ce6f582f2bec4dd1bdaf260c43f05a2e75d7f4eaa0c76e21336e7d4358</checksum>
+        </artifact>
+        <artifact type="binary" platform="x86_64-windows-msvc">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.1.2/com.expidusos.file_manager-windows-x64.zip</location>
+          <checksum type="sha256">6fad4df4ee83cbd16537682b4d9871451dade841e7b933f35d16c92ad5014ebf</checksum>
+        </artifact>
+        <artifact type="source">
+          <location>https://github.com/ExpidusOS/file-manager/archive/refs/tags/0.1.2.tar.gz</location>
+          <checksum type="sha256">1b2611720a60f42dd848f873deff4551d6ef50facf7afc4a7d3e1ba69e7a68ba</checksum>
+        </artifact>
+      </artifacts>
     </release>
     <release version="0.1.1" date="2023-06-05">
       <description>
@@ -51,7 +70,7 @@
           <checksum type="sha256">2d8b3547fcbb1ec84b44c0f4664f83998a392c7bef090cb3467cffde426f027b</checksum>
         </artifact>
         <artifact type="source">
-          <location>https://github.com/ExpidusOS/file-manager/archive/refs/tags/0.1.0.tar.gz</location>
+          <location>https://github.com/ExpidusOS/file-manager/archive/refs/tags/0.1.1.tar.gz</location>
           <checksum type="sha256">f113c3af99d6e8e369e0673fc48236b033e0d1c4e530d90bfcd478342a7cd6e1</checksum>
         </artifact>
       </artifacts>
