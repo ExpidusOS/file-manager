@@ -124,7 +124,7 @@
         <entry key="flutter">
           <value>
             <list>
-              <option value="$USER_HOME$/flutter/packages/flutter/lib" />
+              <option value="/nix/store/6pzqx3mzr7yirgdqsn2v907z15pd30g7-flutter-3.10.0-unwrapped/packages/flutter/lib" />
               <option value="/nix/store/yjysy0yh0xs0979lmczvr07bmmz719h6-flutter-3.10.0-unwrapped/packages/flutter/lib" />
             </list>
           </value>
@@ -139,7 +139,7 @@
         <entry key="flutter_localizations">
           <value>
             <list>
-              <option value="$USER_HOME$/flutter/packages/flutter_localizations/lib" />
+              <option value="/nix/store/6pzqx3mzr7yirgdqsn2v907z15pd30g7-flutter-3.10.0-unwrapped/packages/flutter_localizations/lib" />
               <option value="/nix/store/yjysy0yh0xs0979lmczvr07bmmz719h6-flutter-3.10.0-unwrapped/packages/flutter_localizations/lib" />
             </list>
           </value>
@@ -154,7 +154,7 @@
         <entry key="flutter_test">
           <value>
             <list>
-              <option value="$USER_HOME$/flutter/packages/flutter_test/lib" />
+              <option value="/nix/store/6pzqx3mzr7yirgdqsn2v907z15pd30g7-flutter-3.10.0-unwrapped/packages/flutter_test/lib" />
               <option value="/nix/store/yjysy0yh0xs0979lmczvr07bmmz719h6-flutter-3.10.0-unwrapped/packages/flutter_test/lib" />
             </list>
           </value>
@@ -162,7 +162,7 @@
         <entry key="flutter_web_plugins">
           <value>
             <list>
-              <option value="$USER_HOME$/flutter/packages/flutter_web_plugins/lib" />
+              <option value="/nix/store/6pzqx3mzr7yirgdqsn2v907z15pd30g7-flutter-3.10.0-unwrapped/packages/flutter_web_plugins/lib" />
               <option value="/nix/store/yjysy0yh0xs0979lmczvr07bmmz719h6-flutter-3.10.0-unwrapped/packages/flutter_web_plugins/lib" />
             </list>
           </value>
@@ -198,14 +198,14 @@
         <entry key="libtokyo">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/git/libtokyo-f12e06b35c49fc342856a0e59454d683aa7bc4cb/packages/libtokyo/lib" />
+              <option value="$USER_HOME$/.pub-cache/git/libtokyo-6f4752c07a8c759a6cbd4a22e190d005dd13664f/packages/libtokyo/lib" />
             </list>
           </value>
         </entry>
         <entry key="libtokyo_flutter">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/git/libtokyo-f12e06b35c49fc342856a0e59454d683aa7bc4cb/packages/libtokyo_flutter/lib" />
+              <option value="$USER_HOME$/.pub-cache/git/libtokyo-6f4752c07a8c759a6cbd4a22e190d005dd13664f/packages/libtokyo_flutter/lib" />
             </list>
           </value>
         </entry>
@@ -485,7 +485,7 @@
         <entry key="sky_engine">
           <value>
             <list>
-              <option value="$USER_HOME$/flutter/bin/cache/pkg/sky_engine/lib" />
+              <option value="/nix/store/6pzqx3mzr7yirgdqsn2v907z15pd30g7-flutter-3.10.0-unwrapped/bin/cache/pkg/sky_engine/lib" />
               <option value="/nix/store/yjysy0yh0xs0979lmczvr07bmmz719h6-flutter-3.10.0-unwrapped/bin/cache/pkg/sky_engine/lib" />
             </list>
           </value>
@@ -654,8 +654,8 @@
       </option>
     </properties>
     <CLASSES>
-      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-f12e06b35c49fc342856a0e59454d683aa7bc4cb/packages/libtokyo/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-f12e06b35c49fc342856a0e59454d683aa7bc4cb/packages/libtokyo_flutter/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-6f4752c07a8c759a6cbd4a22e190d005dd13664f/packages/libtokyo/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-6f4752c07a8c759a6cbd4a22e190d005dd13664f/packages/libtokyo_flutter/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/args-2.4.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/async-2.11.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/bitsdojo_window-0.1.5/lib" />
@@ -741,11 +741,11 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/xdg_directories-1.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/xml-6.3.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/yaml-3.1.2/lib" />
-      <root url="file://$USER_HOME$/flutter/bin/cache/pkg/sky_engine/lib" />
-      <root url="file://$USER_HOME$/flutter/packages/flutter/lib" />
-      <root url="file://$USER_HOME$/flutter/packages/flutter_localizations/lib" />
-      <root url="file://$USER_HOME$/flutter/packages/flutter_test/lib" />
-      <root url="file://$USER_HOME$/flutter/packages/flutter_web_plugins/lib" />
+      <root url="file:///nix/store/6pzqx3mzr7yirgdqsn2v907z15pd30g7-flutter-3.10.0-unwrapped/bin/cache/pkg/sky_engine/lib" />
+      <root url="file:///nix/store/6pzqx3mzr7yirgdqsn2v907z15pd30g7-flutter-3.10.0-unwrapped/packages/flutter/lib" />
+      <root url="file:///nix/store/6pzqx3mzr7yirgdqsn2v907z15pd30g7-flutter-3.10.0-unwrapped/packages/flutter_localizations/lib" />
+      <root url="file:///nix/store/6pzqx3mzr7yirgdqsn2v907z15pd30g7-flutter-3.10.0-unwrapped/packages/flutter_test/lib" />
+      <root url="file:///nix/store/6pzqx3mzr7yirgdqsn2v907z15pd30g7-flutter-3.10.0-unwrapped/packages/flutter_web_plugins/lib" />
       <root url="file:///nix/store/yjysy0yh0xs0979lmczvr07bmmz719h6-flutter-3.10.0-unwrapped/bin/cache/pkg/sky_engine/lib" />
       <root url="file:///nix/store/yjysy0yh0xs0979lmczvr07bmmz719h6-flutter-3.10.0-unwrapped/packages/flutter/lib" />
       <root url="file:///nix/store/yjysy0yh0xs0979lmczvr07bmmz719h6-flutter-3.10.0-unwrapped/packages/flutter_localizations/lib" />
