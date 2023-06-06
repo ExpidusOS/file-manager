@@ -23,12 +23,19 @@
   </categories>
 
   <releases>
+    <release version="0.1.2" date="2023-06-06">
+      <description>
+        <p>Fixes the text contrasting issue on desktop devices. Some additional changes made to hopefully fix release assets.</p>
+
+        <url>https://github.com/ExpidusOS/file-manager/releases/tag/0.1.2</url>
+      </description>
+    </release>
     <release version="0.1.1" date="2023-06-05">
       <description>
         <p>Decreased the minimum Android API level from 33 to 19, this will support many devices now. Finalize the localizations by adding them to the about title and feedback category list.</p>
       </description>
 
-      <url>https://github.com/ExpidusOS/file-manager/releases/tag/0.1.0</url>
+      <url>https://github.com/ExpidusOS/file-manager/releases/tag/0.1.1</url>
 
       <artifacts>
         <artifact type="binary" platform="x86_64-linux-gnu">
