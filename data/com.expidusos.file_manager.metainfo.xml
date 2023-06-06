@@ -27,7 +27,7 @@
       <description>
         <p>Fixes the text contrasting issue on desktop devices. Some additional changes made to hopefully fix release assets.</p>
       </description>
-      
+
       <url>https://github.com/ExpidusOS/file-manager/releases/tag/0.1.2</url>
     </release>
     <release version="0.1.1" date="2023-06-05">
