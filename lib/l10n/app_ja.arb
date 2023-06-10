@@ -179,5 +179,6 @@
     "feedbackViewLibraryGrid": "グリッド内のファイルの参照",
     "feedbackViewLibraryList": "ファイルを一覧で参照中",
     "feedbackViewSettings": "設定ビュー",
-    "fullApplicationTitle": "ExpidusOSのファイルマネージャー"
+    "fullApplicationTitle": "ExpidusOSのファイルマネージャー",
+    "settingsTheme": "Theme"
 }
