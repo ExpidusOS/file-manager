@@ -136,7 +136,9 @@ class _FileManagerApp extends State<FileManagerApp> {
         ChangeNotifierProvider(create: (context) => Clipboard()),
       ],
       child: TokyoApp(
+        themeMode: colorScheme == ColorScheme.day ? ThemeMode.light : ThemeMode.dark,
         colorScheme: colorScheme,
+        colorSchemeDark: colorScheme,
         onGenerateTitle: (context) => AppLocalizations.of(context)!.applicationTitle,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

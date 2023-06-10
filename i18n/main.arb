@@ -179,5 +179,6 @@
     "feedbackViewLibraryGrid": "File browsing in a grid",
     "feedbackViewLibraryList": "File browsing in a list",
     "feedbackViewSettings": "Settings view",
-    "fullApplicationTitle": "ExpidusOS File Manager"
+    "fullApplicationTitle": "ExpidusOS File Manager",
+    "settingsTheme": "Theme"
 }

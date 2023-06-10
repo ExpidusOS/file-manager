@@ -160,6 +160,7 @@ class LibraryEntry extends StatelessWidget {
           return true;
         case PermissionStatus.denied:
         case PermissionStatus.restricted:
+        case PermissionStatus.provisional:
           return false;
         case PermissionStatus.permanentlyDenied:
           return await openAppSettings();

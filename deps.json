@@ -286,7 +286,7 @@
   },
   {
     "name": "args",
-    "version": "2.4.1",
+    "version": "2.4.2",
     "kind": "transitive",
     "source": "hosted",
     "dependencies": []
@@ -543,7 +543,7 @@
   },
   {
     "name": "path_provider_windows",
-    "version": "2.1.6",
+    "version": "2.1.7",
     "kind": "direct",
     "source": "hosted",
     "dependencies": [
@@ -556,7 +556,7 @@
   },
   {
     "name": "permission_handler",
-    "version": "10.2.0",
+    "version": "10.3.0",
     "kind": "direct",
     "source": "hosted",
     "dependencies": [
@@ -570,7 +570,7 @@
   },
   {
     "name": "permission_handler_platform_interface",
-    "version": "3.9.0",
+    "version": "3.10.0",
     "kind": "transitive",
     "source": "hosted",
     "dependencies": [
@@ -591,7 +591,7 @@
   },
   {
     "name": "permission_handler_apple",
-    "version": "9.0.8",
+    "version": "9.1.0",
     "kind": "transitive",
     "source": "hosted",
     "dependencies": [
@@ -601,7 +601,7 @@
   },
   {
     "name": "permission_handler_android",
-    "version": "10.2.2",
+    "version": "10.2.3",
     "kind": "transitive",
     "source": "hosted",
     "dependencies": [
@@ -621,7 +621,7 @@
   },
   {
     "name": "shared_preferences",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "kind": "direct",
     "source": "hosted",
     "dependencies": [
@@ -979,7 +979,8 @@
       "libtokyo",
       "path",
       "intl",
-      "filesize"
+      "filesize",
+      "bitsdojo_window"
     ]
   },
   {

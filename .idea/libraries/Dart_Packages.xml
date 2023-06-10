@@ -5,7 +5,7 @@
         <entry key="args">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/args-2.4.1/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/args-2.4.2/lib" />
             </list>
           </value>
         </entry>
@@ -198,14 +198,14 @@
         <entry key="libtokyo">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/git/libtokyo-6f4752c07a8c759a6cbd4a22e190d005dd13664f/packages/libtokyo/lib" />
+              <option value="$USER_HOME$/.pub-cache/git/libtokyo-9e0642532a2664ca4dcb736b046454a14cf304d1/packages/libtokyo/lib" />
             </list>
           </value>
         </entry>
         <entry key="libtokyo_flutter">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/git/libtokyo-6f4752c07a8c759a6cbd4a22e190d005dd13664f/packages/libtokyo_flutter/lib" />
+              <option value="$USER_HOME$/.pub-cache/git/libtokyo-9e0642532a2664ca4dcb736b046454a14cf304d1/packages/libtokyo_flutter/lib" />
             </list>
           </value>
         </entry>
@@ -324,35 +324,35 @@
         <entry key="path_provider_windows">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.6/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.7/lib" />
             </list>
           </value>
         </entry>
         <entry key="permission_handler">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler-10.2.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler-10.3.0/lib" />
             </list>
           </value>
         </entry>
         <entry key="permission_handler_android">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_android-10.2.2/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_android-10.2.3/lib" />
             </list>
           </value>
         </entry>
         <entry key="permission_handler_apple">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_apple-9.1.0/lib" />
             </list>
           </value>
         </entry>
         <entry key="permission_handler_platform_interface">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_platform_interface-3.9.0/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_platform_interface-3.10.0/lib" />
             </list>
           </value>
         </entry>
@@ -436,7 +436,7 @@
         <entry key="shared_preferences">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences-2.1.1/lib" />
+              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences-2.1.2/lib" />
             </list>
           </value>
         </entry>
@@ -654,9 +654,9 @@
       </option>
     </properties>
     <CLASSES>
-      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-6f4752c07a8c759a6cbd4a22e190d005dd13664f/packages/libtokyo/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-6f4752c07a8c759a6cbd4a22e190d005dd13664f/packages/libtokyo_flutter/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/args-2.4.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-9e0642532a2664ca4dcb736b046454a14cf304d1/packages/libtokyo/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-9e0642532a2664ca4dcb736b046454a14cf304d1/packages/libtokyo_flutter/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/args-2.4.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/async-2.11.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/bitsdojo_window-0.1.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/bitsdojo_window_linux-0.1.3/lib" />
@@ -695,11 +695,11 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.3/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_linux-2.1.11/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_platform_interface-2.0.6/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.6/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler-10.2.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_android-10.2.2/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_platform_interface-3.9.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.7/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler-10.3.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_android-10.2.3/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_apple-9.1.0/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_platform_interface-3.10.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/permission_handler_windows-0.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/petitparser-5.4.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/platform-3.1.0/lib" />
@@ -711,7 +711,7 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/quiver-3.2.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sentry-7.7.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/sentry_flutter-7.7.0/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences-2.1.1/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences-2.1.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_android-2.1.4/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.2.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/shared_preferences_linux-2.2.0/lib" />
