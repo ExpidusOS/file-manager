@@ -7,7 +7,6 @@ import 'package:file_manager/widgets.dart';
 import 'package:file_manager/views.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:open_file_plus/open_file_plus.dart';
 import 'package:path/path.dart' as path;
@@ -171,18 +170,10 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
       builder: (context, snapshot) =>
         Consumer<Clipboard>(
           builder: (context, clipboard, widget) => Scaffold(
-          windowBar: WindowBar.shouldShow(context) ? PreferredSize(
-            preferredSize: const Size.fromHeight(kToolbarHeight / 2),
-            child: MoveWindow(
-              child: WindowBar(
-                leading: Image.asset('assets/imgs/icon.png'),
-                title: Text(libraryTitle == null ? AppLocalizations.of(context)!.applicationTitle
-                  : AppLocalizations.of(context)!.applicationTitleWithLibraryName(libraryTitle!)),
-                onMinimize: () => appWindow.minimize(),
-                onMaximize: () => appWindow.maximize(),
-                onClose: () => appWindow.close(),
-              ),
-            ),
+          windowBar: WindowBar.shouldShow(context) ? WindowBar(
+            leading: Image.asset('assets/imgs/icon.png'),
+            title: Text(libraryTitle == null ? AppLocalizations.of(context)!.applicationTitle
+              : AppLocalizations.of(context)!.applicationTitleWithLibraryName(libraryTitle!)),
           ) : null,
           appBar: AppBar(
             leading: const DrawerWithClose(),

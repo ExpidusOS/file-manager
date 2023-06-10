@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:markdown/markdown.dart' hide Text;
@@ -34,17 +33,9 @@ class Privacy extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       Scaffold(
-        windowBar: WindowBar.shouldShow(context) ? PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight / 2),
-          child: MoveWindow(
-            child: WindowBar(
-              leading: Image.asset('assets/imgs/icon.png'),
-              title: Text(AppLocalizations.of(context)!.applicationTitle),
-              onMinimize: () => appWindow.minimize(),
-              onMaximize: () => appWindow.maximize(),
-              onClose: () => appWindow.close(),
-            ),
-          ),
+        windowBar: WindowBar.shouldShow(context) ? WindowBar(
+          leading: Image.asset('assets/imgs/icon.png'),
+          title: Text(AppLocalizations.of(context)!.applicationTitle),
         ) : null,
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.viewPrivacy),
