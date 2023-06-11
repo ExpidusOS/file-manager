@@ -1,7 +1,6 @@
 import 'package:file_manager/logic/error.dart';
 import 'package:file_manager/main.dart';
 import 'package:file_manager/views.dart';
-import 'package:flutter/material.dart' hide ColorScheme, Scaffold;
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:libtokyo/libtokyo.dart' show ColorScheme;
 import 'package:libtokyo_flutter/libtokyo.dart';
@@ -46,7 +45,6 @@ class _SettingsViewState extends State<SettingsView> {
   }
 
   void _handleError(BuildContext context, Object e) {
-    print(e);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(AppLocalizations.of(context)!.genericErrorMessage(e.toString())),
@@ -90,7 +88,9 @@ class _SettingsViewState extends State<SettingsView> {
                   setState(() {
                     showHiddenFiles = value;
                   });
-                }).catchError((error) => _handleError(context, error)),
+                }).catchError((error) {
+                  _handleError(context, error);
+                }),
           ),
           SwitchListTile(
             title: Text(
@@ -103,7 +103,9 @@ class _SettingsViewState extends State<SettingsView> {
                   setState(() {
                     showHiddenLibraries = value;
                   });
-                }).catchError((error) => _handleError(context, error)),
+                }).catchError((error) {
+                  _handleError(context, error);
+                }),
           ),
           SwitchListTile(
             title: Text(AppLocalizations.of(context)!.settingsShowGridView),
@@ -114,7 +116,9 @@ class _SettingsViewState extends State<SettingsView> {
                   setState(() {
                     showGridView = value;
                   });
-                }).catchError((error) => _handleError(context, error)),
+                }).catchError((error) {
+                  _handleError(context, error);
+                }),
           ),
           ListTile(
             title: Text(AppLocalizations.of(context)!.settingsTheme),
@@ -139,8 +143,9 @@ class _SettingsViewState extends State<SettingsView> {
                                         colorScheme = value;
                                         FileManagerApp.reload(context);
                                       });
-                                    }).catchError((error) =>
-                                        _handleError(context, error)),
+                                    }).catchError((error) {
+                                      _handleError(context, error);
+                                    }),
                               ),
                               RadioListTile(
                                 title: const Text('Night'),
@@ -154,8 +159,9 @@ class _SettingsViewState extends State<SettingsView> {
                                         colorScheme = value;
                                         FileManagerApp.reload(context);
                                       });
-                                    }).catchError((error) =>
-                                        _handleError(context, error)),
+                                    }).catchError((error) {
+                                      _handleError(context, error);
+                                    }),
                               ),
                               RadioListTile(
                                 title: const Text('Moon'),
@@ -169,8 +175,9 @@ class _SettingsViewState extends State<SettingsView> {
                                         colorScheme = value;
                                         FileManagerApp.reload(context);
                                       });
-                                    }).catchError((error) =>
-                                        _handleError(context, error)),
+                                    }).catchError((error) {
+                                      _handleError(context, error);
+                                    }),
                               ),
                               RadioListTile(
                                 title: const Text('Day'),
@@ -184,8 +191,9 @@ class _SettingsViewState extends State<SettingsView> {
                                         colorScheme = value;
                                         FileManagerApp.reload(context);
                                       });
-                                    }).catchError((error) =>
-                                        _handleError(context, error)),
+                                    }).catchError((error) {
+                                      _handleError(context, error);
+                                    }),
                               )
                             ],
                           ),
@@ -208,7 +216,9 @@ class _SettingsViewState extends State<SettingsView> {
                     setState(() {
                       optInErrorReporting = value;
                     });
-                  }).catchError((error) => _handleError(context, error)),
+                  }).catchError((error) {
+                    _handleError(context, error);
+                  }),
             ),
           ] : []),
           const Divider(),
@@ -231,6 +241,7 @@ class _SettingsViewState extends State<SettingsView> {
                 preferences.clear().then((value) =>
                     setState(() {
                       _loadSettings();
+                      FileManagerApp.reload(context);
                     })).catchError((error) => _handleError(context, error)),
           ),
           const Divider(),

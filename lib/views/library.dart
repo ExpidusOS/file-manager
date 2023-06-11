@@ -154,7 +154,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
         )
       ).then((action) {
         if (action != null) {
-          clipboard.add(ClipboardEntry(action: action!, entry: entry));
+          clipboard.add(ClipboardEntry(action: action, entry: entry));
 
           setState(() {
             key = UniqueKey();
@@ -482,14 +482,14 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                       currentDirectory: currentDirectory,
                     )
                         : null,
-                    body: currentDirectory == null ? null : AdaptiveLayout(
+                    body: currentDirectory == null || destinations.length < 2 ? null : AdaptiveLayout(
                       primaryNavigation: SlotLayout(
                         config: <Breakpoint, SlotLayoutConfig>{
                           Breakpoints.medium: SlotLayout.from(
                             key: const Key('primaryNavigation'),
                             builder: (_) => NavigationRailTheme(
                               data: Theme.of(context).navigationRailTheme.copyWith(
-                                elevation: 5,
+                                elevation: AppBarTheme.of(context).elevation ?? Theme.of(context).appBarTheme.elevation ?? 4,
                               ),
                               child: AdaptiveScaffold.standardNavigationRail(
                                 destinations: destinations.map((_) => AdaptiveScaffold.toRailDestination(_)).toList(),
@@ -510,7 +510,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                             key: const Key('primaryNavigation'),
                             builder: (_) => NavigationRailTheme(
                               data: Theme.of(context).navigationRailTheme.copyWith(
-                                elevation: 5,
+                                elevation: AppBarTheme.of(context).elevation ?? Theme.of(context).appBarTheme.elevation ?? 4,
                               ),
                               child: AdaptiveScaffold.standardNavigationRail(
                                 destinations: destinations.map((_) => AdaptiveScaffold.toRailDestination(_)).toList(),
@@ -642,14 +642,22 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                               final deleteCount = clipboard.countForAction(
                                   ClipboardAction.delete);
 
-                              if (copyCount > 0) labels.add(
+                              if (copyCount > 0) {
+                                labels.add(
                                   Text(i18n.clipboardCopyLabel(copyCount)));
-                              if (moveCount > 0) labels.add(
+                              }
+                              if (moveCount > 0) {
+                                labels.add(
                                   Text(i18n.clipboardMoveLabel(moveCount)));
-                              if (linkCount > 0) labels.add(
+                              }
+                              if (linkCount > 0) {
+                                labels.add(
                                   Text(i18n.clipboardLinkLabel(linkCount)));
-                              if (deleteCount > 0) labels.add(
+                              }
+                              if (deleteCount > 0) {
+                                labels.add(
                                   Text(i18n.clipboardDeleteLabel(deleteCount)));
+                              }
 
                               return Column(
                                 mainAxisAlignment: MainAxisAlignment

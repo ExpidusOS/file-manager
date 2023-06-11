@@ -62,7 +62,7 @@ class _FeedbackState extends State<Feedback> {
                     if (value == null || value.isEmpty) {
                       return AppLocalizations.of(context)!.feedbackFieldEmptyEmail;
                     }
-                    return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) ? null : AppLocalizations.of(context)!.feedbackFieldInvalidEmail;
+                    return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) ? null : AppLocalizations.of(context)!.feedbackFieldInvalidEmail;
                   },
                   onSaved: (value) {
                     setState(() {
