@@ -84,7 +84,7 @@ class About extends StatelessWidget {
                         } else if (dep is HostedReference) {
                           subtitle = InkWell(
                             onTap: () =>
-                                launchUrlString('https://pub.dev/packages/${name}', mode: LaunchMode.externalApplication)
+                                launchUrlString('https://pub.dev/packages/$name/versions/${dep.versionConstraint.toString().replaceAll('^', '')}', mode: LaunchMode.externalApplication)
                                     .catchError((error, trace) =>
                                     handleError(error, trace: trace)),
                             child: Text(
