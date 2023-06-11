@@ -493,9 +493,10 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                               ),
                               child: AdaptiveScaffold.standardNavigationRail(
                                 destinations: destinations.map((_) => AdaptiveScaffold.toRailDestination(_)).toList(),
+                                backgroundColor: Theme.of(context).colorScheme.background,
                                 selectedIndex: currentLibrary != null ? libraryEntries.indexOf(currentLibrary!) : null,
-                                selectedLabelTextStyle: Theme.of(context).textTheme.labelMedium,
-                                unSelectedLabelTextStyle: Theme.of(context).textTheme.labelMedium,
+                                selectedLabelTextStyle: Theme.of(context).textTheme.bodyLarge,
+                                unSelectedLabelTextStyle: Theme.of(context).textTheme.bodyLarge,
                                 selectedIconTheme: IconTheme.of(context).copyWith(
                                   color: Theme.of(context).colorScheme.secondary,
                                 ),
@@ -514,9 +515,10 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                               ),
                               child: AdaptiveScaffold.standardNavigationRail(
                                 destinations: destinations.map((_) => AdaptiveScaffold.toRailDestination(_)).toList(),
+                                backgroundColor: Theme.of(context).colorScheme.background,
                                 selectedIndex: currentLibrary != null ? libraryEntries.indexOf(currentLibrary!) : null,
-                                selectedLabelTextStyle: Theme.of(context).textTheme.labelMedium,
-                                unSelectedLabelTextStyle: Theme.of(context).textTheme.labelMedium,
+                                selectedLabelTextStyle: Theme.of(context).textTheme.bodyLarge,
+                                unSelectedLabelTextStyle: Theme.of(context).textTheme.bodyLarge,
                                 selectedIconTheme: IconTheme.of(context).copyWith(
                                   color: Theme.of(context).colorScheme.secondary,
                                 ),
