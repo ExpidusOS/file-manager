@@ -29,6 +29,7 @@
       "intl",
       "provider",
       "flutter_markdown",
+      "flutter_adaptive_scaffold",
       "flutter_test",
       "flutter_lints"
     ]
@@ -261,6 +262,15 @@
     "kind": "transitive",
     "source": "sdk",
     "dependencies": []
+  },
+  {
+    "name": "flutter_adaptive_scaffold",
+    "version": "0.1.4",
+    "kind": "direct",
+    "source": "hosted",
+    "dependencies": [
+      "flutter"
+    ]
   },
   {
     "name": "flutter_markdown",

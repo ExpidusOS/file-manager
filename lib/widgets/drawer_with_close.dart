@@ -1,9 +1,10 @@
 import 'package:libtokyo_flutter/libtokyo.dart';
 
 class DrawerWithClose extends StatelessWidget {
-  const DrawerWithClose({ super.key, this.onBack, this.canGoBack });
+  const DrawerWithClose({ super.key, this.onBack, this.canOpenDrawer = true, this.canGoBack });
 
   final bool? canGoBack;
+  final bool canOpenDrawer;
   final void Function()? onBack;
 
   @override
@@ -12,13 +13,16 @@ class DrawerWithClose extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: (canGoBack ?? Navigator.of(context).canPop() ? <Widget>[
-          IconButton(
-            onPressed: () => onBack == null ? Navigator.of(context).pop() : onBack!(),
-            icon: const Icon(Icons.arrow_back_ios),
-          )
-        ] : <Widget>[])..add(
-          const DrawerButton(),
-        ),
+        children: [
+          ...(canGoBack ?? Navigator.of(context).canPop() ? [
+            IconButton(
+              onPressed: () => onBack == null ? Navigator.of(context).pop() : onBack!(),
+              icon: const Icon(Icons.arrow_back_ios),
+            )
+          ] : []),
+          ...(canOpenDrawer ? [
+            const DrawerButton(),
+          ] : []),
+        ],
       );
 }
