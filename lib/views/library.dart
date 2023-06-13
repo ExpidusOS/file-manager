@@ -483,6 +483,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                     )
                         : null,
                     body: currentDirectory == null || destinations.length < 2 ? null : AdaptiveLayout(
+                      internalAnimations: false,
                       primaryNavigation: SlotLayout(
                         config: <Breakpoint, SlotLayoutConfig>{
                           Breakpoints.medium: SlotLayout.from(
