@@ -3,6 +3,8 @@ description: The file manager for the Expidus operating system.
 publish_to: 'none'
 version: 0.1.2+1
 homepage: https://expidusos.com
+funding:
+  - https://opencollective.com/midstall-software
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
