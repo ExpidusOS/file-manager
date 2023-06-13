@@ -89,7 +89,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
         MaterialPageRoute(
           builder: (context) => LibraryView(
             currentDirectory: entry,
-	    parentContext: context,
+            parentContext: context,
           ),
           settings: RouteSettings(
             name: 'LibraryView',
@@ -190,7 +190,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
         MaterialPageRoute(
           builder: (context) => LibraryView(
             currentDirectory: entry,
-	    parentContext: context,
+            parentContext: context,
           ),
           settings: RouteSettings(
             name: 'LibraryView',

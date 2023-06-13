@@ -42,7 +42,7 @@ class LibraryEntry extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => LibraryView(
               currentDirectory: entry,
-	      parentContext: context,
+              parentContext: context,
             ),
             settings: RouteSettings(
               name: 'LibraryView',
