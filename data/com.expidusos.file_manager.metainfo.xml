@@ -112,6 +112,13 @@
   <requires>
     <display_length>600</display_length>
   </requires>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://github.com/ExpidusOS/file-manager/tree/master/data/screenshots/1.png</image>
+      <caption>Browsing the home directory</caption>
+    </screenshot>
+  </screenshots>
   
   <description>
     <p>
