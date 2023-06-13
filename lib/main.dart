@@ -151,6 +151,7 @@ class _FileManagerApp extends State<FileManagerApp> {
           builder: (context) =>
             LibraryView(
               currentDirectory: widget.directory ?? (LibraryEntry.getDefaultEntry(context) == null ? io.Directory.current : LibraryEntry.getDefaultEntry(context)!.entry),
+              parentContext: context,
             ),
         ),
       ),
