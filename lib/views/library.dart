@@ -18,9 +18,11 @@ class LibraryView extends StatefulWidget {
   const LibraryView({
     super.key,
     this.currentDirectory,
+    required this.parentContext,
   });
 
   final io.Directory? currentDirectory;
+  final BuildContext parentContext;
 
   @override
   State<LibraryView> createState() => _LibraryViewState();
@@ -34,10 +36,13 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
   List<ClipboardEntry> clipboard = <ClipboardEntry>[];
   bool runningClipboard = false;
   bool isFavorite = false;
+  late final Future<void> populateLibraryEntriesFuture;
 
   @override
   void initState() {
     super.initState();
+
+    populateLibraryEntriesFuture = populateLibraryEntries(widget.parentContext);
 
     currentDirectory = widget.currentDirectory;
 
@@ -84,6 +89,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
         MaterialPageRoute(
           builder: (context) => LibraryView(
             currentDirectory: entry,
+            parentContext: context,
           ),
           settings: RouteSettings(
             name: 'LibraryView',
@@ -184,6 +190,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
         MaterialPageRoute(
           builder: (context) => LibraryView(
             currentDirectory: entry,
+            parentContext: context,
           ),
           settings: RouteSettings(
             name: 'LibraryView',
@@ -213,7 +220,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
       ),
     ];
     return FutureBuilder(
-        future: populateLibraryEntries(context),
+        future: populateLibraryEntriesFuture,
         builder: (context, snapshot) =>
             Consumer<Clipboard>(
               builder: (context, clipboard, widget) =>
