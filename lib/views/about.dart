@@ -52,6 +52,29 @@ class About extends StatelessWidget {
                     ),
                   ),
                 ),
+                ...((FileManagerApp.getPubSpec(context).unParsedYaml!['funding'] as List<dynamic>).isEmpty ? [] : [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Text(
+                      AppLocalizations.of(context)!.aboutHeadingFunding,
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
+                  ),
+                  Column(
+                    children: (FileManagerApp.getPubSpec(context).unParsedYaml!['funding'] as List<dynamic>).map((link) =>
+                      ListTile(
+                        tileColor: Theme.of(context).cardTheme.color ?? Theme.of(context).cardColor,
+                        shape: Theme.of(context).cardTheme.shape,
+                        contentPadding: Theme.of(context).cardTheme.margin,
+                        title: Text(
+                          link as String,
+                          style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Theme.of(context).colorScheme.tertiary),
+                        ),
+                        onTap: () => launchUrlString(link, mode: LaunchMode.externalApplication),
+                      )
+                    ).toList(),
+                  )
+                ]),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: Text(

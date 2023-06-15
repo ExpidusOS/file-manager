@@ -181,5 +181,6 @@
     "feedbackViewSettings": "Settings view",
     "fullApplicationTitle": "ExpidusOS File Manager",
     "settingsTheme": "Theme",
-    "donationMessage": "Enjoying the app? Please donate."
+    "donationMessage": "Enjoying the app? Please donate.",
+    "aboutHeadingFunding": "Donations"
 }
