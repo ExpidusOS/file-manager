@@ -18,11 +18,13 @@ import 'views.dart';
 
 Future<void> _runMain({
   required bool isSentry,
+  required bool isFirstRun,
   required PubSpec pubspec,
   required List<String> args,
 }) async {
   final app = FileManagerApp(
     isSentry: isSentry,
+    isFirstRun: isFirstRun,
     pubspec: pubspec,
     directory: args.isNotEmpty ? io.Directory(args.first) : null,
   );
@@ -53,6 +55,7 @@ Future<void> main(List<String> args) async {
 
   const sentryDsn = String.fromEnvironment('SENTRY_DSN', defaultValue: '');
   final prefs = await SharedPreferences.getInstance();
+  final isFirstRun = prefs.getBool(FileManagerSettings.firstRun.name) ?? true;
 
   if (sentryDsn.isNotEmpty && (prefs.getBool(FileManagerSettings.optInErrorReporting.name) ?? false)) {
     await SentryFlutter.init(
@@ -71,6 +74,7 @@ Future<void> main(List<String> args) async {
       },
       appRunner: () => _runMain(
         isSentry: true,
+        isFirstRun: isFirstRun,
         pubspec: pubspec,
         args: args,
       ).catchError((error, trace) => handleError(error, trace: trace)),
@@ -78,6 +82,7 @@ Future<void> main(List<String> args) async {
   } else {
     await _runMain(
       isSentry: false,
+      isFirstRun: isFirstRun,
       pubspec: pubspec,
       args: args,
     );
@@ -87,11 +92,13 @@ Future<void> main(List<String> args) async {
 class FileManagerApp extends StatefulWidget {
   const FileManagerApp({
     super.key,
+    required this.isFirstRun,
     required this.isSentry,
     required this.pubspec,
     this.directory,
   });
 
+  final bool isFirstRun;
   final bool isSentry;
   final PubSpec pubspec;
   final io.Directory? directory;
@@ -102,15 +109,30 @@ class FileManagerApp extends StatefulWidget {
   static Future<void> reload(BuildContext context) => context.findAncestorStateOfType<_FileManagerApp>()!.reload();
   static bool isSentryOnContext(BuildContext context) => context.findAncestorWidgetOfExactType<FileManagerApp>()!.isSentry;
   static PubSpec getPubSpec(BuildContext context) => context.findAncestorWidgetOfExactType<FileManagerApp>()!.pubspec;
+  static bool isFirstRunOnContext(BuildContext context) => context.findAncestorStateOfType<_FileManagerApp>()!.isFirstRun
+    ?? context.findAncestorWidgetOfExactType<FileManagerApp>()!.isFirstRun;
+
+  static bool popFirstRun(BuildContext context) {
+    final state = context.findAncestorStateOfType<_FileManagerApp>()!;
+    final value = state.isFirstRun ?? context.findAncestorWidgetOfExactType<FileManagerApp>()!.isFirstRun;
+    if (value) {
+      state.isFirstRun = false;
+      state.preferences.setBool(FileManagerSettings.firstRun.name, state.isFirstRun!);
+    }
+    return value;
+  }
 }
 
 class _FileManagerApp extends State<FileManagerApp> {
   late SharedPreferences preferences;
+  bool? isFirstRun;
   ColorScheme? colorScheme;
 
   @override
   void initState() {
     super.initState();
+
+    isFirstRun = widget.isFirstRun;
 
     SharedPreferences.getInstance().then((prefs) => setState(() {
       preferences = prefs;
@@ -122,6 +144,7 @@ class _FileManagerApp extends State<FileManagerApp> {
 
   void _loadSettings() {
     colorScheme = ColorScheme.values.asNameMap()[preferences.getString(FileManagerSettings.colorScheme.name) ?? 'night'];
+    isFirstRun = preferences.getBool(FileManagerSettings.firstRun.name) ?? widget.isFirstRun;
   }
 
   Future<void> reload() async {

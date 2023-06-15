@@ -33,7 +33,8 @@ enum FileManagerSettings {
   showHiddenLibraries,
   colorScheme,
   optInErrorReporting,
-  favoritePaths;
+  favoritePaths,
+  firstRun;
 
   @override
   String toString() => name;
