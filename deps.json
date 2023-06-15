@@ -265,7 +265,7 @@
   },
   {
     "name": "flutter_adaptive_scaffold",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "kind": "direct",
     "source": "hosted",
     "dependencies": [
