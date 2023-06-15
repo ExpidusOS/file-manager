@@ -19,8 +19,15 @@
     <content_attribute id="social-info">moderate</content_attribute>
   </content_rating>
 
+  <keywords>
+    <keyword>ExpidusOS</keyword>
+    <keyword>File Manager</keyword>
+  </keywords>
+
   <categories>
     <category>System</category>
+    <category>FileTools</category>
+    <category>FileManager</category>
   </categories>
 
   <releases>
@@ -128,4 +135,7 @@
   </description>
   
   <launchable type="desktop-id">com.expidusos.file_manager.desktop</launchable>
+  <provides>
+    <id>com.expidusos.file_manager</id>
+  </provides>
 </component>
