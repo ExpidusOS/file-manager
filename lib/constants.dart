@@ -1,6 +1,7 @@
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:libtokyo_flutter/libtokyo.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 String _viewAbout(BuildContext context) => AppLocalizations.of(context)!.feedbackViewAbout;
 String _viewFeedback(BuildContext context) => AppLocalizations.of(context)!.feedbackViewFeedback;
@@ -9,7 +10,7 @@ String _viewLibraryGrid(BuildContext context) => AppLocalizations.of(context)!.f
 String _viewLibraryList(BuildContext context) => AppLocalizations.of(context)!.feedbackViewLibraryList;
 String _viewSettings(BuildContext context) => AppLocalizations.of(context)!.feedbackViewSettings;
 
-enum FileManagerFeedbackID {
+enum FileManagerFeedbackID implements FeedbackId<BuildContext> {
   viewAbout(key: 'view.about', onGenerateTitle: _viewAbout),
   viewFeedback(key: 'view.feedback', onGenerateTitle: _viewFeedback),
   viewFeedbackChoice(key: 'view.feedback.choise', onGenerateTitle: _viewFeedbackChoice),
@@ -26,16 +27,25 @@ enum FileManagerFeedbackID {
   Future<String> toFutureString(BuildContext context) async => '${onGenerateTitle(context)} ($name,$key)=${await getId(context)}';
 }
 
-enum FileManagerSettings {
-  gridViewsPaths,
-  showGridView,
-  showHiddenFiles,
-  showHiddenLibraries,
-  colorScheme,
-  optInErrorReporting,
-  favoritePaths,
-  firstRun;
+enum FileManagerSettings<T> implements Settings<T> {
+  gridViewsPaths('gridViewsPaths', <String>[]),
+  showGridView('showGridView', false),
+  showHiddenFiles('showHiddenFiles', false),
+  showHiddenLibraries('showHiddenLibraries', false),
+  colorScheme('colorScheme', 'night'),
+  optInErrorReporting('optInErrorReporting', false),
+  favoritePaths('favoritePaths', <String>[]),
+  firstRun('firstRun', true);
+
+  const FileManagerSettings(this.name, this.defaultValue);
 
   @override
-  String toString() => name;
+  final String name;
+
+  final T defaultValue;
+  T valueFor(SharedPreferences prefs) => (prefs.get(name) as T?) ?? defaultValue;
+  Future<T> get value async => valueFor(await SharedPreferences.getInstance());
+
+  @override
+  toString() => '$name:${T.toString()}';
 }
