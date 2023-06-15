@@ -987,30 +987,14 @@
       "flutter",
       "material_theme_builder",
       "libtokyo",
+      "flutter_localizations",
       "path",
       "intl",
       "filesize",
-      "bitsdojo_window"
-    ]
-  },
-  {
-    "name": "libtokyo",
-    "version": "0.1.0",
-    "kind": "direct",
-    "source": "git",
-    "dependencies": [
-      "meta",
-      "path"
-    ]
-  },
-  {
-    "name": "material_theme_builder",
-    "version": "1.0.4",
-    "kind": "transitive",
-    "source": "hosted",
-    "dependencies": [
-      "flutter",
-      "material_color_utilities"
+      "bitsdojo_window",
+      "shared_preferences",
+      "pubspec",
+      "url_launcher"
     ]
   },
   {
@@ -1029,6 +1013,27 @@
       "meta",
       "path",
       "vector_math"
+    ]
+  },
+  {
+    "name": "libtokyo",
+    "version": "0.1.0",
+    "kind": "direct",
+    "source": "git",
+    "dependencies": [
+      "meta",
+      "path",
+      "pubspec"
+    ]
+  },
+  {
+    "name": "material_theme_builder",
+    "version": "1.0.4",
+    "kind": "transitive",
+    "source": "hosted",
+    "dependencies": [
+      "flutter",
+      "material_color_utilities"
     ]
   }
 ]
