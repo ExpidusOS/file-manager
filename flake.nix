@@ -21,10 +21,11 @@
     flake-utils.eachSystem flake-utils.allSystems (system:
       let
         pkgs = expidus-sdk.legacyPackages.${system};
+        deps = builtins.fromJSON (builtins.readFile ./deps.json);
       in {
         packages.default = pkgs.flutter.buildFlutterApplication {
           pname = "expidus-file-manager";
-          version = "0.1.2-${self.shortRev or "dirty"}";
+          version = "${(builtins.elemAt deps 0).version}+git-${self.shortRev or "dirty"}";
 
           src = cleanSource self;
 
