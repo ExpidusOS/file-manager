@@ -180,5 +180,7 @@
     "feedbackViewLibraryList": "ファイルを一覧で参照中",
     "feedbackViewSettings": "設定ビュー",
     "fullApplicationTitle": "ExpidusOSのファイルマネージャー",
-    "settingsTheme": "テーマ"
+    "settingsTheme": "テーマ",
+    "donationMessage": "アプリを楽しんでいますか？寄付してください。",
+    "aboutHeadingFunding": "寄付"
 }
