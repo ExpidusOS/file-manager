@@ -205,14 +205,14 @@
         <entry key="libtokyo">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/git/libtokyo-00b6676e2f2d6c2a14c571fc7ad0f2c3e2a8d0dc/packages/libtokyo/lib" />
+              <option value="$USER_HOME$/.pub-cache/git/libtokyo-3e1946e1f09d778a44d710ab634957d5281e8e86/packages/libtokyo/lib" />
             </list>
           </value>
         </entry>
         <entry key="libtokyo_flutter">
           <value>
             <list>
-              <option value="$USER_HOME$/.pub-cache/git/libtokyo-00b6676e2f2d6c2a14c571fc7ad0f2c3e2a8d0dc/packages/libtokyo_flutter/lib" />
+              <option value="$USER_HOME$/.pub-cache/git/libtokyo-3e1946e1f09d778a44d710ab634957d5281e8e86/packages/libtokyo_flutter/lib" />
             </list>
           </value>
         </entry>
@@ -661,8 +661,8 @@
       </option>
     </properties>
     <CLASSES>
-      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-00b6676e2f2d6c2a14c571fc7ad0f2c3e2a8d0dc/packages/libtokyo/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-00b6676e2f2d6c2a14c571fc7ad0f2c3e2a8d0dc/packages/libtokyo_flutter/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-3e1946e1f09d778a44d710ab634957d5281e8e86/packages/libtokyo/lib" />
+      <root url="file://$USER_HOME$/.pub-cache/git/libtokyo-3e1946e1f09d778a44d710ab634957d5281e8e86/packages/libtokyo_flutter/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/args-2.4.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/async-2.11.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/bitsdojo_window-0.1.5/lib" />

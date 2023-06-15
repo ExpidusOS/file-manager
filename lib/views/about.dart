@@ -21,7 +21,7 @@ class About extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: AboutPageBuilder(
-              appTitle: AppLocalizations.of(context)!.applicationTitle,
+              appTitle: AppLocalizations.of(context)!.fullApplicationTitle,
               appDescription: FileManagerApp.getPubSpec(context).description!,
               pubspec: FileManagerApp.getPubSpec(context),
             ),
