@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' hide Clipboard;
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:libtokyo_flutter/libtokyo.dart' hide ColorScheme;
 import 'package:libtokyo/libtokyo.dart' hide TokyoApp;
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:pub_semver/pub_semver.dart';
 import 'package:pubspec/pubspec.dart';
 import 'package:provider/provider.dart';
 import 'dart:io' as io;
@@ -51,7 +52,10 @@ Future<void> _runMain({
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  final pubspec = PubSpec.fromYamlString(await rootBundle.loadString('pubspec.yaml'));
+  final pinfo = await PackageInfo.fromPlatform();
+  final pubspec = PubSpec.fromYamlString(await rootBundle.loadString('pubspec.yaml')).copy(
+    version: Version.parse("${pinfo.version}+${pinfo.buildNumber}"),
+  );
 
   const sentryDsn = String.fromEnvironment('SENTRY_DSN', defaultValue: '');
   final prefs = await SharedPreferences.getInstance();

@@ -21,16 +21,26 @@
     flake-utils.eachSystem flake-utils.allSystems (system:
       let
         pkgs = expidus-sdk.legacyPackages.${system};
-        deps = builtins.fromJSON (builtins.readFile ./deps.json);
+        deps = builtins.fromJSON (readFile ./deps.json);
+        shortRev = self.shortRev or (substring 7 7 fakeHash);
+        shortRevCodes = map strings.charToInt (stringToCharacters shortRev);
+        buildCode = foldr (a: b: "${toString a}${toString b}") "" shortRevCodes;
+
+        shortVersion = builtins.elemAt (splitString "+" (builtins.elemAt deps 0).version) 0;
+        version = "${shortVersion}+${buildCode}";
       in {
         packages.default = pkgs.flutter.buildFlutterApplication {
           pname = "expidus-file-manager";
-          version = "${(builtins.elemAt deps 0).version}+git-${self.shortRev or "dirty"}";
+          version = "${shortVersion}+git-${shortRev}";
 
           src = cleanSource self;
 
+          preBuild = ''
+            sed -i 's/version: .*/version: ${version}/g' pubspec.yaml
+          '';
+
           depsListFile = ./deps.json;
-          vendorHash = "sha256-r1+I1+ffyWh1IZcW4oRf7sg3d8+9uiH68BuOsGYowwE=";
+          vendorHash = "sha256-us/AliDqYHyxJeJ+ZloHR/yns7lElZeNrhS4VLZzNqc=";
 
           postInstall = ''
             rm $out/bin/file_manager
