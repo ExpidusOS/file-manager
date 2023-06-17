@@ -281,7 +281,10 @@ class LibraryEntry extends StatelessWidget {
         for (var i = 0; i < arr.length; i++) {
           final val = arr[i];
           if (val == 0) {
-            drives.add(String.fromCharCodes(elem));
+            final str = String.fromCharCodes(elem);
+            if (str.contains(':')) {
+              drives.add(str);
+            }
             elem = <int>[];
           } else {
             elem.add(val);
