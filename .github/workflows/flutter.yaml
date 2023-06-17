@@ -124,6 +124,7 @@ jobs:
           architecture: ${{ matrix.arch }}
       - name: Set build code
         run: |
+          git config --global --add safe.directory $(pwd)
           export BUILD_CODE=$(git rev-parse HEAD | od -An -tuC | tr ' ' '\0' | tr '\n' '\0')
           echo "BUILD_CODE=$BUILD_CODE" >>$GITHUB_ENV
       - if: ${{ !github.event.issue.pull_request }}
@@ -186,6 +187,7 @@ jobs:
         run: flutter pub get
       - name: Set build code
         run: |
+          git config --global --add safe.directory $(pwd)
           export BUILD_CODE=$(git rev-parse HEAD | od -An -tuC | tr ' ' '\0' | tr '\n' '\0')
           echo "BUILD_CODE=$BUILD_CODE" >>$GITHUB_ENV
       - name: Build desktop
