@@ -70,13 +70,13 @@ jobs:
       - if: ${{ !github.event.issue.pull_request }}
         name: Build for Android (release)
         run: |
-          flutter build appbundle --release --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-          flutter build apk --release --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build appbundle --release --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build apk --release --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - if: ${{ github.event.issue.pull_request }}
         name: Build for Android (profile)
         run: |
-          flutter build appbundle --profile --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-          flutter build apk --profile --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build appbundle --profile --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build apk --profile --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - name: Upload Android APK
         uses: actions/upload-artifact@v3
         with:
