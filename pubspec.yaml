@@ -1,7 +1,7 @@
 name: file_manager
 description: The file manager for the Expidus operating system.
 publish_to: 'none'
-version: 0.1.2+1
+version: 0.1.2+65656565656565
 homepage: https://expidusos.com
 funding:
   - https://opencollective.com/midstall-software

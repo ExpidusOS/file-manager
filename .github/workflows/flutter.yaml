@@ -26,6 +26,10 @@ jobs:
       - run: flutter doctor
       - name: Download dependencies
         run: flutter pub get
+      - name: Set build code
+        run: |
+          export BUILD_CODE=$(git rev-parse HEAD | od -An -tuC | tr ' ' '\0' | tr '\n' '\0')
+          echo "BUILD_CODE=$BUILD_CODE" >>$GITHUB_ENV
       - if: ${{ !github.event.issue.pull_request }}
         name: Set up signing
         env:
@@ -122,6 +126,10 @@ jobs:
           cache: true
           channel: ${{ matrix.channel }}
           architecture: ${{ matrix.arch }}
+      - name: Set build code
+        run: |
+          export BUILD_CODE=$(git rev-parse HEAD | od -An -tuC | tr ' ' '\0' | tr '\n' '\0')
+          echo "BUILD_CODE=$BUILD_CODE" >>$GITHUB_ENV
       - if: ${{ !github.event.issue.pull_request }}
         name: Set up GPG key
         uses: crazy-max/ghaction-import-gpg@v5
@@ -132,7 +140,7 @@ jobs:
         run: |
           git config --global --add safe.directory /opt/hostedtoolcache/flutter/${{ matrix.channel }}-3.10.2-${{ matrix.arch }}
           flutter config --enable-linux-desktop
-          flutter build linux --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build linux --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
           tar -czf com.expidusos.file_manager-linux-${{ matrix.arch }}.tar.gz -C build/linux/${{ matrix.arch }}/release/bundle/ .
       - if: ${{ !github.event.issue.pull_request }}
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
@@ -180,10 +188,14 @@ jobs:
       - run: flutter doctor
       - name: Download dependencies
         run: flutter pub get
+      - name: Set build code
+        run: |
+          export BUILD_CODE=$(git rev-parse HEAD | od -An -tuC | tr ' ' '\0' | tr '\n' '\0')
+          echo "BUILD_CODE=$BUILD_CODE" >>$GITHUB_ENV
       - name: Build desktop
         run: |
           flutter config --enable-macos-desktop
-          flutter build macos --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build macos --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
           find build
   windows:
     strategy:
@@ -202,10 +214,14 @@ jobs:
       - run: flutter doctor
       - name: Download dependencies
         run: flutter pub get
+      - name: Set build code
+        run: |
+          export BUILD_CODE=$(git rev-parse HEAD | od -An -tuC | tr ' ' '\0' | tr '\n' '\0')
+          echo "BUILD_CODE=$BUILD_CODE" >>$GITHUB_ENV
       - name: Build desktop
         run: |
           flutter config --enable-windows-desktop
-          flutter build windows --build-number $GITHUB_RUN_NUMBER --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build windows --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
           
           pushd build/windows/runner/Release
           7z a ../../../../com.expidusos.file_manager-windows-${{ matrix.arch }}.zip . -r
