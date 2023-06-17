@@ -26,10 +26,6 @@ jobs:
       - run: flutter doctor
       - name: Download dependencies
         run: flutter pub get
-      - name: Set build code
-        run: |
-          export BUILD_CODE=$(git rev-parse HEAD | od -An -tuC | tr ' ' '\0' | tr '\n' '\0')
-          echo "BUILD_CODE=$BUILD_CODE" >>$GITHUB_ENV
       - if: ${{ !github.event.issue.pull_request }}
         name: Set up signing
         env:
@@ -70,13 +66,13 @@ jobs:
       - if: ${{ !github.event.issue.pull_request }}
         name: Build for Android (release)
         run: |
-          flutter build appbundle --release --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-          flutter build apk --release --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build appbundle --release --build-number $GITHUB_RUN_NUMBER --dart-define=COMMIT_HASH=$GITHUB_SHA --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build apk --release --build-number $GITHUB_RUN_NUMBER --dart-define=COMMIT_HASH=$GITHUB_SHA --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - if: ${{ github.event.issue.pull_request }}
         name: Build for Android (profile)
         run: |
-          flutter build appbundle --profile --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
-          flutter build apk --profile --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build appbundle --profile --build-number $GITHUB_RUN_NUMBER --dart-define=COMMIT_HASH=$GITHUB_SHA --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build apk --profile --build-number $GITHUB_RUN_NUMBER --dart-define=COMMIT_HASH=$GITHUB_SHA --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
       - name: Upload Android APK
         uses: actions/upload-artifact@v3
         with:
@@ -214,15 +210,10 @@ jobs:
       - run: flutter doctor
       - name: Download dependencies
         run: flutter pub get
-      - name: Set build code
-        run: |
-          set BUILD_CODE=$(git rev-parse HEAD | od -An -tuC | tr ' ' '\0' | tr '\n' '\0')
-          echo "BUILD_CODE=$BUILD_CODE"
-          echo "BUILD_CODE=$BUILD_CODE" >>$GITHUB_ENV
       - name: Build desktop
         run: |
           flutter config --enable-windows-desktop
-          flutter build windows --build-number $BUILD_CODE --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build windows --build-number $GITHUB_RUN_NUMBER --dart-define=COMMIT_HASH=$GITHUB_SHA --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
           
           pushd build/windows/runner/Release
           7z a ../../../../com.expidusos.file_manager-windows-${{ matrix.arch }}.zip . -r

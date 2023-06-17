@@ -17,6 +17,19 @@ import 'logic.dart';
 import 'widgets.dart';
 import 'views.dart';
 
+const kCommitHash = String.fromEnvironment('COMMIT_HASH', defaultValue: '');
+
+String _getCommitHash(String buildCode) {
+  if (kCommitHash.isNotEmpty) return kCommitHash;
+  var buildCodeChars = <int>[];
+
+  for (var i = 0; i < (buildCode.length / 2); i++) {
+    buildCodeChars.add(int.parse(buildCode.substring(i * 2, (i * 2) + 2)));
+  }
+
+  return String.fromCharCodes(buildCodeChars);
+}
+
 Future<void> _runMain({
   required bool isSentry,
   required bool isFirstRun,
@@ -53,16 +66,9 @@ Future<void> _runMain({
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   final pinfo = await PackageInfo.fromPlatform();
-  var buildCodeChars = <int>[];
-
-  for (var i = 0; i < (pinfo.buildNumber.length / 2); i++) {
-    buildCodeChars.add(int.parse(pinfo.buildNumber.substring(i * 2, (i * 2) + 2)));
-  }
-
-  final buildCode = String.fromCharCodes(buildCodeChars);
 
   final pubspec = PubSpec.fromYamlString(await rootBundle.loadString('pubspec.yaml')).copy(
-    version: Version.parse("${pinfo.version}+$buildCode"),
+    version: Version.parse("${pinfo.version}+${_getCommitHash(pinfo.buildNumber)}"),
   );
 
   const sentryDsn = String.fromEnvironment('SENTRY_DSN', defaultValue: '');
