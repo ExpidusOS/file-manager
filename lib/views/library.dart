@@ -225,7 +225,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
   Widget build(BuildContext context) {
     var leadingWidth = 0.0;
     if (Breakpoints.smallMobile.isActive(context)) leadingWidth += 52;
-    if (Navigator.of(context).canPop()) leadingWidth += 48;
+    if (Navigator.of(context, rootNavigator: true).canPop()) leadingWidth += 48;
 
     final destinations = <NavigationDestination>[
       ...LibraryEntry.sort(libraryEntries).map((entry) => NavigationDestination(

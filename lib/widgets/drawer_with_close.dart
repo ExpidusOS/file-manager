@@ -14,9 +14,9 @@ class DrawerWithClose extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          ...(canGoBack ?? Navigator.of(context).canPop() ? [
+          ...(canGoBack ?? Navigator.of(context, rootNavigator: true).canPop() ? [
             IconButton(
-              onPressed: () => onBack == null ? Navigator.of(context).maybePop() : onBack!(),
+              onPressed: () => onBack == null ? Navigator.of(context, rootNavigator: true).pop() : onBack!(),
               icon: const Icon(Icons.arrow_back_ios),
             )
           ] : []),
