@@ -20,14 +20,14 @@ import 'views.dart';
 const kCommitHash = String.fromEnvironment('COMMIT_HASH', defaultValue: '');
 
 String _getCommitHash(String buildCode) {
-  if (kCommitHash.isNotEmpty) return kCommitHash;
+  if (kCommitHash.isNotEmpty) return kCommitHash.substring(0, 7);
   var buildCodeChars = <int>[];
 
   for (var i = 0; i < (buildCode.length / 2); i++) {
     buildCodeChars.add(int.parse(buildCode.substring(i * 2, (i * 2) + 2)));
   }
 
-  return String.fromCharCodes(buildCodeChars);
+  return String.fromCharCodes(buildCodeChars).substring(0, 7);
 }
 
 Future<void> _runMain({
