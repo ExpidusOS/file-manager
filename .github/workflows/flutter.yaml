@@ -126,7 +126,7 @@ jobs:
         run: |
           git config --global --add safe.directory $(pwd)
           export BUILD_CODE=$(git rev-parse HEAD | od -An -tuC | tr ' ' '\0' | tr '\n' '\0')
-          sed -i "s/version: .*/version: 0.1.2-$BUILD_CODE/g" pubspec.yaml
+          sed -i "s/version: .*/version: 0.1.2+$BUILD_CODE/g" pubspec.yaml
       - if: ${{ !github.event.issue.pull_request }}
         name: Set up GPG key
         uses: crazy-max/ghaction-import-gpg@v5
