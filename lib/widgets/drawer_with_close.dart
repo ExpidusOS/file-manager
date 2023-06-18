@@ -16,7 +16,7 @@ class DrawerWithClose extends StatelessWidget {
         children: [
           ...(canGoBack ?? Navigator.of(context).canPop() ? [
             IconButton(
-              onPressed: () => onBack == null ? Navigator.of(context).pop() : onBack!(),
+              onPressed: () => onBack == null ? Navigator.of(context).maybePop() : onBack!(),
               icon: const Icon(Icons.arrow_back_ios),
             )
           ] : []),
