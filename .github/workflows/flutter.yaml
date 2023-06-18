@@ -1,5 +1,10 @@
 name: Flutter
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - '*'
+      - '!l10n_master'
+  pull_request:
 
 permissions:
   contents: write
@@ -54,7 +59,7 @@ jobs:
           if [[ "${{ github.ref_name }}" == "master" ]]; then
             echo "TRACK=beta" >> $GITHUB_ENV
           else
-            echo "TRACK=${{ github.ref_name }}" >> $GITHUB_ENV
+            echo "TRACK=internal" >> $GITHUB_ENV
           fi
           
           echo "RELEASE_FILE=build/app/outputs/bundle/release/app-release.aab" >> $GITHUB_ENV
