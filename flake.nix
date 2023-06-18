@@ -35,9 +35,9 @@
 
           src = cleanSource self;
 
-          preBuild = ''
-            sed -i 's/version: .*/version: ${version}/g' pubspec.yaml
-          '';
+          flutterBuildFlags = [
+            "--dart-define=COMMIT_HASH=${shortRev}"
+          ];
 
           depsListFile = ./deps.json;
           vendorHash = "sha256-4ByEQMyK3Fwxdk+YsBau2wqYKAohNXiEbo9VK8rbm9k=";
