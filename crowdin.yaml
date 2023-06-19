@@ -7,4 +7,4 @@ files:
   - source: /i18n/*.arb
     translation: /lib/l10n/app_%two_letters_code%.arb
   - source: /i18n/*.arb
-    translation: /android/app/src/main/res/values-%two_letters_code%/strings.xml
+    translation: /android/app/src/main/res/values-%android_code%/strings.xml
