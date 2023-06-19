@@ -1,0 +1,186 @@
+{
+    "applicationTitle": "ファイルマネージャー",
+    "libraryHome": "ホーム",
+    "applicationTitleWithLibraryName": "ファイルマネージャー：{libraryName}",
+    "@applicationTitleWithLibraryName": {
+        "description": "Application title with the name of the current library",
+        "placeholders": {
+            "libraryName": {
+                "type": "String"
+            }
+        }
+    },
+    "libraryStorage": "ストレージ",
+    "@libraryStorage": {
+        "description": "Library"
+    },
+    "libraryDCIM": "DCIM",
+    "@libraryDCIM": {
+        "description": "Library"
+    },
+    "libraryAlarms": "アラーム",
+    "@libraryAlarms": {
+        "description": "Library"
+    },
+    "libraryDocuments": "ドキュメント",
+    "@libraryDocuments": {
+        "description": "Library"
+    },
+    "libraryDownloads": "ダウンロード",
+    "@libraryDownloads": {
+        "description": "Library"
+    },
+    "libraryMovies": "ムービー",
+    "@libraryMovies": {
+        "description": "Library"
+    },
+    "libraryMusic": "ミュージック",
+    "@libraryMusic": {
+        "description": "Library"
+    },
+    "libraryPictures": "ピクチャ",
+    "@libraryPictures": {
+        "description": "Library"
+    },
+    "libraryPodcasts": "ポッドキャスト",
+    "@libraryPodcasts": {
+        "description": "Library"
+    },
+    "libraryNotifications": "通知",
+    "@libraryNotifications": {
+        "description": "Library"
+    },
+    "libraryRingtones": "着信音",
+    "@libraryRingtones": {
+        "description": "Library"
+    },
+    "libraryDesktop": "デスクトップ",
+    "@libraryDesktop": {
+        "description": "Library"
+    },
+    "libraryTemplates": "テンプレート",
+    "@libraryTemplates": {
+        "description": "Library"
+    },
+    "libraryPublic": "公開",
+    "@libraryPublic": {
+        "description": "Library"
+    },
+    "viewAbout": "について",
+    "@viewAbout": {
+        "description": "About Page View"
+    },
+    "viewSettings": "設定",
+    "@viewSettings": {
+        "description": "Settings Page View"
+    },
+    "viewPrivacy": "プライバシーポリシー",
+    "settingsRestoreDefaults": "初期設定に戻す",
+    "@settingsRestoreDefaults": {
+        "description": "Settings"
+    },
+    "feedbackSend": "フィードバックを送信する",
+    "feedbackSubmit": "フィードバックを送信します。",
+    "feedbackSubmitSuccess": "フィードバックを送信しました。",
+    "feedbackSubmitFail": "フィードバックの送信に失敗しました: {errorMessage}",
+    "@feedbackSubmitFail": {
+        "description": "Error message displayed in a snackbar when feedback submission failed.",
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        }
+    },
+    "feedbackFieldHintEmail": "Eメールアドレス",
+    "feedbackFieldLabelEmail": "E メール",
+    "feedbackFieldEmptyEmail": "Eメールアドレスを入力してください",
+    "feedbackFieldInvalidEmail": "有効なメールアドレスではありません",
+    "feedbackFieldLabelComments": "あなたのコメント",
+    "feedbackFieldEmptyComments": "コメントを入力してください",
+    "aboutHeadingDependencies": "依存関係",
+    "viewLibraryActionCreateFile": "ファイルを作成",
+    "viewLibraryActionCreateDirectory": "ディレクトリを作成",
+    "libraryItemActionCopy": "コピー",
+    "libraryItemActionMove": "移動",
+    "libraryItemActionLink": "リンク",
+    "libraryItemActionDelete": "削除",
+    "genericErrorMessage": "アクションを実行できませんでした: {errorMessage}",
+    "@genericErrorMessage": {
+        "description": "An error message with no specific meaning",
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        }
+    },
+    "fileOpenErrorMessage": "ファイルを開けませんでした: {errorMessage}",
+    "@fileOpenErrorMessage": {
+        "description": "An error message indicating a failure in opening a file",
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        }
+    },
+    "libraryViewsPopulateFailedTitle": "ライブラリエントリの取得に失敗しました",
+    "dialogCreateFileTitle": "ファイルを作成",
+    "dialogCreateDirectoryTitle": "ディレクトリを作成",
+    "dialogCreateEntryFieldName": "名前",
+    "dialogCreateEntryEmptyName": "名前を入力して下さい",
+    "dialogCreateEntryActionCancel": "キャンセル",
+    "dialogCreateEntryActionCreate": "作成する",
+    "settingsShowHiddenFiles": "隠しファイルおよびディレクトリの表示",
+    "settingsShowHiddenLibraries": "隠しライブラリを表示する",
+    "settingsShowGridView": "すべてのディレクトリにグリッドビューを表示",
+    "settingsOptInErrorReporting": "Sentry 経由のエラー報告へのオプトイン",
+    "settingsOptInErrorReportingSubtitle": "アプリケーションを再起動した後に有効になります",
+    "clipboardDeleteLabel": "削除: {deleteCount}",
+    "@clipboardDeleteLabel": {
+        "description": "The label for the amount of entries being deleted",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardLinkLabel": "リンク: {deleteCount}",
+    "@clipboardLinkLabel": {
+        "description": "The label for the amount of entries being linked",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardMoveLabel": "移動中: {deleteCount}",
+    "@clipboardMoveLabel": {
+        "description": "The label for the amount of entries being moved",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardCopyLabel": "コピー: {deleteCount}",
+    "@clipboardCopyLabel": {
+        "description": "The label for the amount of entries being copied",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardExecute": "ここでアクションを実行",
+    "favoriteRemove": "お気に入りを削除",
+    "favoriteAdd": "お気に入りに追加",
+    "feedbackViewAbout": "についてのアプリケーション",
+    "feedbackViewFeedback": "フィードバック提出ビュー",
+    "feedbackViewFeedbackChoice": "フィードバックの選択リスト",
+    "feedbackViewLibraryGrid": "グリッド内のファイルの参照",
+    "feedbackViewLibraryList": "ファイルを一覧で参照中",
+    "feedbackViewSettings": "設定ビュー",
+    "fullApplicationTitle": "ExpidusOSのファイルマネージャー",
+    "settingsTheme": "テーマ",
+    "donationMessage": "アプリを楽しんでいますか？寄付してください。",
+    "aboutHeadingFunding": "寄付"
+}
