@@ -1,5 +1,5 @@
 {
-    "applicationTitle": "File Manager",
+    "applicationTitle": "Gerenciador de arquivos",
     "libraryHome": "Home",
     "applicationTitleWithLibraryName": "File Manager: {libraryName}",
     "@applicationTitleWithLibraryName": {
