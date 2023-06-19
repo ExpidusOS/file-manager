@@ -3,10 +3,11 @@ api_token: CROWDIN_PERSONAL_TOKEN
 base_path: .
 base_url: 'https://api.crowdin.com'
 preserve_hierarchy: 1
+pull_request_title: "feat: crowdin update"
+pull_request_labels:
+  - l10n
 files:
   - source: /i18n/*.arb
     translation: /lib/l10n/app_%locale_with_underscore%.arb
-  - source: /i18n/*.arb
-    translation: /lib/l10n/app_%two_letters_code%.arb
-  - source: /i18n/*.arb
+  - source: /android/app/res/values/*.xml
     translation: /android/app/src/main/res/values-%android_code%/strings.xml
