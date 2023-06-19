@@ -1,7 +1,7 @@
 {
-    "applicationTitle": "Gerenciador de arquivos",
-    "libraryHome": "Home",
-    "applicationTitleWithLibraryName": "File Manager: {libraryName}",
+    "applicationTitle": "Gerenciador de Arquivos",
+    "libraryHome": "Início",
+    "applicationTitleWithLibraryName": "Gerenciador de Arquivos: {libraryName}",
     "@applicationTitleWithLibraryName": {
         "description": "Application title with the name of the current library",
         "placeholders": {
@@ -10,7 +10,7 @@
             }
         }
     },
-    "libraryStorage": "Storage",
+    "libraryStorage": "Armazenamento",
     "@libraryStorage": {
         "description": "Library"
     },
@@ -18,11 +18,11 @@
     "@libraryDCIM": {
         "description": "Library"
     },
-    "libraryAlarms": "Alarms",
+    "libraryAlarms": "Alarmes",
     "@libraryAlarms": {
         "description": "Library"
     },
-    "libraryDocuments": "Documents",
+    "libraryDocuments": "Documentos",
     "@libraryDocuments": {
         "description": "Library"
     },
@@ -30,15 +30,15 @@
     "@libraryDownloads": {
         "description": "Library"
     },
-    "libraryMovies": "Movies",
+    "libraryMovies": "Vídeos",
     "@libraryMovies": {
         "description": "Library"
     },
-    "libraryMusic": "Music",
+    "libraryMusic": "Música",
     "@libraryMusic": {
         "description": "Library"
     },
-    "libraryPictures": "Pictures",
+    "libraryPictures": "Imagens",
     "@libraryPictures": {
         "description": "Library"
     },
@@ -46,43 +46,43 @@
     "@libraryPodcasts": {
         "description": "Library"
     },
-    "libraryNotifications": "Notifications",
+    "libraryNotifications": "Notificações",
     "@libraryNotifications": {
         "description": "Library"
     },
-    "libraryRingtones": "Ringtones",
+    "libraryRingtones": "Toques",
     "@libraryRingtones": {
         "description": "Library"
     },
-    "libraryDesktop": "Desktop",
+    "libraryDesktop": "Área de trabalho",
     "@libraryDesktop": {
         "description": "Library"
     },
-    "libraryTemplates": "Templates",
+    "libraryTemplates": "Modelos",
     "@libraryTemplates": {
         "description": "Library"
     },
-    "libraryPublic": "Public",
+    "libraryPublic": "Público",
     "@libraryPublic": {
         "description": "Library"
     },
-    "viewAbout": "About",
+    "viewAbout": "Sobre",
     "@viewAbout": {
         "description": "About Page View"
     },
-    "viewSettings": "Settings",
+    "viewSettings": "Configurações",
     "@viewSettings": {
         "description": "Settings Page View"
     },
-    "viewPrivacy": "Privacy Policy",
-    "settingsRestoreDefaults": "Restore default settings",
+    "viewPrivacy": "Política de Privacidade",
+    "settingsRestoreDefaults": "Restaurar configurações padrão",
     "@settingsRestoreDefaults": {
         "description": "Settings"
     },
-    "feedbackSend": "Send feedback",
-    "feedbackSubmit": "Submit feedback",
-    "feedbackSubmitSuccess": "Successfully submitted your feedback",
-    "feedbackSubmitFail": "Failed to send your feedback: {errorMessage}",
+    "feedbackSend": "Enviar feedback",
+    "feedbackSubmit": "Enviar resposta",
+    "feedbackSubmitSuccess": "Seu feedback foi enviado com sucesso",
+    "feedbackSubmitFail": "Falha ao enviar seu feedback: {errorMessage}",
     "@feedbackSubmitFail": {
         "description": "Error message displayed in a snackbar when feedback submission failed.",
         "placeholders": {
@@ -91,20 +91,20 @@
             }
         }
     },
-    "feedbackFieldHintEmail": "E-Mail address",
-    "feedbackFieldLabelEmail": "E-Mail",
-    "feedbackFieldEmptyEmail": "Please enter your E-Mail address",
-    "feedbackFieldInvalidEmail": "Not a valid E-Mail address",
-    "feedbackFieldLabelComments": "Your comments",
-    "feedbackFieldEmptyComments": "Please enter your comments",
-    "aboutHeadingDependencies": "Dependencies",
-    "viewLibraryActionCreateFile": "Create File",
-    "viewLibraryActionCreateDirectory": "Create Directory",
-    "libraryItemActionCopy": "Copy",
-    "libraryItemActionMove": "Move",
+    "feedbackFieldHintEmail": "Endereço de E-mail",
+    "feedbackFieldLabelEmail": "E-mail",
+    "feedbackFieldEmptyEmail": "Por favor, insira o seu endereço de E-mail",
+    "feedbackFieldInvalidEmail": "Endereço de E-Mail inválido",
+    "feedbackFieldLabelComments": "Seus comentários",
+    "feedbackFieldEmptyComments": "Por favor, insira os seus comentários",
+    "aboutHeadingDependencies": "Dependências",
+    "viewLibraryActionCreateFile": "Criar Arquivo",
+    "viewLibraryActionCreateDirectory": "Criar Diretório",
+    "libraryItemActionCopy": "Copiar",
+    "libraryItemActionMove": "Mover",
     "libraryItemActionLink": "Link",
-    "libraryItemActionDelete": "Delete",
-    "genericErrorMessage": "Failed to perform action: {errorMessage}",
+    "libraryItemActionDelete": "Deletar",
+    "genericErrorMessage": "Falha ao executar a ação: {errorMessage}",
     "@genericErrorMessage": {
         "description": "An error message with no specific meaning",
         "placeholders": {
@@ -113,7 +113,7 @@
             }
         }
     },
-    "fileOpenErrorMessage": "Failed to open file: {errorMessage}",
+    "fileOpenErrorMessage": "Falha ao abrir arquivo: {errorMessage}",
     "@fileOpenErrorMessage": {
         "description": "An error message indicating a failure in opening a file",
         "placeholders": {
@@ -122,19 +122,19 @@
             }
         }
     },
-    "libraryViewsPopulateFailedTitle": "Failed to get library entries",
-    "dialogCreateFileTitle": "Create File",
-    "dialogCreateDirectoryTitle": "Create Directory",
-    "dialogCreateEntryFieldName": "Name",
-    "dialogCreateEntryEmptyName": "Please enter the name",
-    "dialogCreateEntryActionCancel": "Cancel",
-    "dialogCreateEntryActionCreate": "Create",
-    "settingsShowHiddenFiles": "Show hidden files and directories",
-    "settingsShowHiddenLibraries": "Show hidden libraries",
-    "settingsShowGridView": "Show grid view in all directories",
-    "settingsOptInErrorReporting": "Opt-in to error reporting via Sentry",
-    "settingsOptInErrorReportingSubtitle": "Will take effect after restarting the application",
-    "clipboardDeleteLabel": "Deleting: {deleteCount}",
+    "libraryViewsPopulateFailedTitle": "Falha ao obter entradas da biblioteca",
+    "dialogCreateFileTitle": "Criar Arquivo",
+    "dialogCreateDirectoryTitle": "Criar Diretório",
+    "dialogCreateEntryFieldName": "Nome",
+    "dialogCreateEntryEmptyName": "Por favor, insira o nome",
+    "dialogCreateEntryActionCancel": "Cancelar",
+    "dialogCreateEntryActionCreate": "Criar",
+    "settingsShowHiddenFiles": "Mostrar arquivos e pastas ocultas",
+    "settingsShowHiddenLibraries": "Mostrar bibliotecas ocultas",
+    "settingsShowGridView": "Mostrar exibição em grade em todos os diretórios",
+    "settingsOptInErrorReporting": "Optar por enviar relatórios de erros por meio do Sentry",
+    "settingsOptInErrorReportingSubtitle": "As alterações terão efeito ao reiniciar o aplicativo",
+    "clipboardDeleteLabel": "Deletando: {deleteCount}",
     "@clipboardDeleteLabel": {
         "description": "The label for the amount of entries being deleted",
         "placeholders": {
@@ -143,7 +143,7 @@
             }
         }
     },
-    "clipboardLinkLabel": "Linking: {deleteCount}",
+    "clipboardLinkLabel": "Vinculando: {deleteCount}",
     "@clipboardLinkLabel": {
         "description": "The label for the amount of entries being linked",
         "placeholders": {
@@ -152,7 +152,7 @@
             }
         }
     },
-    "clipboardMoveLabel": "Moving: {deleteCount}",
+    "clipboardMoveLabel": "Movendo: {deleteCount}",
     "@clipboardMoveLabel": {
         "description": "The label for the amount of entries being moved",
         "placeholders": {
@@ -161,7 +161,7 @@
             }
         }
     },
-    "clipboardCopyLabel": "Copying: {deleteCount}",
+    "clipboardCopyLabel": "Copiando: {deleteCount}",
     "@clipboardCopyLabel": {
         "description": "The label for the amount of entries being copied",
         "placeholders": {
@@ -170,17 +170,17 @@
             }
         }
     },
-    "clipboardExecute": "Perform actions here",
-    "favoriteRemove": "Remove favorite",
-    "favoriteAdd": "Add as favorite",
-    "feedbackViewAbout": "Application About",
-    "feedbackViewFeedback": "Feedback submission view",
-    "feedbackViewFeedbackChoice": "Feedback choice list",
-    "feedbackViewLibraryGrid": "File browsing in a grid",
-    "feedbackViewLibraryList": "File browsing in a list",
-    "feedbackViewSettings": "Settings view",
-    "fullApplicationTitle": "ExpidusOS File Manager",
-    "settingsTheme": "Theme",
-    "donationMessage": "Enjoying the app? Please donate.",
-    "aboutHeadingFunding": "Donations"
+    "clipboardExecute": "Realizar ações aqui",
+    "favoriteRemove": "Remover dos favoritos",
+    "favoriteAdd": "Adicionar aos favoritos",
+    "feedbackViewAbout": "Sobre o aplicativo",
+    "feedbackViewFeedback": "Visualização de submissão de Feedback",
+    "feedbackViewFeedbackChoice": "Lista de opções de feedback",
+    "feedbackViewLibraryGrid": "Navegação em arquivos em uma grade",
+    "feedbackViewLibraryList": "Navegação de arquivos em uma lista",
+    "feedbackViewSettings": "Visualização de configurações",
+    "fullApplicationTitle": "Gerenciador de Arquivos ExpidusOS",
+    "settingsTheme": "Tema",
+    "donationMessage": "Gostando do aplicativo? Por favor, doe.",
+    "aboutHeadingFunding": "Doações"
 }
