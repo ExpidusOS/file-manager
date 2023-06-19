@@ -9,3 +9,5 @@ pull_request_labels:
 files:
   - source: /i18n/*.arb
     translation: /lib/l10n/app_%locale_with_underscore%.arb
+  - source: /android/app/src/main/res/values/strings.xml
+    translation: /android/app/src/main/res/values-%android_code%/strings.xml
