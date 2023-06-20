@@ -31,6 +31,14 @@
   </categories>
 
   <releases>
+    <release version="0.2.0" date="2023-06-20">
+      <description>
+        <p>Performance fixes, adds adaptive navigation and Portugese translations, code cleanup.</p>
+      </description>
+
+      <artifacts>
+      </artifacts>
+    </release>
     <release version="0.1.2" date="2023-06-06">
       <description>
         <p>Fixes the text contrasting issue on desktop devices. Some additional changes made to hopefully fix release assets.</p>
