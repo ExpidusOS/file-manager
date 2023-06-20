@@ -70,7 +70,7 @@ Future<void> main(List<String> args) async {
         options.dsn = sentryDsn;
         options.tracesSampleRate = 1.0;
         options.release = 'com.expidusos.file_manager@${pubspec.version!}';
-        options.dist = pubspec.version!;
+        options.dist = pubspec.version!.toString();
 
         if (kDebugMode) {
           options.environment = 'debug';
