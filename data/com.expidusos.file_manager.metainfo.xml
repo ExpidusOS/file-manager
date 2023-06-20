@@ -33,7 +33,7 @@
   <releases>
     <release version="0.2.0" date="2023-06-20">
       <description>
-        <p>Performance fixes, adds adaptive navigation and Portugese translations, code cleanup.</p>
+        <p>Performance fixes, adds adaptive navigation and Portuguese translations, code cleanup.</p>
       </description>
 
       <artifacts>
