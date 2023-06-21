@@ -11,5 +11,3 @@ files:
     translation: /lib/l10n/app_%locale_with_underscore%.arb
   - source: /android/app/src/main/res/values/strings.xml
     translation: /android/app/src/main/res/values-%android_code%/strings.xml
-  - source: README.md
-    translation: README.%locale_with_underscore%.md
