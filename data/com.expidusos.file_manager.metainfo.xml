@@ -37,6 +37,22 @@
       </description>
 
       <artifacts>
+        <artifact type="binary" platform="x86_64-linux-gnu">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.2.0/com.expidusos.file_manager-linux-x64.zip</location>
+          <checksum type="sha256">5e1e6a3228b27e1d76ac16da926e7210f2bee5497b232353b16aac176e611ebe</checksum>
+        </artifact>
+        <artifact type="binary" platform="x86_64-linux-gnu">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.2.0/com.expidusos.file_manager.flatpak</location>
+          <checksum type="sha256">5d937c81cb783d8e80cfdee24a6ae826aba9588233fc1473eb0fea1e21c28497</checksum>
+        </artifact>
+        <artifact type="binary" platform="x86_64-windows-msvc">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.2.0/com.expidusos.file_manager-windows-x64.zip</location>
+          <checksum type="sha256">82e72eef6066bb2e6d011241d75ac1e7cd7778b060f54f4ad730713dc438611f</checksum>
+        </artifact>
+        <artifact type="source">
+          <location>https://github.com/ExpidusOS/file-manager/archive/refs/tags/0.2.0.tar.gz</location>
+          <checksum type="sha256">35b69de2ebf63a80dfe8b97c973d11a7c6837c3cfc56de74b2a0099d56fc8e51</checksum>
+        </artifact>
       </artifacts>
     </release>
     <release version="0.1.2" date="2023-06-06">
