@@ -1,0 +1,186 @@
+{
+    "applicationTitle": "Trình quản lý tập tin",
+    "libraryHome": "Trang chủ",
+    "applicationTitleWithLibraryName": "Trình quản lý tập tin: {libraryName}",
+    "@applicationTitleWithLibraryName": {
+        "description": "Application title with the name of the current library",
+        "placeholders": {
+            "libraryName": {
+                "type": "String"
+            }
+        }
+    },
+    "libraryStorage": "Lưu trữ",
+    "@libraryStorage": {
+        "description": "Library"
+    },
+    "libraryDCIM": "Máy ảnh",
+    "@libraryDCIM": {
+        "description": "Library"
+    },
+    "libraryAlarms": "Chuông báo",
+    "@libraryAlarms": {
+        "description": "Library"
+    },
+    "libraryDocuments": "Tài liệu",
+    "@libraryDocuments": {
+        "description": "Library"
+    },
+    "libraryDownloads": "Tải về",
+    "@libraryDownloads": {
+        "description": "Library"
+    },
+    "libraryMovies": "Phim",
+    "@libraryMovies": {
+        "description": "Library"
+    },
+    "libraryMusic": "Nhạc",
+    "@libraryMusic": {
+        "description": "Library"
+    },
+    "libraryPictures": "Ảnh",
+    "@libraryPictures": {
+        "description": "Library"
+    },
+    "libraryPodcasts": "Podcast",
+    "@libraryPodcasts": {
+        "description": "Library"
+    },
+    "libraryNotifications": "Thông báo",
+    "@libraryNotifications": {
+        "description": "Library"
+    },
+    "libraryRingtones": "Nhạc chuông",
+    "@libraryRingtones": {
+        "description": "Library"
+    },
+    "libraryDesktop": "Màn hình chính",
+    "@libraryDesktop": {
+        "description": "Library"
+    },
+    "libraryTemplates": "Thư viện mẫu",
+    "@libraryTemplates": {
+        "description": "Library"
+    },
+    "libraryPublic": "Công cộng",
+    "@libraryPublic": {
+        "description": "Library"
+    },
+    "viewAbout": "Giới thiệu",
+    "@viewAbout": {
+        "description": "About Page View"
+    },
+    "viewSettings": "Cài đặt",
+    "@viewSettings": {
+        "description": "Settings Page View"
+    },
+    "viewPrivacy": "Chính sách quyền riêng tư",
+    "settingsRestoreDefaults": "Khôi phục cài đặt mặc định",
+    "@settingsRestoreDefaults": {
+        "description": "Settings"
+    },
+    "feedbackSend": "Phản hồi",
+    "feedbackSubmit": "Gửi phản hồi",
+    "feedbackSubmitSuccess": "Phản hồi thành công",
+    "feedbackSubmitFail": "Không thể gửi phản hồi: {errorMessage}",
+    "@feedbackSubmitFail": {
+        "description": "Error message displayed in a snackbar when feedback submission failed.",
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        }
+    },
+    "feedbackFieldHintEmail": "Địa chỉ E-Mail",
+    "feedbackFieldLabelEmail": "E-Mail",
+    "feedbackFieldEmptyEmail": "Nhập địa chỉ E-Mail",
+    "feedbackFieldInvalidEmail": "Địa chỉ E-Mail không hợp lệ",
+    "feedbackFieldLabelComments": "Ý kiến của bạn",
+    "feedbackFieldEmptyComments": "Nhập ý kiến",
+    "aboutHeadingDependencies": "Các thành phần phụ thuộc",
+    "viewLibraryActionCreateFile": "Tạo tệp",
+    "viewLibraryActionCreateDirectory": "Tạo thư mục",
+    "libraryItemActionCopy": "Sao chép",
+    "libraryItemActionMove": "Di chuyển",
+    "libraryItemActionLink": "Tao liên kết",
+    "libraryItemActionDelete": "Xóa",
+    "genericErrorMessage": "Đã xảy ra lỗi: {errorMessage}",
+    "@genericErrorMessage": {
+        "description": "An error message with no specific meaning",
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        }
+    },
+    "fileOpenErrorMessage": "Không thể mở tệp: {errorMessage}",
+    "@fileOpenErrorMessage": {
+        "description": "An error message indicating a failure in opening a file",
+        "placeholders": {
+            "errorMessage": {
+                "type": "String"
+            }
+        }
+    },
+    "libraryViewsPopulateFailedTitle": "Không thể liệt kê các mục thư viện",
+    "dialogCreateFileTitle": "Tạo tệp",
+    "dialogCreateDirectoryTitle": "Tạo thư mục",
+    "dialogCreateEntryFieldName": "Tên",
+    "dialogCreateEntryEmptyName": "Nhập tên",
+    "dialogCreateEntryActionCancel": "Hủy",
+    "dialogCreateEntryActionCreate": "Tạo",
+    "settingsShowHiddenFiles": "Hiển thị tệp và thư mục ẩn",
+    "settingsShowHiddenLibraries": "Hiển thị mục thư viện ẩn",
+    "settingsShowGridView": "Xem ở dạng lưới trong mọi thư mục",
+    "settingsOptInErrorReporting": "Cho phép báo lỗi qua Sentry",
+    "settingsOptInErrorReportingSubtitle": "Sẽ có hiệu lực khi khởi động lại ứng dụng",
+    "clipboardDeleteLabel": "Đang xóa: {deleteCount}",
+    "@clipboardDeleteLabel": {
+        "description": "The label for the amount of entries being deleted",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardLinkLabel": "Đang tạo liên kết: {deleteCount}",
+    "@clipboardLinkLabel": {
+        "description": "The label for the amount of entries being linked",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardMoveLabel": "Đang di chuyển: {deleteCount}",
+    "@clipboardMoveLabel": {
+        "description": "The label for the amount of entries being moved",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardCopyLabel": "Đang sao chép: {deleteCount}",
+    "@clipboardCopyLabel": {
+        "description": "The label for the amount of entries being copied",
+        "placeholders": {
+            "deleteCount": {
+                "type": "int"
+            }
+        }
+    },
+    "clipboardExecute": "Thực hiện hành động ở đây",
+    "favoriteRemove": "Bỏ khỏi mục yêu thích",
+    "favoriteAdd": "Thêm vào mục yêu thích",
+    "feedbackViewAbout": "Thông tin ứng dụng",
+    "feedbackViewFeedback": "Xem phản hồi",
+    "feedbackViewFeedbackChoice": "Danh sách lựa chọn phản hồi",
+    "feedbackViewLibraryGrid": "Xem ở dạng lưới",
+    "feedbackViewLibraryList": "Xem ở dạng danh sách",
+    "feedbackViewSettings": "Mục cài đặt",
+    "fullApplicationTitle": "Trình quản lý tập tin ExpidusOS",
+    "settingsTheme": "Chủ đề",
+    "donationMessage": "Thấy hài lòng? Hãy quyên góp.",
+    "aboutHeadingFunding": "Quyên góp"
+}
