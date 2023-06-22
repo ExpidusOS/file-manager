@@ -4,6 +4,7 @@ Type=Application
 Name=File Manager
 Name[ja_JP]=ファイルマネージャー
 Name[pt_BR]=Gerenciador de Arquivos
+Name[vi_VN]=Trình quản lý tập tin
 Comment=ExpidusOS File Manager
 Categories=Utility;
 Icon=com.expidusos.file_manager
