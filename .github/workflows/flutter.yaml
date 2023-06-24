@@ -126,7 +126,7 @@ jobs:
       - name: Add dependencies
         run: |
           dnf update -y
-          dnf install -y jq cmake ninja-build gtk3-devel docker clang
+          dnf install -y jq cmake ninja-build gtk3-devel xvfb docker clang
           dnf clean all
       - if: ${{ matrix.arch != 'x64' }}
         name: Set up cross compiling
@@ -148,7 +148,7 @@ jobs:
         run: |
           git config --global --add safe.directory /opt/hostedtoolcache/flutter/${{ matrix.channel }}-3.10.2-${{ matrix.arch }}
           flutter config --enable-linux-desktop
-          flutter build linux --build-number $GITHUB_RUN_NUMBER --dart-define=COMMIT_HASH=$GITHUB_SHA --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }}
+          flutter build linux --build-number $GITHUB_RUN_NUMBER --dart-define=COMMIT_HASH=$GITHUB_SHA --dart-define=SENTRY_DSN=${{ secrets.SENTRY_DSN }} --target-platform linux-${{ matrix.arch }}
           tar -czf com.expidusos.file_manager-linux-${{ matrix.arch }}.tar.gz -C build/linux/${{ matrix.arch }}/release/bundle/ .
       - if: ${{ !github.event.issue.pull_request }}
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
