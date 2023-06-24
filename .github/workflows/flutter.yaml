@@ -126,7 +126,7 @@ jobs:
       - name: Add dependencies
         run: |
           dnf update -y
-          dnf install -y jq cmake ninja-build gtk3-devel xvfb docker clang
+          dnf install -y jq cmake ninja-build gtk3-devel xorg-x11-server-Xvfb docker clang
           dnf clean all
       - if: ${{ matrix.arch != 'x64' }}
         name: Set up cross compiling
