@@ -126,7 +126,7 @@ jobs:
       - name: Add dependencies
         run: |
           dnf update -y
-          dnf install -y jq cmake ninja-build gtk3-devel clang
+          dnf install -y jq cmake ninja-build gtk3-devel docker clang
           dnf clean all
       - if: ${{ matrix.arch != 'x64' }}
         name: Set up cross compiling
@@ -158,6 +158,7 @@ jobs:
           manifest-path: data/com.expidusos.file_manager.yml
           cache-key: flatpak-builder-${{ github.sha }}
           gpg-sign: F1AE8F34E36642E92E7777B591654E1B742E4226
+          arch: ${{ matrix.arch }}
       - if: ${{ github.event.issue.pull_request }}
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6.1
         name: Bundle Flatpak
@@ -165,6 +166,7 @@ jobs:
           bundle: com.expidusos.file_manager.flatpak
           manifest-path: data/com.expidusos.file_manager.yml
           cache-key: flatpak-builder-${{ github.sha }}
+          arch: ${{ matrix.arch }}
       - name: Upload build
         uses: actions/upload-artifact@v3
         with:
