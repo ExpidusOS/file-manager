@@ -128,7 +128,7 @@ jobs:
           dnf update -y
           dnf install -y jq cmake ninja-build gtk3-devel clang
           dnf clean all
-      - if: ${{ matrix.arch != "x64" }}
+      - if: ${{ matrix.arch != 'x64' }}
         name: Set up cross compiling
         uses: docker/setup-qemu-action@v2
         with:
