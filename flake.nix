@@ -60,15 +60,6 @@
               --replace "Icon=com.expidusos.file_manager" "Icon=$out/share/icons/com.expidusos.file_manager.png"
           '';
 
-          nativeBuildInputs = with pkgs; [
-            removeReferencesTo
-          ];
-
-          disallowedReferences = with pkgs; [
-            flutter
-            flutter.unwrapped
-          ];
-
           meta = {
             description = "ExpidusOS File Manager";
             homepage = "https://expidusos.com";
