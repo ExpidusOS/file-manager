@@ -68,5 +68,11 @@
             platforms = [ "x86_64-linux" "aarch64-linux" ];
           };
         };
+
+        devShells.default = pkgs.mkShell {
+          inherit (self.packages.${system}.default) pname version name;
+
+          packages = with pkgs; [ flutter ];
+        };
       });
 }
