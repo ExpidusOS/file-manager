@@ -31,7 +31,10 @@ class LibraryEntry extends StatelessWidget {
   final io.Directory entry;
   final IconData iconData;
 
-  String titleFor(io.Directory dir) => dir.path.replaceFirst(entry.path, title);
+  String titleFor(io.Directory dir) {
+    if (entry.path == '/') return dir.path;
+    return dir.path.replaceFirst(entry.path, title);
+  }
 
   @override
   Widget build(BuildContext context) =>
@@ -342,5 +345,5 @@ class LibraryEntry extends StatelessWidget {
   static LibraryEntry? find({
     required List<LibraryEntry> entries,
     required io.Directory directory,
-  }) => entries.firstWhereOrNull((entry) => directory.path.startsWith(entry.entry.path));
+  }) => entries.lastWhereOrNull((entry) => directory.path.startsWith(entry.entry.path));
 }
