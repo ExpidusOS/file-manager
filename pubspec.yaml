@@ -1,7 +1,7 @@
 name: file_manager
 description: The file manager for the Expidus operating system.
 publish_to: 'none'
-version: 0.2.0+65656565656565
+version: 0.2.1+65656565656565
 homepage: https://expidusos.com
 funding:
   - https://opencollective.com/midstall-software
@@ -18,12 +18,12 @@ dependencies:
   libtokyo:
     git:
       url: https://github.com/ExpidusOS/libtokyo.git
-      ref: 3e1946e1f09d778a44d710ab634957d5281e8e86
+      ref: eb140908dd2435afdf6208cb84bd37db840b46df
       path: packages/libtokyo
   libtokyo_flutter:
     git:
       url: https://github.com/ExpidusOS/libtokyo.git
-      ref: 3e1946e1f09d778a44d710ab634957d5281e8e86
+      ref: eb140908dd2435afdf6208cb84bd37db840b46df
       path: packages/libtokyo_flutter
   path_provider: ^2.0.15
   url_launcher: ^6.1.11
@@ -52,7 +52,7 @@ dependency_overrides:
   libtokyo:
     git:
       url: https://github.com/ExpidusOS/libtokyo.git
-      ref: 3e1946e1f09d778a44d710ab634957d5281e8e86
+      ref: eb140908dd2435afdf6208cb84bd37db840b46df
       path: packages/libtokyo
 
 dev_dependencies:
