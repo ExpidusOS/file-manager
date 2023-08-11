@@ -21,12 +21,14 @@ class LibraryEntry extends StatelessWidget {
   const LibraryEntry({
     super.key,
     this.group = 0,
+    this.scanLast = false,
     required this.title,
     required this.entry,
     required this.iconData,
   });
 
   final int group;
+  final bool scanLast;
   final String title;
   final io.Directory entry;
   final IconData iconData;
@@ -101,7 +103,7 @@ class LibraryEntry extends StatelessWidget {
       case 'PUBLICSHARE':
         return LibraryEntry(title: i18n.libraryPublic, entry: entry, iconData: Icons.public);
       case 'HOME':
-        return LibraryEntry(title: i18n.libraryHome, entry: entry, iconData: Icons.home);
+        return LibraryEntry(title: i18n.libraryHome, entry: entry, iconData: Icons.home, scanLast: true);
       case 'DOWNLOAD':
         return from(
           context,
@@ -232,6 +234,7 @@ class LibraryEntry extends StatelessWidget {
           entries.add(LibraryEntry(
             title: drive.hintName.isEmpty ? (drive.idLabel.isEmpty ? entry.path : drive.idLabel) : drive.hintName,
             entry: entry,
+            scanLast: true,
             iconData: Icons.storage,
             group: 1,
           ));
@@ -345,5 +348,11 @@ class LibraryEntry extends StatelessWidget {
   static LibraryEntry? find({
     required List<LibraryEntry> entries,
     required io.Directory directory,
-  }) => entries.lastWhereOrNull((entry) => directory.path.startsWith(entry.entry.path));
+  }) {
+    final found = entries.firstWhereOrNull((entry) => directory.path.startsWith(entry.entry.path));
+    if (found != null) {
+      if (found!.scanLast) return entries.lastWhereOrNull((entry) => directory.path.startsWith(entry.entry.path));
+    }
+    return found;
+  }
 }
