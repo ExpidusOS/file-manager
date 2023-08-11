@@ -31,6 +31,11 @@
   </categories>
 
   <releases>
+    <release version="0.2.1" date="2023-08-10">
+      <description>
+        <p>Fixes path naming with root filesystem being named on Linux. Updates dependencies.</p>
+      </description>
+    </release>
     <release version="0.2.0" date="2023-06-20">
       <description>
         <p>Performance fixes, adds adaptive navigation and Portuguese translations, code cleanup.</p>
