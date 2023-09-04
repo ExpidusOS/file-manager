@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 0.2.1+65656565656565
 homepage: https://expidusos.com
 funding:
-  - https://opencollective.com/midstall-software
+  - https://opencollective.com/expidusos
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
