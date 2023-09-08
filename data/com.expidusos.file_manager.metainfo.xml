@@ -9,7 +9,7 @@
   <url type="homepage">https://expidusos.com</url>
   <url type="bugtracker">https://github.com/ExpidusOS/file-manager/issues</url>
   <url type="contribute">https://github.com/ExpidusOS/file-manager</url>
-  <url type="donation">https://opencollective.com/midstall-software</url>
+  <url type="donation">https://opencollective.com/expidusos</url>
   <url type="translate">https://crowdin.com/project/expidusos-file-manager</url>
   
   <metadata_license>CC0-1.0</metadata_license>
@@ -31,10 +31,33 @@
   </categories>
 
   <releases>
-    <release version="0.2.1" date="2023-08-10">
+    <release version="0.2.1" date="2023-09-07">
       <description>
-        <p>Fixes path naming with root filesystem being named on Linux. Updates dependencies.</p>
+        <ul>
+          <li>Fixed an issue with text contrasting on mobile with a fix introduced in libtokyo</li>
+          <li>Use the ExpidusOS Open Collective page instead of the Midstall one</li>
+          <li>Fixes #31 - volume naming</li>
+        </ul>
       </description>
+
+      <artifacts>
+        <artifact type="binary" platform="x86_64-linux-gnu">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.2.1/com.expidusos.file_manager-linux-x64.zip</location>
+          <checksum type="sha256">20b2edfb0a3efa9662405921ce99bfde70b3ee00c6d4ed51413708066232bdab</checksum>
+        </artifact>
+        <artifact type="binary" platform="x86_64-linux-gnu">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.2.1/com.expidusos.file_manager.flatpak.tgz</location>
+          <checksum type="sha256">7387d40be68bea0a272199c94f689ebe9b03aa59a96b9fab3a7ce61fc7e89805</checksum>
+        </artifact>
+        <artifact type="binary" platform="x86_64-windows-msvc">
+          <location>https://github.com/ExpidusOS/file-manager/releases/download/0.2.1/com.expidusos.file_manager-windows-x64.zip</location>
+          <checksum type="sha256">f525ed26b5a520b4ab214784846578b2770960b27d3c04f15e6de84b33e6bb1f</checksum>
+        </artifact>
+        <artifact type="source">
+          <location>https://github.com/ExpidusOS/file-manager/archive/refs/tags/0.2.1.tar.gz</location>
+          <checksum type="sha256">82f96d40291d6ee2370ef9a6f044a222bf76142a61adf39447dc327989b89f23</checksum>
+        </artifact>
+      </artifacts>
     </release>
     <release version="0.2.0" date="2023-06-20">
       <description>
