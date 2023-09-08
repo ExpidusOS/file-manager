@@ -217,8 +217,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/libtokyo"
-      ref: eb140908dd2435afdf6208cb84bd37db840b46df
-      resolved-ref: eb140908dd2435afdf6208cb84bd37db840b46df
+      ref: f48d528ebfc22fe827fe9f2d1965be1d339ccfb7
+      resolved-ref: f48d528ebfc22fe827fe9f2d1965be1d339ccfb7
       url: "https://github.com/ExpidusOS/libtokyo.git"
     source: git
     version: "0.1.0"
@@ -226,8 +226,8 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/libtokyo_flutter"
-      ref: eb140908dd2435afdf6208cb84bd37db840b46df
-      resolved-ref: eb140908dd2435afdf6208cb84bd37db840b46df
+      ref: f48d528ebfc22fe827fe9f2d1965be1d339ccfb7
+      resolved-ref: f48d528ebfc22fe827fe9f2d1965be1d339ccfb7
       url: "https://github.com/ExpidusOS/libtokyo.git"
     source: git
     version: "0.1.0"
