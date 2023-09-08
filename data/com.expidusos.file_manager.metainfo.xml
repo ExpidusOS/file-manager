@@ -11,6 +11,7 @@
   <url type="contribute">https://github.com/ExpidusOS/file-manager</url>
   <url type="donation">https://opencollective.com/expidusos</url>
   <url type="translate">https://crowdin.com/project/expidusos-file-manager</url>
+  <url type="vcs-browser">https://github.com/ExpidusOS/file-manager</url>
   
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-only</project_license>
