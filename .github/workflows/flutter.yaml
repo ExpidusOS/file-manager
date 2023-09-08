@@ -111,6 +111,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: com.expidusos.file_manager.apk
           allow_override: true
+          gzip: false
   linux:
     strategy:
       matrix:
@@ -171,6 +172,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           allow_override: true
+          gzip: false
           files: >
             com.expidusos.file_manager.flatpak
             com.expidusos.file_manager-linux-${{ matrix.arch }}.tar.gz
