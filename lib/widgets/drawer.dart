@@ -62,7 +62,7 @@ class _FileManagerDrawerState extends State<FileManagerDrawer> with FileManagerL
                 ...LibraryEntry.buildWidgets(libraryEntries, context),
                 const Divider(),
                 ListTile(
-                  leading: const Icon(Icons.settings),
+                  leading: const Icon(Icons.gears),
                   title: Text(AppLocalizations.of(context)!.viewSettings),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(

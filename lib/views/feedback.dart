@@ -53,7 +53,7 @@ class _FeedbackState extends State<Feedback> {
               children: [
                 TextFormField(
                   decoration: InputDecoration(
-                    icon: const Icon(Icons.email),
+                    icon: const Icon(Icons.envelope),
                     hintText: AppLocalizations.of(context)!.feedbackFieldHintEmail,
                     labelText: AppLocalizations.of(context)!.feedbackFieldLabelEmail,
                   ),
@@ -72,7 +72,7 @@ class _FeedbackState extends State<Feedback> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    icon: const Icon(Icons.note),
+                    icon: const Icon(Icons.solidNoteSticky),
                     labelText: AppLocalizations.of(context)!.feedbackFieldLabelComments,
                   ),
                   maxLines: null,

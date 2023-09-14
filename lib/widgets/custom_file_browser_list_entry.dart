@@ -22,7 +22,7 @@ class CustomFileBrowserListEntry extends FileBrowserListEntry {
     if (showIcon) {
       if (entry is io.File) {
         iconWidget = Icon(
-          Icons.text_snippet,
+          Icons.fileLines,
           size: iconSize,
         );
       } else if (entry is io.Directory) {
@@ -32,7 +32,7 @@ class CustomFileBrowserListEntry extends FileBrowserListEntry {
         );
       } else if (entry is io.Link) {
         iconWidget = Icon(
-          Icons.attachment,
+          Icons.link,
           size: iconSize,
         );
       }

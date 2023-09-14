@@ -66,25 +66,25 @@ class LibraryEntry extends StatelessWidget {
     final i18n = AppLocalizations.of(context)!;
     switch (type) {
       case StorageDirectory.alarms:
-        return LibraryEntry(title: i18n.libraryAlarms, entry: entry, iconData: Icons.alarm);
+        return LibraryEntry(title: i18n.libraryAlarms, entry: entry, iconData: Icons.bell);
       case StorageDirectory.dcim:
-        return LibraryEntry(title: i18n.libraryDCIM, entry: entry, iconData: Icons.photo_library);
+        return LibraryEntry(title: i18n.libraryDCIM, entry: entry, iconData: Icons.images);
       case StorageDirectory.documents:
         return LibraryEntry(title: i18n.libraryDocuments, entry: entry, iconData: Icons.folder);
       case StorageDirectory.downloads:
         return LibraryEntry(title: i18n.libraryDownloads, entry: entry, iconData: Icons.download);
       case StorageDirectory.movies:
-        return LibraryEntry(title: i18n.libraryMovies, entry: entry, iconData: Icons.local_movies);
+        return LibraryEntry(title: i18n.libraryMovies, entry: entry, iconData: Icons.film);
       case StorageDirectory.music:
-        return LibraryEntry(title: i18n.libraryMusic, entry: entry, iconData: Icons.library_music);
+        return LibraryEntry(title: i18n.libraryMusic, entry: entry, iconData: Icons.music);
       case StorageDirectory.pictures:
-        return LibraryEntry(title: i18n.libraryPictures, entry: entry, iconData: Icons.photo_library);
+        return LibraryEntry(title: i18n.libraryPictures, entry: entry, iconData: Icons.images);
       case StorageDirectory.podcasts:
-        return LibraryEntry(title: i18n.libraryPodcasts, entry: entry, iconData: Icons.podcasts);
+        return LibraryEntry(title: i18n.libraryPodcasts, entry: entry, iconData: Icons.podcast);
       case StorageDirectory.notifications:
-        return LibraryEntry(title: i18n.libraryNotifications, entry: entry, iconData: Icons.notifications);
+        return LibraryEntry(title: i18n.libraryNotifications, entry: entry, iconData: Icons.bell);
       case StorageDirectory.ringtones:
-        return LibraryEntry(title: i18n.libraryRingtones, entry: entry, iconData: Icons.library_music);
+        return LibraryEntry(title: i18n.libraryRingtones, entry: entry, iconData: Icons.music);
       default:
         return LibraryEntry(title: type.name, entry: entry, iconData: Icons.folder);
     }
@@ -97,11 +97,11 @@ class LibraryEntry extends StatelessWidget {
     final i18n = AppLocalizations.of(context)!;
     switch (name) {
       case 'DESKTOP':
-        return LibraryEntry(title: i18n.libraryDesktop, entry: entry, iconData: Icons.desktop_mac);
+        return LibraryEntry(title: i18n.libraryDesktop, entry: entry, iconData: Icons.desktop);
       case 'TEMPLATES':
         return LibraryEntry(title: i18n.libraryTemplates, entry: entry, iconData: Icons.folder);
       case 'PUBLICSHARE':
-        return LibraryEntry(title: i18n.libraryPublic, entry: entry, iconData: Icons.public);
+        return LibraryEntry(title: i18n.libraryPublic, entry: entry, iconData: Icons.globe);
       case 'HOME':
         return LibraryEntry(title: i18n.libraryHome, entry: entry, iconData: Icons.home, scanLast: true);
       case 'DOWNLOAD':
@@ -143,7 +143,7 @@ class LibraryEntry extends StatelessWidget {
     final i18n = AppLocalizations.of(context)!;
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return LibraryEntry(title: i18n.libraryStorage, entry: io.Directory('/storage/emulated/0'), iconData: Icons.storage);
+        return LibraryEntry(title: i18n.libraryStorage, entry: io.Directory('/storage/emulated/0'), iconData: Icons.hardDrive);
       case TargetPlatform.linux:
         return LibraryEntry.fromXdg(context, name: 'HOME', entry: io.Directory(io.Platform.environment['HOME']!));
       case TargetPlatform.windows:
@@ -235,7 +235,7 @@ class LibraryEntry extends StatelessWidget {
             title: drive.hintName.isEmpty ? (drive.idLabel.isEmpty ? entry.path : drive.idLabel) : drive.hintName,
             entry: entry,
             scanLast: true,
-            iconData: Icons.storage,
+            iconData: Icons.hardDrive,
             group: 1,
           ));
         }
@@ -249,7 +249,7 @@ class LibraryEntry extends StatelessWidget {
           LibraryEntry(
             title: i18n.libraryDesktop,
             entry: io.Directory((await pathProvider.getPath(FOLDERID_Desktop))!),
-            iconData: Icons.desktop_windows
+            iconData: Icons.desktop
           ),
           LibraryEntry.from(
             context,
@@ -301,7 +301,7 @@ class LibraryEntry extends StatelessWidget {
           LibraryEntry(
             title: drive,
             entry: io.Directory(drive),
-            iconData: Icons.storage,
+            iconData: Icons.hardDrive,
             group: 1,
           )
         ));

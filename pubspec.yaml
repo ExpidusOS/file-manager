@@ -1,7 +1,7 @@
 name: file_manager
 description: The file manager for the Expidus operating system.
 publish_to: 'none'
-version: 0.2.1+65656565656565
+version: 0.3.0+65656565656565
 homepage: https://expidusos.com
 funding:
   - https://opencollective.com/expidusos
@@ -18,12 +18,12 @@ dependencies:
   libtokyo:
     git:
       url: https://github.com/ExpidusOS/libtokyo.git
-      ref: f48d528ebfc22fe827fe9f2d1965be1d339ccfb7
+      ref: 54f684dad77635134133bc223dce47291eeb6e2a
       path: packages/libtokyo
   libtokyo_flutter:
     git:
       url: https://github.com/ExpidusOS/libtokyo.git
-      ref: f48d528ebfc22fe827fe9f2d1965be1d339ccfb7
+      ref: 54f684dad77635134133bc223dce47291eeb6e2a
       path: packages/libtokyo_flutter
   path_provider: ^2.0.15
   url_launcher: ^6.1.11
@@ -45,14 +45,15 @@ dependencies:
   provider: ^6.0.5
   flutter_markdown: ^0.6.15
   flutter_adaptive_scaffold: ^0.1.4
-  package_info_plus: ^3.1.2
+  package_info_plus: ^4.1.0
   pub_semver: ^2.1.4
 
 dependency_overrides:
+  win32: ^5.0.7
   libtokyo:
     git:
       url: https://github.com/ExpidusOS/libtokyo.git
-      ref: f48d528ebfc22fe827fe9f2d1965be1d339ccfb7
+      ref: 54f684dad77635134133bc223dce47291eeb6e2a
       path: packages/libtokyo
 
 dev_dependencies:
@@ -61,7 +62,7 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-  uses-material-design: true
+  uses-material-design: false
   generate: true
   assets:
     - assets/imgs/

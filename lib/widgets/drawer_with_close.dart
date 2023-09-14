@@ -17,7 +17,7 @@ class DrawerWithClose extends StatelessWidget {
           ...(canGoBack ?? Navigator.of(context, rootNavigator: true).canPop() ? [
             IconButton(
               onPressed: () => onBack == null ? Navigator.of(context, rootNavigator: true).pop() : onBack!(),
-              icon: const Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.angleLeft),
             )
           ] : []),
           ...(canOpenDrawer ? [

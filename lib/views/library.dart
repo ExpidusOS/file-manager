@@ -233,7 +233,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
         label: entry.title,
       )),
       NavigationDestination(
-        icon: const Icon(Icons.settings),
+        icon: const Icon(Icons.gear),
         label: AppLocalizations.of(context)!.viewSettings,
       ),
     ];
@@ -254,7 +254,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
           : Text(currentDirectory!.path)) : Text(libraryTitle!),
         actions: [
           IconButton(
-            icon: gridView ? const Icon(Icons.list) : const Icon(Icons.grid_4x4),
+            icon: gridView ? const Icon(Icons.list) : const Icon(Icons.boxesStacked), // TODO: use grid icon once Font Awesome Flutter has it
             onPressed: () =>
               setState(() {
                 gridView = !gridView;
@@ -277,6 +277,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                 }),
           ),
           PopupMenuButton<String>(
+            icon: const Icon(Icons.caretDown),
             onSelected: (value) {
               switch (value) {
                 case 'mkfile':
@@ -656,7 +657,7 @@ class _LibraryViewState extends State<LibraryView> with FileManagerLogic<Library
                                     ),
                                     IconButton(
                                       padding: EdgeInsets.zero,
-                                      icon: const Icon(Icons.clear),
+                                      icon: const Icon(Icons.circleXmark),
                                       onPressed: () => setState(() {
                                         clipboard.clear();
                                         key = UniqueKey();
