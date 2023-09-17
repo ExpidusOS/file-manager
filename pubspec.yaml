@@ -18,12 +18,12 @@ dependencies:
   libtokyo:
     git:
       url: https://github.com/ExpidusOS/libtokyo.git
-      ref: e3f58b57083ada21b2947985fde1059c7efcc36a
+      ref: 2713b388d1e80a24fd440227845a22e64e06d71e
       path: packages/libtokyo
   libtokyo_flutter:
     git:
       url: https://github.com/ExpidusOS/libtokyo.git
-      ref: e3f58b57083ada21b2947985fde1059c7efcc36a
+      ref: 2713b388d1e80a24fd440227845a22e64e06d71e
       path: packages/libtokyo_flutter
   path_provider: ^2.0.15
   url_launcher: ^6.1.11
@@ -53,7 +53,7 @@ dependency_overrides:
   libtokyo:
     git:
       url: https://github.com/ExpidusOS/libtokyo.git
-      ref: e3f58b57083ada21b2947985fde1059c7efcc36a
+      ref: 2713b388d1e80a24fd440227845a22e64e06d71e
       path: packages/libtokyo
 
 dev_dependencies:
