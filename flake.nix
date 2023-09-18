@@ -40,7 +40,7 @@
           ];
 
           depsListFile = ./deps.json;
-          vendorHash = "sha256-oLtMLOEErwKUMhPamRfvAK6XAc1Hh/9ix/Yac3o7OII=";
+          vendorHash = "sha256-IikMgLdqGafV/jIPzp3yh31BqAkceYfKAdo3AsIWFYk=";
 
           postInstall = ''
             rm $out/bin/file_manager
