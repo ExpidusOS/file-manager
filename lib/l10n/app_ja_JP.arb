@@ -1,5 +1,5 @@
 {
-    "applicationTitle": "ファイルマネージャー",
+    "applicationTitle": "ファイル管理",
     "libraryHome": "ホーム",
     "applicationTitleWithLibraryName": "ファイルマネージャー：{libraryName}",
     "@applicationTitleWithLibraryName": {
@@ -10,7 +10,7 @@
             }
         }
     },
-    "libraryStorage": "ストレージ",
+    "libraryStorage": "貯蔵庫",
     "@libraryStorage": {
         "description": "Library"
     },
@@ -22,7 +22,7 @@
     "@libraryAlarms": {
         "description": "Library"
     },
-    "libraryDocuments": "ドキュメント",
+    "libraryDocuments": "文書",
     "@libraryDocuments": {
         "description": "Library"
     },
@@ -30,15 +30,15 @@
     "@libraryDownloads": {
         "description": "Library"
     },
-    "libraryMovies": "ムービー",
+    "libraryMovies": "映画",
     "@libraryMovies": {
         "description": "Library"
     },
-    "libraryMusic": "ミュージック",
+    "libraryMusic": "音楽",
     "@libraryMusic": {
         "description": "Library"
     },
-    "libraryPictures": "ピクチャ",
+    "libraryPictures": "画像",
     "@libraryPictures": {
         "description": "Library"
     },
