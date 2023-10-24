@@ -33,8 +33,16 @@
       "package_info_plus",
       "pub_semver",
       "flutter_test",
-      "flutter_lints"
+      "flutter_lints",
+      "meta"
     ]
+  },
+  {
+    "name": "meta",
+    "version": "1.11.0",
+    "kind": "transitive",
+    "source": "hosted",
+    "dependencies": []
   },
   {
     "name": "flutter_lints",
@@ -145,13 +153,6 @@
       "collection",
       "meta"
     ]
-  },
-  {
-    "name": "meta",
-    "version": "1.9.1",
-    "kind": "transitive",
-    "source": "hosted",
-    "dependencies": []
   },
   {
     "name": "material_color_utilities",
