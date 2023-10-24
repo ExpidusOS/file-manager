@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         arch: [x64]
-        channel: [master]
+        channel: [stable]
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
